@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp.csproj" />
+  <event action="Analyze" type="Success" name="Form1.resx" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp\Form1.resx" />
+  <event action="Analyze" type="Success" name="MWarehouseFormApp" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Contract.Service\MWarehouse.Contract.Service.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.Contract.Service" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Contract.Service\MWarehouse.Contract.Service.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Service\MWarehouse.Service.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.Service" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Service\MWarehouse.Service.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Contract.Repository\MWarehouse.Contract.Repository.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.Contract.Repository" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Contract.Repository\MWarehouse.Contract.Repository.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Repository\MWarehouse.Repository.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.Repository" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Repository\MWarehouse.Repository.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.ModelViews\MWarehouse.ModelViews.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.ModelViews" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.ModelViews\MWarehouse.ModelViews.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Entity\MWarehouse.Entity.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouse.Entity" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouse.Entity\MWarehouse.Entity.csproj" />
+  <event action="Analyze" type="Success" name="MWarehouseFormApp" path="L:\MWarehouseFormApp\MWarehouseFormApp\MWarehouseFormApp.sln" />
+</log>

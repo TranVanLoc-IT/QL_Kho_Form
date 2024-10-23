@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MapperProfile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MWarehouse.Contract.Service\MWarehouse.Contract.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Syncfusion.Compression.Base">
+      <HintPath>C:\Users\admin\Downloads\Buoi07\Buoi07\XayDungDaTang\FileExport\bin\Debug\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base">
+      <HintPath>C:\Users\admin\Downloads\Buoi07\Buoi07\XayDungDaTang\FileExport\bin\Debug\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.OfficeChart.Base">
+      <HintPath>C:\Users\admin\Downloads\Buoi07\Buoi07\XayDungDaTang\FileExport\bin\Debug\Syncfusion.OfficeChart.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base">
+      <HintPath>C:\Users\admin\Downloads\Buoi07\Buoi07\XayDungDaTang\FileExport\bin\Debug\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
