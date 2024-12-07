@@ -22,11 +22,7 @@ namespace MWarehouse.ModelViews.UnitModelViews
         /// <summary>
         ///     Ghi chú bổ sung
         /// </summary>
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
 
-        /// <summary>
-        ///      Trạng thái xóa mềm
-        /// </summary>
-        public bool? IsDeleted { get; set; }
     }
 }

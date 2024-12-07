@@ -1,9 +1,7 @@
 ﻿using MWarehouse.Core.Constant;
 using System;
 using System.Text.Json.Serialization;
-namespace MWarehouse.Core;
-
-public class Class1
+namespace MWarehouse.Core
 {
     public class CoreException : Exception
     {

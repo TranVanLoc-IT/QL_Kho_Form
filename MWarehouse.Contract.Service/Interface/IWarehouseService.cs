@@ -11,8 +11,9 @@ namespace MWarehouse.Contract.Service.Interface
     public interface IWarehouseService
     {
         // async
-        Task CreateAsync(ResponseWarehouseModel obj);
-        Task UpdateAsync(string id, ResponseWarehouseModel obj);
-        Task DeleteAsync(string id);
+        Task CreateAsync(CreateWarehouseModel obj);
+        Task UpdateAsync(int id, ResponseWarehouseModel obj);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<ResponseWarehouseModel>> GetAllAsync();
     }
 }

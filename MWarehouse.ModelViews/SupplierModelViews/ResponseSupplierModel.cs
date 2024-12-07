@@ -11,7 +11,7 @@ namespace MWarehouse.ModelViews.SupplierModelViews
         /// <summary>
         ///     Mã định danh
         /// </summary>
-        public string MaNcc { get; set; }
+        public int AutoId { get; set; }
 
         /// <summary>
         ///     Tên NCC
@@ -22,10 +22,5 @@ namespace MWarehouse.ModelViews.SupplierModelViews
         ///     Ghi chú thông tin liên quan: SDT, DC, LH
         /// </summary>
         public string GhiChu { get; set; }
-
-        /// <summary>
-        ///     Xóa mềm
-        /// </summary>
-        public bool? IsDeleted { get; set; }
     }
 }

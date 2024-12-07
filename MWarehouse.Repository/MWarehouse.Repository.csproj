@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MWarehouse.Contract.Repository\MWarehouse.Contract.Repository.csproj" />
-    <ProjectReference Include="..\MWarehouse.Entity\MWarehouse.Entity.csproj" />
+    <ProjectReference Include="..\MWarehouse.Contract.Service\MWarehouse.Contract.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using MWarehouse.Repository.Models;
 using System.Linq.Expressions;
 
 
-namespace NhaMayMay.Repositories.Repositories
+namespace MWarehouse.Repositories.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -84,11 +84,6 @@ namespace NhaMayMay.Repositories.Repositories
         public async Task<T> GetByIdAsync(object id)
         {
             return await _dbSet.FindAsync(id);
-        }
-
-        public async Task<BasePaginatedList<T>> GetPagging(IQueryable<T> query, int index, int pageSize)
-        {
-            return null;
         }
 
         public void Insert(T obj)

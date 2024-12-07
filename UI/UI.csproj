@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\Icons\accept.png" />
+    <None Remove="Controls\Icons\add.png" />
+    <None Remove="Controls\Icons\box.svg" />
+    <None Remove="Controls\Icons\cancel.png" />
+    <None Remove="Controls\Icons\delete.png" />
+    <None Remove="Controls\Icons\home.svg" />
+    <None Remove="Controls\Icons\productType.svg" />
+    <None Remove="Controls\Icons\receipt.svg" />
+    <None Remove="Controls\Icons\see.png" />
+    <None Remove="Controls\Icons\supplier.svg" />
+    <None Remove="Controls\Icons\unit.svg" />
+    <None Remove="Controls\Icons\update.png" />
+    <None Remove="Controls\Icons\view.png" />
+    <None Remove="Controls\Icons\warehouse.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Controls\Icons\accept.png" />
+    <Content Include="Controls\Icons\add.png" />
+    <Content Include="Controls\Icons\box.svg" />
+    <Content Include="Controls\Icons\cancel.png" />
+    <Content Include="Controls\Icons\delete.png" />
+    <Content Include="Controls\Icons\home.svg" />
+    <Content Include="Controls\Icons\productType.svg" />
+    <Content Include="Controls\Icons\receipt.svg" />
+    <Content Include="Controls\Icons\see.png" />
+    <Content Include="Controls\Icons\supplier.svg" />
+    <Content Include="Controls\Icons\unit.svg" />
+    <Content Include="Controls\Icons\update.png" />
+    <Content Include="Controls\Icons\view.png" />
+    <Content Include="Controls\Icons\warehouse.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\TextBox\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MWarehouse.ModelViews\MWarehouse.ModelViews.csproj" />
+    <ProjectReference Include="..\MWarehouse.Repository\MWarehouse.Repository.csproj" />
+    <ProjectReference Include="..\MWarehouse.Service\MWarehouse.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\UCButton\DeleteButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\UCButton\UpdateButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\GoodsReceiptControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ProductControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ProductTypeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\SupplierControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\UnitControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\WarehouseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

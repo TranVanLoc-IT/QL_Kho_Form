@@ -1,7 +1,7 @@
 ﻿using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Repository.Models;
 
-namespace NhaMayMay.Repositories.Repositories
+namespace MWarehouse.Repositories.Repositories
 {
     public class UnitOfWork(QlKhoContext dbContext) : IUnitOfWork
     {

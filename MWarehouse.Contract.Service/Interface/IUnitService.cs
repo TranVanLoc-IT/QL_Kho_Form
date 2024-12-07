@@ -11,9 +11,8 @@ namespace MWarehouse.Contract.Service.Interface
     public interface IUnitService
     {
         // async
-        Task<BasePaginatedList<ResponseUnitModel>> GetAsync(string? id, string? name, string? code, int index, int pageSize);
-        Task CreateAsync(ResponseUnitModel obj);
-        Task UpdateAsync(string id, ResponseUnitModel obj);
-        Task DeleteAsync(string id);
+        Task CreateAsync(CreateUnitModel obj);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<ResponseUnitModel>> GetAllAsync();
     }
 }

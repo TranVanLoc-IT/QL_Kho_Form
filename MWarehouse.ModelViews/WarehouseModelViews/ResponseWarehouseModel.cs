@@ -24,9 +24,5 @@ namespace MWarehouse.ModelViews.WarehouseModelViews
 
         public string GhiChu { get; set; }
 
-        /// <summary>
-        ///     Xóa mềm
-        /// </summary>
-        public bool? IsDeleted { get; set; }
     }
 }

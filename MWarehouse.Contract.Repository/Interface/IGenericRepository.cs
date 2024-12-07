@@ -12,7 +12,6 @@ namespace MWarehouse.Contract.Repository.Interface
     {
         IEnumerable<T> Get(int index, int pageSize);
         IQueryable<T> Entities { get; }
-        Task<BasePaginatedList<T>> GetPagging(IQueryable<T> query, int index, int pageSize);
         T GetById(object id);
         void Update(T obj);
         void Delete(object id);

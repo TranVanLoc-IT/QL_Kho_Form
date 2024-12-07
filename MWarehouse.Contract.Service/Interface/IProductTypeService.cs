@@ -11,9 +11,8 @@ namespace MWarehouse.Contract.Service.Interface
     public interface IProductTypeService
     {
         // async
-        Task<BasePaginatedList<ResponseProductTypeModel>> GetAsync(string? id, string? name, string? code, int index, int pageSize);
-        Task CreateAsync(ResponseProductTypeModel obj);
-        Task UpdateAsync(string id, ResponseProductTypeModel obj);
-        Task DeleteAsync(string id);
+        Task<IEnumerable<ResponseProductTypeModel>> GetAllAsync();
+        Task CreateAsync(CreateProductTypeModel obj);
+        Task DeleteAsync(int id);
     }
 }

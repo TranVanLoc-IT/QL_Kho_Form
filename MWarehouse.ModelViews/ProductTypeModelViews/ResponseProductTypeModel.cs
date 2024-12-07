@@ -11,7 +11,7 @@ namespace MWarehouse.ModelViews.ProductTypeModelViews
         /// <summary>
         ///     Mã định danh
         /// </summary>
-        public int MaLsp { get; set; }
+        public int AutoId { get; set; }
 
         /// <summary>
         ///     Tên loại
@@ -23,9 +23,5 @@ namespace MWarehouse.ModelViews.ProductTypeModelViews
         /// </summary>
         public string GhiChu { get; set; }
 
-        /// <summary>
-        ///     Xóa mềm
-        /// </summary>
-        public bool? IsDeleted { get; set; }
     }
 }

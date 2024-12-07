@@ -24,7 +24,13 @@ namespace MWarehouse.Core.Constant
             FAIL = 500,
 
             [CustomName("Success")]
-            SUCCESS = 200
+            SUCCESS = 200,
+
+            [CustomName("Object Null")]
+            OBJECT_NULL = 403,
+
+            [CustomName("Object existed")]
+            OBJECT_EXISTED = 406
         }
     }
 }
