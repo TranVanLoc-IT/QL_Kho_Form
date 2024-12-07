@@ -82,7 +82,7 @@
     <Compile Update="Controls\UnitControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Controls\WarehouseControl.cs">
+    <Compile Update="Controls\AIControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

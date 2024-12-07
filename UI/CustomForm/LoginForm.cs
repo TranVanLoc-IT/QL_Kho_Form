@@ -53,7 +53,7 @@ namespace UI.CustomForm
             }
             catch (ErrorException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("ĐĂNG NHẬP THẤT BẠI");
             }
         }
 

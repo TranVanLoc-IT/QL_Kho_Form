@@ -18,7 +18,7 @@ namespace UI.Controls
 
         private Size DropSizeBox { get; set; } = new Size(199, 68);
 
-        private Panel container = new Panel();
+        public Panel container = new Panel();
         private PageViewModel _headerPage { get; set; }
         private bool _isDroped { get; set; }
 
@@ -31,6 +31,7 @@ namespace UI.Controls
 
         public DropdownButton()
         {
+            this.container.Name = "container";
             this._isDroped = false;
             this.container.Dock = DockStyle.Fill;
             this.Controls.Add(container);

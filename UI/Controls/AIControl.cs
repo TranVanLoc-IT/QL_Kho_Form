@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public partial class WarehouseControl : UserControl
+    public partial class AIControl : UserControl
     {
-        public WarehouseControl()
+        public AIControl()
         {
             InitializeComponent();
         }

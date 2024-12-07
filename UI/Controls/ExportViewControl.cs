@@ -21,7 +21,6 @@ namespace UI.Controls
             this._wordService = wordService;
             this._excelService = _excelService;
             InitializeComponent();
-            acceptButton.button.Text = "Xuất file";
         }
     }
 }

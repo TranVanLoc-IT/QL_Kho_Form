@@ -21,7 +21,7 @@ namespace UI.Layouts
         private readonly HomeControl _homeControl;
         private readonly ProductControl _productControl;
         private readonly SupplierControl _supplierControl;
-        private readonly WarehouseControl _warehouseControl;
+        private readonly AIControl _warehouseControl;
         private readonly ExportViewControl _exportViewControl;
         private readonly ProductTypeControl _productTypeControl;
         private readonly GoodsReceiptControl _goodsReceiptControl;
@@ -48,7 +48,7 @@ namespace UI.Layouts
 
 
         public LayoutForm(UnitControl unitControl, HomeControl homeControl, ProductControl productControl,
-                       SupplierControl supplierControl, WarehouseControl warehouseControl,
+                       SupplierControl supplierControl, AIControl warehouseControl,
                        ExportViewControl exportViewControl, ProductTypeControl productTypeControl,
                        GoodsReceiptControl goodsReceiptControl, ILoginService loginService)
         {
@@ -73,6 +73,7 @@ namespace UI.Layouts
             this.navViewControl1.ChatBot.Click += PrintPage_Click;
             header.Resize += Header_Resize;
             timer1.Tick += timer1_Tick;
+            SetClickDropdown();
             timer1.Start();
 
         }
@@ -107,42 +108,57 @@ namespace UI.Layouts
 
         private void SetClickDropdown()
         {
-            foreach(Control c in navViewControl1.Controls)
+            foreach(Control c in navViewControl1.panel1.Controls)
             {
-                if(c is DropdownButton b)
+                if (c is DropdownButton b)
                 {
-                    foreach(PageViewModel p in b.PageViewList)
+                    foreach (Button p in b.Controls.Find("container",false).First().Controls)
                     {
-
-                        switch (p.PageName)
-                        {
-                            case "EditSupplierPage":
-                                this.main.Controls.Clear();
-                                _supplierControl.Dock = DockStyle.Fill;
-                                this.main.Controls.Add(_productControl);
-                                break;
-                            case "ImportReceiptPage":
-                                this.main.Controls.Clear();
-                                _goodsReceiptControl.Dock = DockStyle.Fill;
-                                this.main.Controls.Add(_productControl);
-                                break;
-                            case "ExportReceiptPage":
-                                this.main.Controls.Clear();
-                                _exportViewControl.Dock = DockStyle.Fill;
-                                this.main.Controls.Add(_productControl);
-                                break;
-                            case "EditProductPage":
-                                this.main.Controls.Clear();
-                                _productControl.Dock = DockStyle.Fill;
-                                this.main.Controls.Add(_productControl);
-                                break;
-
-                        }
+                        p.Click += btn_Click;
                     }
                 }
             }
         }
+        private void btn_Click(object? sender, EventArgs e)
+        {
+            foreach (Control c in navViewControl1.panel1.Controls)
+            {
+                if (c is DropdownButton b)
+                {
+                    foreach (Button p in b.Controls.Find("container", false).First().Controls)
+                    {
+                        p.Click += subBtn_click;
+                    }
+                }
+            }
+        }
+        private void subBtn_click(object? sender, EventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "EditSupplierPage":
+                    this.main.Controls.Clear();
+                    _supplierControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_supplierControl);
+                    break;
+                case "ImportReceiptPage":
+                    this.main.Controls.Clear();
+                    _goodsReceiptControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_goodsReceiptControl);
+                    break;
+                case "ExportReceiptPage":
+                    this.main.Controls.Clear();
+                    _exportViewControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_exportViewControl);
+                    break;
+                case "EditProductPage":
+                    this.main.Controls.Clear();
+                    _productControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_productControl);
+                    break;
 
+            }
+        }
         private void ProductTypePage_Click(object? sender, EventArgs e)
         {
             _productTypeControl.Dock = DockStyle.Fill;

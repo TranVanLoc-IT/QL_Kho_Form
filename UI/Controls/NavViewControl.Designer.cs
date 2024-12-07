@@ -56,7 +56,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(199, 551);
+            panel1.Size = new Size(183, 551);
             panel1.TabIndex = 0;
             // 
             // WarehousePage
@@ -64,10 +64,10 @@
             WarehousePage.BackColor = SystemColors.ButtonFace;
             WarehousePage.Dock = DockStyle.Top;
             WarehousePage.HeaderPage = null;
-            WarehousePage.Location = new Point(0, 552);
+            WarehousePage.Location = new Point(0, 546);
             WarehousePage.Name = "WarehousePage";
             WarehousePage.PageViewList = null;
-            WarehousePage.Size = new Size(199, 90);
+            WarehousePage.Size = new Size(183, 90);
             WarehousePage.TabIndex = 14;
             // 
             // SupplierPage
@@ -75,10 +75,10 @@
             SupplierPage.BackColor = SystemColors.ButtonFace;
             SupplierPage.Dock = DockStyle.Top;
             SupplierPage.HeaderPage = null;
-            SupplierPage.Location = new Point(0, 462);
+            SupplierPage.Location = new Point(0, 456);
             SupplierPage.Name = "SupplierPage";
             SupplierPage.PageViewList = null;
-            SupplierPage.Size = new Size(199, 90);
+            SupplierPage.Size = new Size(183, 90);
             SupplierPage.TabIndex = 13;
             // 
             // ProductTypePage
@@ -90,9 +90,9 @@
             ProductTypePage.ForeColor = Color.DodgerBlue;
             ProductTypePage.Image = Resource.colors1;
             ProductTypePage.ImageAlign = ContentAlignment.MiddleLeft;
-            ProductTypePage.Location = new Point(0, 372);
+            ProductTypePage.Location = new Point(0, 366);
             ProductTypePage.Name = "ProductTypePage";
-            ProductTypePage.Size = new Size(199, 90);
+            ProductTypePage.Size = new Size(183, 90);
             ProductTypePage.TabIndex = 12;
             ProductTypePage.Text = "Loại sản phẩm";
             ProductTypePage.TextAlign = ContentAlignment.MiddleRight;
@@ -103,10 +103,10 @@
             ProductPage.BackColor = SystemColors.ButtonFace;
             ProductPage.Dock = DockStyle.Top;
             ProductPage.HeaderPage = null;
-            ProductPage.Location = new Point(0, 282);
+            ProductPage.Location = new Point(0, 276);
             ProductPage.Name = "ProductPage";
             ProductPage.PageViewList = null;
-            ProductPage.Size = new Size(199, 90);
+            ProductPage.Size = new Size(183, 90);
             ProductPage.TabIndex = 11;
             // 
             // ChatBot
@@ -119,7 +119,7 @@
             ChatBot.ImageAlign = ContentAlignment.MiddleLeft;
             ChatBot.Location = new Point(0, 461);
             ChatBot.Name = "ChatBot";
-            ChatBot.Size = new Size(199, 90);
+            ChatBot.Size = new Size(183, 90);
             ChatBot.TabIndex = 8;
             ChatBot.Text = "AI";
             ChatBot.TextAlign = ContentAlignment.MiddleRight;
@@ -134,9 +134,9 @@
             UnitPage.ForeColor = Color.DodgerBlue;
             UnitPage.Image = Resource.calculator;
             UnitPage.ImageAlign = ContentAlignment.MiddleLeft;
-            UnitPage.Location = new Point(0, 192);
+            UnitPage.Location = new Point(0, 186);
             UnitPage.Name = "UnitPage";
-            UnitPage.Size = new Size(199, 90);
+            UnitPage.Size = new Size(183, 90);
             UnitPage.TabIndex = 2;
             UnitPage.Text = "Đơn vị tính";
             UnitPage.TextAlign = ContentAlignment.MiddleRight;
@@ -151,9 +151,9 @@
             HomePage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
             HomePage.ForeColor = Color.DodgerBlue;
             HomePage.ImageAlign = ContentAlignment.MiddleLeft;
-            HomePage.Location = new Point(0, 102);
+            HomePage.Location = new Point(0, 96);
             HomePage.Name = "HomePage";
-            HomePage.Size = new Size(199, 90);
+            HomePage.Size = new Size(183, 90);
             HomePage.TabIndex = 1;
             HomePage.Text = "Tổng quan";
             HomePage.TextAlign = ContentAlignment.MiddleRight;
@@ -166,7 +166,7 @@
             pictureBox1.Dock = DockStyle.Top;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(199, 102);
+            pictureBox1.Size = new Size(183, 96);
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
@@ -176,7 +176,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Name = "NavViewControl";
-            Size = new Size(199, 551);
+            Size = new Size(183, 551);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

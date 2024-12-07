@@ -1,6 +1,6 @@
 ﻿namespace UI.Controls
 {
-    partial class WarehouseControl
+    partial class AIControl
     {
         /// <summary> 
         /// Required designer variable.
