@@ -14,7 +14,7 @@ namespace MWarehouse.Contract.Service.Interface
         Task CreateAsync(CreateGoodsReceiptModel obj);
         Task UpdateAsync(UpdateGoodsReceiptModel obj);
         Task DeleteAsync(int id); 
-        Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync();
+        Task<IEnumerable<ReceiptResultModel>> GetAllByBrandAsync(int code);
         Task<ResponseGoodsReceiptModel> GetByIdAsync(int id);
     }
 }

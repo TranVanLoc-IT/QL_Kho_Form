@@ -14,9 +14,9 @@ namespace UI.Controls
 {
     public partial class ExportViewControl : UserControl
     {
-        private readonly IWordExportService _wordService;
+        private readonly IPDFExportService _wordService;
         private readonly IExcelExportService _excelService;
-        public ExportViewControl(IWordExportService wordService, IExcelExportService _excelService)
+        public ExportViewControl(IPDFExportService wordService, IExcelExportService _excelService)
         {
             this._wordService = wordService;
             this._excelService = _excelService;

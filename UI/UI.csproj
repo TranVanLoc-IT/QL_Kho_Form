@@ -62,7 +62,7 @@
     <Compile Update="Controls\GoodsReceiptControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Controls\HomeControl.cs">
+    <Compile Update="Controls\ManageRoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Controls\ProductControl.cs">

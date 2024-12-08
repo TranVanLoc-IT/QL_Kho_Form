@@ -1,6 +1,7 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.ProductModelViews;
 using MWarehouse.ModelViews.ProductTypeModelViews;
+using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
 using System.Threading.Tasks;
 namespace UI.Controls
@@ -30,12 +31,11 @@ namespace UI.Controls
         }
         private async Task LoadFilterData()
         {
-            IEnumerable<ResponseProductModel> data = await _productService.GetAllAsync();
+            IEnumerable<ResponseProductTypeModel> data = await _productTypeService.GetAllAsync();
             this.comboBoxFilter.Items.Clear();
-            this.comboBoxFilter.DataSource = data;
+            this.comboBoxFilter.DataSource = data.ToList();
             this.comboBoxFilter.DisplayMember = "TenLsp";
             this.comboBoxFilter.ValueMember = "AutoId";
-            this.comboBoxFilter.Items.Add(new { TenLsp = "Tất cả", AutoId = "All" });
 
             this.comboBoxFilter.SelectedIndexChanged += (s, e) =>
             {
@@ -43,6 +43,17 @@ namespace UI.Controls
                 this.dataGridView.DataSource = products.Where(r => r.LoaiSanPhamId == int.Parse(this.comboBoxFilter.SelectedValue!.ToString()!)).ToList();
             };
 
+            IEnumerable<ResponseProductTypeModel> dataPt = await _productTypeService.GetAllAsync();
+            this.cbProductType.Items.Clear();
+            this.cbProductType.DataSource = dataPt.ToList();
+            this.cbProductType.DisplayMember = "TenLsp";
+            this.cbProductType.ValueMember = "AutoId";
+
+            IEnumerable<ResponseUnitModel> dataUnit = await _unitService.GetAllAsync();
+            this.cbProductType.Items.Clear();
+            this.cbProductType.DataSource = dataUnit.ToList();
+            this.cbProductType.DisplayMember = "TenDvt";
+            this.cbProductType.ValueMember = "AutoId";
         }
         private async Task ConfigEvent()
         {
@@ -51,11 +62,28 @@ namespace UI.Controls
             updateButton.button.Click += async (s, e) => await UpdateButton_Click(s, e);
             refreshBtn.Click += async(s, e) => {
                 this.products = await _productService.GetAllAsync();
+                dataGridView.DataSource = products;
             };
             // combo
             comboBoxFilter.SelectedIndexChanged += ComboBoxFilter_SelectedIndexChanged;
+            dataGridView.RowHeaderMouseClick += DataGridView_RowHeaderMouseClick;
         }
 
+        private void DataGridView_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            DisplaySelectedResponseData();
+        }
+
+        private void ClearTB()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+        }
         private void ComboBoxFilter_SelectedIndexChanged(object? sender, EventArgs e)
         {
             int result;
@@ -72,14 +100,35 @@ namespace UI.Controls
 
         private async Task UpdateButton_Click(object? sender, EventArgs e)
         {
+            ErrorProvider err = new ErrorProvider();
+            if (string.IsNullOrWhiteSpace(this.txtProductCode.Text))
+            {
+                err.SetError(this.txtProductCode, "Nhập mã");
+
+                return;
+            }
             UpdateProductModel model = GetUpdateData();
             if (model == null) return;
             await _productService.UpdateAsync(dataGridView.SelectedRows[0].Cells[0].ToString(), model);
+            ClearTB();
         }
 
         private async Task DeleteButton_Click(object? sender, EventArgs e)
         {
-            await _productService.DeleteAsync(int.Parse(dataGridView.SelectedRows[0].Cells[0].ToString()));
+            ErrorProvider err = new ErrorProvider();
+            if (string.IsNullOrWhiteSpace(this.txtProductCode.Text))
+            {
+                err.SetError(this.txtProductCode, "Nhập mã");
+
+                return;
+            }
+            DialogResult choose = MessageBox.Show("Xác nhận xóa ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (choose == DialogResult.Yes)
+            {
+                await _productService.DeleteAsync(int.Parse(dataGridView.SelectedRows[0].Cells[0].ToString()));
+            }
+            ClearTB();
+
         }
 
         private async Task CreateButton_Click(object? sender, EventArgs e)
@@ -87,6 +136,8 @@ namespace UI.Controls
             CreateProductModel model = GetCreateData();
             if (model == null) return;
             await _productService.CreateAsync(model);
+            ClearTB();
+
         }
 
         private CreateProductModel GetCreateData()
@@ -95,18 +146,19 @@ namespace UI.Controls
             CreateProductModel model = new CreateProductModel();
             model.GhiChu = this.txtProductNote.Text;
             model.TenSanPham = this.txtProductName.Text;
-
+            model.LoaiSanPhamId = int.Parse(cbProductType.SelectedValue.ToString());
+            model.DonViTinhId = int.Parse(cbUnit.SelectedValue.ToString());
             return model;
         }
 
         private void DisplaySelectedResponseData()
         {
-            DataGridViewCellCollection cell = dataGridView.SelectedRows[0].Cells;
-            this.txtProductCode.Text = cell[0].ToString();
-            this.cbProductType.SelectedValue = cell[2].ToString();
-            this.txtProductName.Text = cell[1].ToString();
-            this.cbUnit.SelectedValue = cell[3].ToString();
-            this.txtProductNote.Text = cell[4].ToString();
+            var row = dataGridView.SelectedRows[0];
+            this.txtProductCode.Text = row.Cells[0].ToString();
+            this.cbProductType.SelectedValue = row.Cells[2].ToString();
+            this.txtProductName.Text = row.Cells[1].ToString();
+            this.cbUnit.SelectedValue = row.Cells[3].ToString();
+            this.txtProductNote.Text = row.Cells[4].ToString();
         }
 
         private UpdateProductModel GetUpdateData()
@@ -117,21 +169,14 @@ namespace UI.Controls
             model.GhiChu = this.txtProductNote.Text;
             model.AutoId = this.txtProductCode.Text == "" ? model.AutoId : int.Parse(this.txtProductCode.Text);
             model.TenSanPham = this.txtProductCode.ProductName == "" ? model.TenSanPham : this.txtProductName.Text;
+            model.LoaiSanPham = int.Parse(cbProductType.SelectedValue.ToString());
+            model.DonViTinhId = int.Parse(cbUnit.SelectedValue.ToString());
             return model;
         }
 
         private bool ValidateData()
         {
             ErrorProvider err = new ErrorProvider();
-            if(string.IsNullOrWhiteSpace(this.txtProductCode.Text))
-            {
-                DialogResult result = MessageBox.Show("Nhập mã code hoặc tự sinh", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
-                {
-                    err.SetError(this.txtProductCode, "Nhập mã code");
-                    return false;
-                }
-            }
             if (string.IsNullOrWhiteSpace(this.txtProductName.Text))
             {
                 err.SetError(this.txtProductName, "Nhập tên sản phẩm");

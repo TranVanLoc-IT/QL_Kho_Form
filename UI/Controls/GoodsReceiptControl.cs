@@ -97,9 +97,12 @@ namespace UI.Controls
         private async Task ConfigAll()
         {
             _receipts = await _goodsReceiptService.GetAllAsync();
-            cbFilter.DataSource = _receipts.GroupBy(r => r.NgayNhapKho).Distinct();
-            cbFilter.DisplayMember = "NgayNhapKho";
-            cbFilter.ValueMember = "NgayNhapKho";
+            cbFilter.DataSource = _receipts.GroupBy(r => r.NgayNhapKho).Distinct().ToList();
+            if(cbFilter.DataSource != null)
+            {
+                cbFilter.DisplayMember = "NgayNhapKho";
+                cbFilter.ValueMember = "NgayNhapKho";
+            }
             dataGridView.DataSource = _receipts;
             cbProducts.DataSource = await _productService.GetAllAsync();
             cbProducts.DisplayMember = "TenSanPham";

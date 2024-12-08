@@ -36,7 +36,7 @@
             ProductPage = new DropdownButton();
             ChatBot = new Button();
             UnitPage = new Button();
-            HomePage = new Button();
+            RolePage = new Button();
             pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -51,7 +51,7 @@
             panel1.Controls.Add(ProductPage);
             panel1.Controls.Add(ChatBot);
             panel1.Controls.Add(UnitPage);
-            panel1.Controls.Add(HomePage);
+            panel1.Controls.Add(RolePage);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -142,22 +142,22 @@
             UnitPage.TextAlign = ContentAlignment.MiddleRight;
             UnitPage.UseVisualStyleBackColor = true;
             // 
-            // HomePage
+            // RolePage
             // 
-            HomePage.BackgroundImage = Resource.dashboard;
-            HomePage.BackgroundImageLayout = ImageLayout.None;
-            HomePage.Cursor = Cursors.Hand;
-            HomePage.Dock = DockStyle.Top;
-            HomePage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            HomePage.ForeColor = Color.DodgerBlue;
-            HomePage.ImageAlign = ContentAlignment.MiddleLeft;
-            HomePage.Location = new Point(0, 96);
-            HomePage.Name = "HomePage";
-            HomePage.Size = new Size(183, 90);
-            HomePage.TabIndex = 1;
-            HomePage.Text = "Tổng quan";
-            HomePage.TextAlign = ContentAlignment.MiddleRight;
-            HomePage.UseVisualStyleBackColor = true;
+            RolePage.BackgroundImage = Resource.dashboard;
+            RolePage.BackgroundImageLayout = ImageLayout.None;
+            RolePage.Cursor = Cursors.Hand;
+            RolePage.Dock = DockStyle.Top;
+            RolePage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            RolePage.ForeColor = Color.DodgerBlue;
+            RolePage.ImageAlign = ContentAlignment.MiddleLeft;
+            RolePage.Location = new Point(0, 96);
+            RolePage.Name = "RolePage";
+            RolePage.Size = new Size(183, 90);
+            RolePage.TabIndex = 1;
+            RolePage.Text = "Phân quyền";
+            RolePage.TextAlign = ContentAlignment.MiddleRight;
+            RolePage.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -185,7 +185,7 @@
         #endregion
         private PictureBox pictureBox1;
         public Panel panel1;
-        public Button HomePage;
+        public Button RolePage;
         public Button UnitPage;
         public Button ChatBot;
         public Button ProductTypePage;

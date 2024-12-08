@@ -32,14 +32,14 @@ namespace MWarehouse.ModelViews.ProductModelViews
         /// <summary>
         ///     Mã đơn vị tính
         /// </summary>
-        [DisplayName("Mã đơn vị tính của sản phẩm")]
+        [DisplayName("Mã đơn vị tính")]
         /// 
         public int? DonViTinhId { get; set; }
 
         /// <summary>
         ///     Ghi chú cho sản phẩm
         /// </summary>
-        /// 
+        [DisplayName("Ghi chú")]
         public string? GhiChu { get; set; }
     }
 }

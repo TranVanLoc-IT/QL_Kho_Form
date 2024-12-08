@@ -38,7 +38,6 @@ namespace MWarehouse.Service.Service
                 throw new ErrorException((int)ErrorCode.Code.OBJECT_EXISTED, ErrorCode.Code.OBJECT_EXISTED.ToString(), "Dữ liệu đối tượng đã có !");
             }
             newProduct = _mapper.Map<TblDmSanPham>(obj);
-            newProduct.AutoId = IDGenerator.GenerateID(6, await GetAllAsync(), r => r.AutoId);
             newProduct.MaSanPham = IDGenerator.Generate("SP", 6);
             await _iuow.GetRepository<TblDmSanPham>().InsertAsync(newProduct);
             await _iuow.SaveAsync();
@@ -81,6 +80,16 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        public async Task UpdateProductTypeAsync(int id, int type)
+        {
+            TblDmSanPham product = _iuow.GetRepository<TblDmSanPham>().Entities.Where(u => u.AutoId == id).FirstOrDefault()!;
+
+            product.LoaiSanPhamId = type;
+            await _iuow.GetRepository<TblDmSanPham>().UpdateAsync(product);
+
+            await _iuow.SaveAsync();
+        }
+
         public async Task UpdateUnitAsync(int id, int[] obj)
         {
             if (obj == null)
@@ -92,7 +101,6 @@ namespace MWarehouse.Service.Service
                 TblDmSanPham product = _iuow.GetRepository<TblDmSanPham>().Entities.Where(u => u.AutoId == model).FirstOrDefault()!;
 
                 product.DonViTinhId = id;
-                product = _mapper.Map<TblDmSanPham>(obj);
                 await _iuow.GetRepository<TblDmSanPham>().UpdateAsync(product);
             }
            

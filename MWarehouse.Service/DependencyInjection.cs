@@ -19,7 +19,7 @@ namespace MWarehouse.Service
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<IExcelExportService, ExcelExportService>();
-            services.AddScoped<IWordExportService, WordExportService>();
+            services.AddScoped<IPDFExportService, PDFExportService>();
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<IGoodsReceiptService, GoodsReceiptService>();

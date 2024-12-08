@@ -24,7 +24,7 @@ namespace UI
         private static void AddControlService(this IServiceCollection services)
         {
             services.AddScoped<UnitControl>();
-            services.AddScoped<HomeControl>();
+            services.AddScoped<ManageRoleControl>();
             services.AddScoped<ProductControl>();
             services.AddScoped<SupplierControl>();
             services.AddScoped<AIControl>();
@@ -35,7 +35,7 @@ namespace UI
             // Register LayoutForm with DI and pass the control names you want
             services.AddScoped(provider => new LayoutForm(
                 provider.GetRequiredService<UnitControl>(),
-                provider.GetRequiredService<HomeControl>(),
+                provider.GetRequiredService<ManageRoleControl>(),
                 provider.GetRequiredService<ProductControl>(),
                 provider.GetRequiredService<SupplierControl>(),
                 provider.GetRequiredService<AIControl>(),

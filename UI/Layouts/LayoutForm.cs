@@ -18,7 +18,7 @@ namespace UI.Layouts
     public partial class LayoutForm : Form
     {
         private readonly UnitControl _unitControl;
-        private readonly HomeControl _homeControl;
+        private readonly ManageRoleControl _homeControl;
         private readonly ProductControl _productControl;
         private readonly SupplierControl _supplierControl;
         private readonly AIControl _warehouseControl;
@@ -47,7 +47,7 @@ namespace UI.Layouts
         }
 
 
-        public LayoutForm(UnitControl unitControl, HomeControl homeControl, ProductControl productControl,
+        public LayoutForm(UnitControl unitControl, ManageRoleControl homeControl, ProductControl productControl,
                        SupplierControl supplierControl, AIControl warehouseControl,
                        ExportViewControl exportViewControl, ProductTypeControl productTypeControl,
                        GoodsReceiptControl goodsReceiptControl, ILoginService loginService)
@@ -67,7 +67,7 @@ namespace UI.Layouts
             this.WindowState = FormWindowState.Maximized;
             this.ResizeEnd += LayoutForm_Resize;
             this.MinimumSizeChanged += LayoutForm_Resize;
-            this.navViewControl1.HomePage.Click += HomePage_Click;
+            this.navViewControl1.RolePage.Click += HomePage_Click;
             this.navViewControl1.UnitPage.Click += UnitPage_Click;
             this.navViewControl1.ProductTypePage.Click += ProductTypePage_Click;
             this.navViewControl1.ChatBot.Click += PrintPage_Click;
@@ -104,6 +104,7 @@ namespace UI.Layouts
             LoginForm login = (sender as LoginForm);
             DisplayFormOnRole(login.forms);
             this.user = login.user;
+            label1.Text = this.user;
         }
 
         private void SetClickDropdown()

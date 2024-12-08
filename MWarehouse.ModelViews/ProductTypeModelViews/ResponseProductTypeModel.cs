@@ -21,7 +21,7 @@ namespace MWarehouse.ModelViews.ProductTypeModelViews
         /// <summary>
         ///     Ghi chú mô tả
         /// </summary>
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
 
     }
 }

@@ -39,7 +39,6 @@ namespace MWarehouse.Service.Service
             }
             newSupplier = _mapper.Map<TblDmNcc>(obj);
 
-            newSupplier.AutoId = IDGenerator.GenerateID(3, await GetAllAsync(), r => r.AutoId);
             newSupplier.MaNcc = IDGenerator.Generate("NCC", 3);
             await _iuow.GetRepository<TblDmNcc>().InsertAsync(newSupplier);
             await _iuow.SaveAsync();

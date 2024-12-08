@@ -72,15 +72,28 @@ namespace MWarehouse.Service.Service
             newReceipt = _mapper.Map<TblXnkNhapKho>(obj);
 
             newReceipt.SoPhieuNhap = IDGenerator.Generate("PN", 8);
-            newReceipt.AutoId = IDGenerator.GenerateID(8, await GetAllAsync(), r => r.AutoId);
             await _iuow.GetRepository<TblXnkNhapKho>().UpdateAsync(newReceipt);
             await _iuow.SaveAsync();
         }
 
-        public async Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync()
+        public async Task<IEnumerable<ReceiptResultModel>> GetAllByBrandAsync(int code)
         {
-            IEnumerable<ResponseGoodsReceiptModel> result = _mapper.Map<IEnumerable<ResponseGoodsReceiptModel>>(await _iuow.GetRepository<TblXnkNhapKho>().GetAllAsync());
+            IEnumerable<ReceiptResultModel> result = from i in _iuow.GetRepository<TblXnkNhapKho>().Entities
+                                                     where i.AutoId == code
+                                                     join ct in _iuow.GetRepository<TblXnkNhapKhoRawDatum>().Entities
+                                                     on i.AutoId equals ct.NhapKhoId
+                                                     group ct by ct.SanPhamId into grouped
+                                                     select new ReceiptResultModel()
+                                                     {
+                                                         SpId = grouped.Key,
+                                                         TenSP = _iuow.GetRepository<TblDmSanPham>().Entities
+                                                                     .Where(r => r.AutoId == grouped.Key)
+                                                                     .Select(r => r.TenSanPham)
+                                                                     .FirstOrDefault() ?? "None",
+                                                         Quantity = grouped.Sum(g => g.SlNhap)
+                                                     };
             return result;
+
         }
 
         public async Task<ResponseGoodsReceiptModel> GetByIdAsync(int id)

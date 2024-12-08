@@ -28,8 +28,8 @@ namespace UI.Controls.UCButton
             this.button.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button.Dock = DockStyle.Fill;
             this.button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button.Size = new System.Drawing.Size(125, 54);
-            this.Size = new System.Drawing.Size(125, 54);
+            this.button.Size = new System.Drawing.Size(50,50);
+            this.Size = new System.Drawing.Size(50,70);
             this.button.TabIndex = 0;
             this.button.Text = "";
             this.button.TextAlign = ContentAlignment.MiddleRight;

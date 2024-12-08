@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public partial class HomeControl : UserControl
+    public partial class ManageRoleControl : UserControl
     {
-        public HomeControl()
+        public ManageRoleControl()
         {
             InitializeComponent();
         }

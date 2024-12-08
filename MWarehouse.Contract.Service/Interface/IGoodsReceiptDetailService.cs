@@ -6,6 +6,6 @@ namespace MWarehouse.Contract.Service.Interface
     public interface IGoodsReceiptDetailService
     {
         Task CreateAsync(IEnumerable<CreateGoodsReceiptDetailModel> obj);
-        Task<IEnumerable<ResponseGoodsReceiptDetailModel>> GetAllAsync();
+        Task<IEnumerable<ResponseGoodsReceiptDetailModel>> GetAllAsync(int code);
     }
 }

@@ -1,15 +1,6 @@
 ﻿using MWarehouse.Contract.Service.Interface;
+using MWarehouse.ModelViews.ProductModelViews;
 using MWarehouse.ModelViews.ProductTypeModelViews;
-using MWarehouse.Service.Service;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UI.Controls
 {
@@ -17,6 +8,8 @@ namespace UI.Controls
     {
         private readonly IProductTypeService _productTypeService;
         private readonly IProductService _productService;
+        private List<ProductResultLine> _resultLines = new List<ProductResultLine>();
+        private IEnumerable<ResponseProductModel> _products;
         public ProductTypeControl(IProductService productService, IProductTypeService productTypeService)
         {
             this._productService = productService;
@@ -30,15 +23,40 @@ namespace UI.Controls
             createButton.button.Click += async (s, e) => await CreateButton_Click(s, e);
             deleteButton.button.Click += async (s, e) => await DeleteButton_Click(s, e);
             this.dataGridView.RowHeaderMouseClick += async (s, e) => await DataGridView_RowHeaderMouseClick(s, e);
+            this.dataGridView.DataSource = (await this._productTypeService.GetAllAsync());
+            _products = await this._productService.GetAllAsync();
+            this.comboBoxProductList.DataSource = _products.ToList();
+            this.comboBoxProductList.DisplayMember = "TenSanPham";
+            this.comboBoxProductList.ValueMember = "AutoId";
 
         }
 
         private async Task LoadDataSource(int code)
         {
-            this.dataGridView.DataSource = (await this._productTypeService.GetAllAsync()).Where(r => r.AutoId == code);
-            this.comboBoxProductList.DataSource = await this._productService.GetAllAsync();
-            this.comboBoxProductList.DisplayMember = "TenSanPham";
-            this.comboBoxProductList.ValueMember = "AutoId";
+            flowLayoutPanel1.Controls.Clear();
+            foreach (var i in _products.Where(r => r.LoaiSanPhamId == code))
+            {
+                ProductResultLine line = new ProductResultLine();
+                line.prName.Text = i.TenSanPham;
+                line.deleteButton1.button.Click += Button_Click;
+                flowLayoutPanel1.Controls.Add(line);
+            }
+        }
+
+        private void ClearTB()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+        }
+        private void Button_Click(object? sender, EventArgs e)
+        {
+            if (!ValidateData()) return;
+            _productService.UpdateProductTypeAsync(int.Parse(comboBoxProductList.SelectedValue.ToString()), int.Parse(txtProductTypeCode.Text));
         }
 
         private async Task DataGridView_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
@@ -46,12 +64,26 @@ namespace UI.Controls
             DataGridViewCellCollection cells = this.dataGridView.SelectedRows[0].Cells;
             this.txtProductTypeCode.Text = cells[0].ToString();
             this.txtProductTypeName.Text = cells[1].ToString();
+            this.txtNote.Text = cells[2].ToString();
             await LoadDataSource(int.Parse(cells[0].ToString()));
         }
 
         private async Task DeleteButton_Click(object? sender, EventArgs e)
         {
-            await _productTypeService.DeleteAsync(int.Parse(this.txtProductTypeCode.ToString()));
+            ErrorProvider err = new ErrorProvider();
+            if (string.IsNullOrWhiteSpace(this.txtProductTypeCode.Text))
+            {
+                err.SetError(this.txtProductTypeCode, "Nhập mã");
+
+                return;
+            }
+            DialogResult choose = MessageBox.Show("Xác nhận xóa ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (choose == DialogResult.Yes)
+            {
+                await _productTypeService.DeleteAsync(int.Parse(this.txtProductTypeCode.ToString()));
+            }
+            this.dataGridView.DataSource = (await this._productTypeService.GetAllAsync()).ToList();
+            ClearTB();
         }
 
         private async Task CreateButton_Click(object? sender, EventArgs e)
@@ -59,6 +91,8 @@ namespace UI.Controls
             CreateProductTypeModel data = GetCreateData();
             if (data == null) return;
             await _productTypeService.CreateAsync(data);
+            this.dataGridView.DataSource = (await this._productTypeService.GetAllAsync()).ToList();
+            ClearTB();
         }
 
         private CreateProductTypeModel GetCreateData()

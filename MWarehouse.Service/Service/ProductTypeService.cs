@@ -38,7 +38,6 @@ namespace MWarehouse.Service.Service
             }
             newProductType = _mapper.Map<TblDmLoaiSanPham>(obj);
 
-            newProductType.AutoId = IDGenerator.GenerateID(3, await GetAllAsync(), r => r.AutoId);
             newProductType.MaLsp = IDGenerator.Generate("LSP", 3);
             await _iuow.GetRepository<TblDmLoaiSanPham>().InsertAsync(newProductType);
             await _iuow.SaveAsync();
@@ -54,7 +53,7 @@ namespace MWarehouse.Service.Service
 
         public async Task<IEnumerable<ResponseProductTypeModel>> GetAllAsync()
         {
-            IEnumerable<ResponseProductTypeModel> result = _mapper.Map<IEnumerable<ResponseProductTypeModel>>(await _iuow.GetRepository<TblXnkNhapKho>().GetAllAsync());
+            IEnumerable<ResponseProductTypeModel> result = _mapper.Map<IEnumerable<ResponseProductTypeModel>>(await _iuow.GetRepository<TblDmLoaiSanPham>().GetAllAsync());
             return result;
         }
 

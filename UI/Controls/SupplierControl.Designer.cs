@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            dataGridViewProductSupplied = new DataGridView();
             textBoxTotalQuantitySupply = new TextBox();
-            comboBoxProductSupply = new ComboBox();
             textBox2 = new TextBox();
             label4 = new Label();
             label3 = new Label();
@@ -41,14 +41,17 @@
             txtSupplierCode = new TextBox();
             label1 = new Label();
             dataGridView = new DataGridView();
+            cbProduct = new ComboBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProductSupplied).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(cbProduct);
+            panel1.Controls.Add(dataGridViewProductSupplied);
             panel1.Controls.Add(textBoxTotalQuantitySupply);
-            panel1.Controls.Add(comboBoxProductSupply);
             panel1.Controls.Add(textBox2);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
@@ -65,23 +68,27 @@
             panel1.Size = new Size(759, 269);
             panel1.TabIndex = 3;
             // 
+            // dataGridViewProductSupplied
+            // 
+            dataGridViewProductSupplied.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewProductSupplied.BackgroundColor = SystemColors.ActiveCaption;
+            dataGridViewProductSupplied.BorderStyle = BorderStyle.None;
+            dataGridViewProductSupplied.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProductSupplied.Location = new Point(308, 139);
+            dataGridViewProductSupplied.Name = "dataGridViewProductSupplied";
+            dataGridViewProductSupplied.RowHeadersWidth = 51;
+            dataGridViewProductSupplied.Size = new Size(296, 124);
+            dataGridViewProductSupplied.TabIndex = 4;
+            // 
             // textBoxTotalQuantitySupply
             // 
             textBoxTotalQuantitySupply.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBoxTotalQuantitySupply.Enabled = false;
             textBoxTotalQuantitySupply.Font = new Font("Times New Roman", 13.8F);
-            textBoxTotalQuantitySupply.Location = new Point(273, 208);
+            textBoxTotalQuantitySupply.Location = new Point(524, 82);
             textBoxTotalQuantitySupply.Name = "textBoxTotalQuantitySupply";
             textBoxTotalQuantitySupply.Size = new Size(172, 34);
             textBoxTotalQuantitySupply.TabIndex = 14;
-            // 
-            // comboBoxProductSupply
-            // 
-            comboBoxProductSupply.Font = new Font("Times New Roman", 13.8F);
-            comboBoxProductSupply.FormattingEnabled = true;
-            comboBoxProductSupply.Location = new Point(311, 143);
-            comboBoxProductSupply.Name = "comboBoxProductSupply";
-            comboBoxProductSupply.Size = new Size(172, 34);
-            comboBoxProductSupply.TabIndex = 13;
             // 
             // textBox2
             // 
@@ -96,7 +103,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            label4.Location = new Point(39, 219);
+            label4.Location = new Point(518, 39);
             label4.Name = "label4";
             label4.Size = new Size(228, 25);
             label4.TabIndex = 12;
@@ -114,7 +121,7 @@
             // 
             // deleteButton1
             // 
-            deleteButton1.Location = new Point(488, 11);
+            deleteButton1.Location = new Point(107, 189);
             deleteButton1.Margin = new Padding(4, 3, 4, 3);
             deleteButton1.Name = "deleteButton1";
             deleteButton1.Size = new Size(56, 55);
@@ -122,7 +129,7 @@
             // 
             // createButton1
             // 
-            createButton1.Location = new Point(390, 11);
+            createButton1.Location = new Point(192, 189);
             createButton1.Margin = new Padding(4, 3, 4, 3);
             createButton1.Name = "createButton1";
             createButton1.Size = new Size(56, 55);
@@ -179,6 +186,15 @@
             dataGridView.Size = new Size(759, 166);
             dataGridView.TabIndex = 2;
             // 
+            // cbProduct
+            // 
+            cbProduct.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbProduct.FormattingEnabled = true;
+            cbProduct.Location = new Point(610, 232);
+            cbProduct.Name = "cbProduct";
+            cbProduct.Size = new Size(151, 33);
+            cbProduct.TabIndex = 15;
+            // 
             // SupplierControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -189,6 +205,7 @@
             Size = new Size(759, 435);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProductSupplied).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
@@ -196,7 +213,6 @@
         #endregion
 
         private Panel panel1;
-        private ComboBox comboBoxProductSupply;
         private TextBox textBox2;
         private Label label4;
         private Label label3;
@@ -208,5 +224,7 @@
         private Label label1;
         private DataGridView dataGridView;
         private TextBox textBoxTotalQuantitySupply;
+        private DataGridView dataGridViewProductSupplied;
+        private ComboBox cbProduct;
     }
 }

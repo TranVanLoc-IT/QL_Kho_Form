@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MWarehouse.Contract.Service.Interface
 {
-    public interface IWordExportService
+    public interface IPDFExportService
     {
     }
 }

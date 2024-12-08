@@ -48,9 +48,11 @@ namespace MWarehouse.Service.Service
             }
         }
 
-        public async Task<IEnumerable<ResponseGoodsReceiptDetailModel>> GetAllAsync()
+        public async Task<IEnumerable<ResponseGoodsReceiptDetailModel>> GetAllAsync(int code)
         {
-            IEnumerable<ResponseGoodsReceiptDetailModel> result = _mapper.Map<IEnumerable<ResponseGoodsReceiptDetailModel>>(await _iuow.GetRepository<TblXnkNhapKhoRawDatum>().GetAllAsync());
+            var data = await _iuow.GetRepository<TblXnkNhapKhoRawDatum>().GetAllAsync();
+
+            IEnumerable<ResponseGoodsReceiptDetailModel> result = _mapper.Map<IEnumerable<ResponseGoodsReceiptDetailModel>>(data.Where(r => r.NhapKhoId == code);
             return result;
         }
     }

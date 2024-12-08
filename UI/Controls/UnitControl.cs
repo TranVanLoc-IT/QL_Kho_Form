@@ -23,7 +23,7 @@ namespace UI.Controls
         {
             createButton.button.Click += async (s, e) => await CreateButton_Click(s, e);
             deleteButton.button.Click += async (s, e) => await DeleteButton_Click(s, e);
-            acceptButton.Click += async (s, e) => await AcceptButton_Click(s, e);
+            acceptButton.button.Click += async (s, e) => await AcceptButton_Click(s, e);
             dataGridView1.RowHeaderMouseClick += DataGridView1_RowHeaderMouseClick;
             dataGridViewProductApply.RowHeaderMouseClick += DataGridViewProductApply_RowHeaderMouseClick;
             _productData = await _productService.GetAllAsync();
@@ -46,6 +46,7 @@ namespace UI.Controls
 
         private async Task AcceptButton_Click(object? sender, EventArgs e)
         {
+            if (!ValidateData()) return;
             DialogResult confirm = MessageBox.Show("Xác nhận lưu ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
             {
@@ -64,33 +65,52 @@ namespace UI.Controls
             }
         }
 
-        private void BtnRemovePr_Click(object? sender, EventArgs e)
-        {
-            DataGridViewSelectedRowCollection rows = dataGridViewProductApply.SelectedRows;
-            foreach (var r in rows)
-            {
-                dataGridViewProductApply.Rows.Remove((DataGridViewRow)r);
-            }
-        }
 
-
-        private void DataGridView1_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        private async void DataGridView1_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewCellCollection cells = this.dataGridView1.SelectedRows[0].Cells;
-            this.txtUnitCode.Text = cells[0].ToString();
-            this.txtUnitName.Text = cells[1].ToString();
+            var row = this.dataGridView1.SelectedRows[0];
+            this.txtUnitCode.Text = row.Cells[0].Value.ToString();
+            this.txtUnitName.Text = row.Cells[1].Value.ToString();
+            this.txtNote.Text = row.Cells[2].Value.ToString();
+            this.dataGridViewProductApply.DataSource = await _unitService.GetAllProductAsync(int.Parse(row.Cells[0].Value.ToString()));
         }
 
         private async Task DeleteButton_Click(object? sender, EventArgs e)
         {
-            await _unitService.DeleteAsync(int.Parse(this.txtUnitCode.ToString()));
+            ErrorProvider err = new ErrorProvider();
+            if (string.IsNullOrWhiteSpace(this.txtUnitCode.Text))
+            {
+                err.SetError(this.txtUnitCode, "Nhập mã");
+
+                return;
+            }
+            DialogResult choose = MessageBox.Show("Xác nhận xóa ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (choose == DialogResult.Yes)
+            {
+                await _unitService.DeleteAsync(int.Parse(this.txtUnitCode.Text));
+                await LoadDataGridData();
+                ClearTB();
+            }
         }
 
+        private void ClearTB()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+        }
         private async Task CreateButton_Click(object? sender, EventArgs e)
         {
             CreateUnitModel data = GetCreateData();
             if (data == null) return;
             await _unitService.CreateAsync(data);
+            txtUnitName.Text = "";
+            await LoadDataGridData();
+            ClearTB();
         }
 
         private async Task LoadDataGridData()
@@ -112,15 +132,6 @@ namespace UI.Controls
         private bool ValidateData()
         {
             ErrorProvider err = new ErrorProvider();
-            if (string.IsNullOrWhiteSpace(this.txtUnitCode.Text))
-            {
-                DialogResult result = MessageBox.Show("Nhập mã code hoặc tự sinh", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
-                {
-                    err.SetError(this.txtUnitCode, "Nhập mã code");
-                    return false;
-                }
-            }
             if (string.IsNullOrWhiteSpace(this.txtUnitName.Text))
             {
                 err.SetError(this.txtUnitName, "Nhập tên đơn vị tính");

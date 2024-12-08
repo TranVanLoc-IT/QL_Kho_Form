@@ -62,13 +62,13 @@
             // 
             // flowLayoutPanelProduct
             // 
-            flowLayoutPanelProduct.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelProduct.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanelProduct.AutoScroll = true;
             flowLayoutPanelProduct.AutoSize = true;
             flowLayoutPanelProduct.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanelProduct.Location = new Point(13, 201);
+            flowLayoutPanelProduct.Location = new Point(3, 198);
             flowLayoutPanelProduct.Name = "flowLayoutPanelProduct";
-            flowLayoutPanelProduct.Size = new Size(342, 357);
+            flowLayoutPanelProduct.Size = new Size(284, 128);
             flowLayoutPanelProduct.TabIndex = 16;
             // 
             // label4
@@ -307,7 +307,7 @@
             groupBox1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(-1, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(538, 332);
+            groupBox1.Size = new Size(538, 367);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phiếu nhập";

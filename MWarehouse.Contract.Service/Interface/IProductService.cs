@@ -15,6 +15,7 @@ namespace MWarehouse.Contract.Service.Interface
         Task CreateAsync(CreateProductModel obj);
         Task UpdateAsync(string id, UpdateProductModel obj);
         Task UpdateUnitAsync(int id, int[] obj);
+        Task UpdateProductTypeAsync(int id, int type);
         Task DeleteAsync(int id);
         Task<IEnumerable<ResponseProductModel>> GetAllAsync();
         Task<ResponseProductModel> GetByIdAsync(int id);

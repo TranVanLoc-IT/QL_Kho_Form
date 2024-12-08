@@ -34,7 +34,6 @@
             btnPrint = new Button();
             txtNote = new TextBox();
             updateButton = new UCButton.UpdateButton();
-            cbFilter = new ComboBox();
             cbWarehouse = new ComboBox();
             label6 = new Label();
             label5 = new Label();
@@ -45,15 +44,16 @@
             createButton = new UCButton.CreateButton();
             label2 = new Label();
             label1 = new Label();
+            cbFilter = new ComboBox();
             dataGridView = new DataGridView();
             panel1 = new Panel();
+            flowLayoutPanelProduct = new FlowLayoutPanel();
             removeProduct = new UCButton.DeleteButton();
             addProduct = new UCButton.CreateButton();
             label7 = new Label();
             quantitySupply = new NumericUpDown();
             cbProducts = new ComboBox();
             label4 = new Label();
-            flowLayoutPanelProduct = new FlowLayoutPanel();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             panel1.SuspendLayout();
@@ -89,7 +89,7 @@
             groupBox1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(538, 391);
+            groupBox1.Size = new Size(538, 427);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phiếu nhập";
@@ -99,7 +99,7 @@
             btnPrint.BackgroundImage = (Image)resources.GetObject("btnPrint.BackgroundImage");
             btnPrint.Location = new Point(234, 327);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(56, 55);
+            btnPrint.Size = new Size(60, 63);
             btnPrint.TabIndex = 16;
             btnPrint.UseVisualStyleBackColor = true;
             // 
@@ -119,18 +119,8 @@
             // 
             updateButton.Location = new Point(34, 327);
             updateButton.Name = "updateButton";
-            updateButton.Size = new Size(56, 55);
+            updateButton.Size = new Size(60, 63);
             updateButton.TabIndex = 14;
-            // 
-            // cbFilter
-            // 
-            cbFilter.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cbFilter.FormattingEnabled = true;
-            cbFilter.Items.AddRange(new object[] { "Tất cả" });
-            cbFilter.Location = new Point(674, 394);
-            cbFilter.Name = "cbFilter";
-            cbFilter.Size = new Size(151, 33);
-            cbFilter.TabIndex = 13;
             // 
             // cbWarehouse
             // 
@@ -193,7 +183,7 @@
             deleteButton.Location = new Point(97, 327);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(56, 55);
+            deleteButton.Size = new Size(60, 63);
             deleteButton.TabIndex = 2;
             // 
             // createButton
@@ -201,7 +191,7 @@
             createButton.Location = new Point(161, 327);
             createButton.Margin = new Padding(4, 3, 4, 3);
             createButton.Name = "createButton";
-            createButton.Size = new Size(56, 55);
+            createButton.Size = new Size(60, 63);
             createButton.TabIndex = 2;
             // 
             // label2
@@ -223,6 +213,16 @@
             label1.Size = new Size(106, 25);
             label1.TabIndex = 0;
             label1.Text = "Mã Code";
+            // 
+            // cbFilter
+            // 
+            cbFilter.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cbFilter.FormattingEnabled = true;
+            cbFilter.Items.AddRange(new object[] { "Tất cả" });
+            cbFilter.Location = new Point(674, 394);
+            cbFilter.Name = "cbFilter";
+            cbFilter.Size = new Size(151, 33);
+            cbFilter.TabIndex = 13;
             // 
             // dataGridView
             // 
@@ -252,20 +252,30 @@
             panel1.Size = new Size(284, 391);
             panel1.TabIndex = 5;
             // 
+            // flowLayoutPanelProduct
+            // 
+            flowLayoutPanelProduct.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelProduct.AutoScroll = true;
+            flowLayoutPanelProduct.AutoSize = true;
+            flowLayoutPanelProduct.Location = new Point(13, 207);
+            flowLayoutPanelProduct.Name = "flowLayoutPanelProduct";
+            flowLayoutPanelProduct.Size = new Size(327, 175);
+            flowLayoutPanelProduct.TabIndex = 16;
+            // 
             // removeProduct
             // 
-            removeProduct.Location = new Point(81, 137);
+            removeProduct.Location = new Point(191, 146);
             removeProduct.Margin = new Padding(6, 3, 6, 3);
             removeProduct.Name = "removeProduct";
-            removeProduct.Size = new Size(56, 55);
+            removeProduct.Size = new Size(60, 63);
             removeProduct.TabIndex = 14;
             // 
             // addProduct
             // 
-            addProduct.Location = new Point(13, 137);
+            addProduct.Location = new Point(104, 146);
             addProduct.Margin = new Padding(6, 3, 6, 3);
             addProduct.Name = "addProduct";
-            addProduct.Size = new Size(56, 55);
+            addProduct.Size = new Size(60, 63);
             addProduct.TabIndex = 14;
             // 
             // label7
@@ -300,16 +310,6 @@
             label4.Size = new Size(169, 23);
             label4.TabIndex = 11;
             label4.Text = "Sản phẩm cung cấp";
-            // 
-            // flowLayoutPanelProduct
-            // 
-            flowLayoutPanelProduct.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            flowLayoutPanelProduct.AutoScroll = true;
-            flowLayoutPanelProduct.AutoSize = true;
-            flowLayoutPanelProduct.Location = new Point(13, 207);
-            flowLayoutPanelProduct.Name = "flowLayoutPanelProduct";
-            flowLayoutPanelProduct.Size = new Size(327, 175);
-            flowLayoutPanelProduct.TabIndex = 16;
             // 
             // GoodsReceiptControl
             // 

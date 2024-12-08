@@ -1,4 +1,5 @@
 ﻿using MWarehouse.Core.Base;
+using MWarehouse.ModelViews.ProductModelViews;
 using MWarehouse.ModelViews.UnitModelViews;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace MWarehouse.Contract.Service.Interface
         Task CreateAsync(CreateUnitModel obj);
         Task DeleteAsync(int id);
         Task<IEnumerable<ResponseUnitModel>> GetAllAsync();
+        Task<IEnumerable<ResponseProductModel>> GetAllProductAsync(int code);
     }
 }

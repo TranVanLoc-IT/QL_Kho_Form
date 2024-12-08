@@ -30,9 +30,9 @@
         {
             dataGridView = new DataGridView();
             panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            txtNote = new TextBox();
             comboBoxProductList = new ComboBox();
-            totalProductQuantity = new TextBox();
-            label4 = new Label();
             label3 = new Label();
             deleteButton = new UCButton.DeleteButton();
             createButton = new UCButton.CreateButton();
@@ -49,17 +49,17 @@
             dataGridView.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Dock = DockStyle.Bottom;
-            dataGridView.Location = new Point(0, 262);
+            dataGridView.Location = new Point(0, 300);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(705, 211);
+            dataGridView.Size = new Size(705, 173);
             dataGridView.TabIndex = 0;
             // 
             // panel1
             // 
+            panel1.Controls.Add(flowLayoutPanel1);
+            panel1.Controls.Add(txtNote);
             panel1.Controls.Add(comboBoxProductList);
-            panel1.Controls.Add(totalProductQuantity);
-            panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(deleteButton);
             panel1.Controls.Add(createButton);
@@ -71,41 +71,40 @@
             panel1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(705, 262);
+            panel1.Size = new Size(705, 300);
             panel1.TabIndex = 1;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Location = new Point(484, 139);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(250, 155);
+            flowLayoutPanel1.TabIndex = 15;
+            // 
+            // txtNote
+            // 
+            txtNote.BorderStyle = BorderStyle.None;
+            txtNote.Font = new Font("Times New Roman", 13.8F);
+            txtNote.Location = new Point(39, 139);
+            txtNote.Multiline = true;
+            txtNote.Name = "txtNote";
+            txtNote.PlaceholderText = "Thêm ghi chú..";
+            txtNote.Size = new Size(422, 94);
+            txtNote.TabIndex = 14;
             // 
             // comboBoxProductList
             // 
+            comboBoxProductList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxProductList.Font = new Font("Times New Roman", 13.8F);
             comboBoxProductList.FormattingEnabled = true;
             comboBoxProductList.Location = new Point(484, 75);
             comboBoxProductList.Name = "comboBoxProductList";
-            comboBoxProductList.Size = new Size(172, 34);
+            comboBoxProductList.Size = new Size(218, 34);
             comboBoxProductList.TabIndex = 13;
-            // 
-            // totalProductQuantity
-            // 
-            totalProductQuantity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            totalProductQuantity.BorderStyle = BorderStyle.None;
-            totalProductQuantity.Enabled = false;
-            totalProductQuantity.Font = new Font("Times New Roman", 13.8F);
-            totalProductQuantity.Location = new Point(379, 141);
-            totalProductQuantity.Name = "totalProductQuantity";
-            totalProductQuantity.Size = new Size(93, 27);
-            totalProductQuantity.TabIndex = 11;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            label4.Location = new Point(42, 143);
-            label4.Name = "label4";
-            label4.Size = new Size(331, 25);
-            label4.TabIndex = 12;
-            label4.Text = "Số lượng sản phẩm đã cung cấp";
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label3.Location = new Point(484, 44);
@@ -116,23 +115,22 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(176, 183);
+            deleteButton.Location = new Point(153, 239);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(56, 55);
+            deleteButton.Size = new Size(60, 63);
             deleteButton.TabIndex = 8;
             // 
             // createButton
             // 
-            createButton.Location = new Point(99, 183);
+            createButton.Location = new Point(60, 239);
             createButton.Margin = new Padding(4, 3, 4, 3);
             createButton.Name = "createButton";
-            createButton.Size = new Size(56, 55);
+            createButton.Size = new Size(60, 63);
             createButton.TabIndex = 7;
             // 
             // txtProductTypeName
             // 
-            txtProductTypeName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtProductTypeName.BorderStyle = BorderStyle.None;
             txtProductTypeName.Font = new Font("Times New Roman", 13.8F);
             txtProductTypeName.Location = new Point(250, 93);
@@ -152,7 +150,6 @@
             // 
             // txtProductTypeCode
             // 
-            txtProductTypeCode.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtProductTypeCode.BorderStyle = BorderStyle.None;
             txtProductTypeCode.Enabled = false;
             txtProductTypeCode.Font = new Font("Times New Roman", 13.8F);
@@ -190,8 +187,6 @@
         private DataGridView dataGridView;
         private Panel panel1;
         private ComboBox comboBoxProductList;
-        private TextBox totalProductQuantity;
-        private Label label4;
         private Label label3;
         private UCButton.DeleteButton deleteButton;
         private UCButton.CreateButton createButton;
@@ -199,5 +194,7 @@
         private Label label2;
         private TextBox txtProductTypeCode;
         private Label label1;
+        private TextBox txtNote;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
