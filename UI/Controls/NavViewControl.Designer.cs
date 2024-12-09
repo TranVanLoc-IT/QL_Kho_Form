@@ -69,6 +69,7 @@
             WarehousePage.PageViewList = null;
             WarehousePage.Size = new Size(183, 90);
             WarehousePage.TabIndex = 14;
+            WarehousePage.Visible = false;
             // 
             // SupplierPage
             // 
@@ -80,6 +81,7 @@
             SupplierPage.PageViewList = null;
             SupplierPage.Size = new Size(183, 90);
             SupplierPage.TabIndex = 13;
+            SupplierPage.Visible = false;
             // 
             // ProductTypePage
             // 
@@ -97,6 +99,7 @@
             ProductTypePage.Text = "Loại sản phẩm";
             ProductTypePage.TextAlign = ContentAlignment.MiddleRight;
             ProductTypePage.UseVisualStyleBackColor = true;
+            ProductTypePage.Visible = false;
             // 
             // ProductPage
             // 
@@ -108,6 +111,7 @@
             ProductPage.PageViewList = null;
             ProductPage.Size = new Size(183, 90);
             ProductPage.TabIndex = 11;
+            ProductPage.Visible = false;
             // 
             // ChatBot
             // 
@@ -141,6 +145,7 @@
             UnitPage.Text = "Đơn vị tính";
             UnitPage.TextAlign = ContentAlignment.MiddleRight;
             UnitPage.UseVisualStyleBackColor = true;
+            UnitPage.Visible = false;
             // 
             // RolePage
             // 
@@ -158,6 +163,7 @@
             RolePage.Text = "Phân quyền";
             RolePage.TextAlign = ContentAlignment.MiddleRight;
             RolePage.UseVisualStyleBackColor = true;
+            RolePage.Visible = false;
             // 
             // pictureBox1
             // 

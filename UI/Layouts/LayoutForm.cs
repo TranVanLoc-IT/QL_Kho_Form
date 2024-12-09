@@ -1,14 +1,6 @@
 ﻿using Microsoft.VisualBasic.Logging;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Controls;
 using UI.CustomForm;
@@ -28,7 +20,7 @@ namespace UI.Layouts
 
         private readonly ILoginService _loginService;
 
-        private string userName; 
+        private string userName;
 
         public string user
         {
@@ -36,7 +28,7 @@ namespace UI.Layouts
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    userName = value; 
+                    userName = value;
                     this.label1.Text = "Xin chào " + value; // Cập nhật label
                 }
             }
@@ -62,8 +54,8 @@ namespace UI.Layouts
             _productTypeControl = productTypeControl;
             _goodsReceiptControl = goodsReceiptControl;
             this._loginService = loginService;
-            Login();
             InitializeComponent();
+            Login();
             this.WindowState = FormWindowState.Maximized;
             this.ResizeEnd += LayoutForm_Resize;
             this.MinimumSizeChanged += LayoutForm_Resize;
@@ -95,8 +87,8 @@ namespace UI.Layouts
         private void Login()
         {
             LoginForm login = new LoginForm(_loginService);
-            login.ShowDialog();
             login.FormClosed += Login_FormClosed;
+            login.ShowDialog();
         }
 
         private void Login_FormClosed(object? sender, FormClosedEventArgs e)
@@ -104,16 +96,16 @@ namespace UI.Layouts
             LoginForm login = (sender as LoginForm);
             DisplayFormOnRole(login.forms);
             this.user = login.user;
-            label1.Text = this.user;
+            label1.Text = "Đang hoạt động: " + this.user;
         }
 
         private void SetClickDropdown()
         {
-            foreach(Control c in navViewControl1.panel1.Controls)
+            foreach (Control c in navViewControl1.panel1.Controls)
             {
                 if (c is DropdownButton b)
                 {
-                    foreach (Button p in b.Controls.Find("container",false).First().Controls)
+                    foreach (Button p in b.Controls.Find("container", false).First().Controls)
                     {
                         p.Click += btn_Click;
                     }
@@ -166,7 +158,7 @@ namespace UI.Layouts
             this.main.Controls.Clear();
             this.main.Controls.Add(_productTypeControl);
         }
-        
+
         private void WarehousePage_Click(object? sender, EventArgs e)
         {
             this.main.Controls.Clear();
@@ -211,21 +203,54 @@ namespace UI.Layouts
         {
             foreach (string form in forms)
             {
-                foreach (Control control in this.navViewControl1.Controls)
+
+                foreach (Control control in this.navViewControl1.panel1.Controls)
                 {
-                    if(control is Button b)
+
+                    if (control is Button b)
                     {
-                        if(b.Name == form)
+                        if (b.Name.Equals(form.Trim()))
                         {
                             b.Visible = true;
-                        }
-                        else
-                        {
-                            b.Visible = false;
+                            break;
                         }
                     }
+                    if (form.Equals("WarehousePage"))
+                    {
+                        this.navViewControl1.WarehousePage.Visible = true;
+                        break;
+                    }
+                    else if (form.Equals("SupplierPage"))
+                    {
+                        this.navViewControl1.SupplierPage.Visible = true;
+                        break;
+                    }
+                    else if (form.Equals("ProductPage"))
+                    {
+                        this.navViewControl1.ProductPage.Visible = true;
+                        break;
+                    }
+
+
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Control control in this.navViewControl1.panel1.Controls)
+            {
+
+                if (control is Button b)
+                {
+                    b.Visible = false;
+                }
+            }
+            this.navViewControl1.WarehousePage.Visible = false;
+            this.navViewControl1.SupplierPage.Visible = false;
+            this.navViewControl1.ProductTypePage.Visible = false;
+
+            Login();
         }
     }
 }

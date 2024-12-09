@@ -101,7 +101,6 @@ namespace UI.Controls
             if(cbFilter.DataSource != null)
             {
                 cbFilter.DisplayMember = "NgayNhapKho";
-                cbFilter.ValueMember = "NgayNhapKho";
             }
             dataGridView.DataSource = _receipts;
             cbProducts.DataSource = await _productService.GetAllAsync();

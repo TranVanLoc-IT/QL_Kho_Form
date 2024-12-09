@@ -62,7 +62,7 @@ namespace UI.Controls
             updateButton.button.Click += async (s, e) => await UpdateButton_Click(s, e);
             refreshBtn.Click += async(s, e) => {
                 this.products = await _productService.GetAllAsync();
-                dataGridView.DataSource = products;
+                dataGridView.DataSource = products.ToList();
             };
             // combo
             comboBoxFilter.SelectedIndexChanged += ComboBoxFilter_SelectedIndexChanged;

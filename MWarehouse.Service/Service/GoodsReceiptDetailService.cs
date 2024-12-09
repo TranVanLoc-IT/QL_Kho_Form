@@ -52,7 +52,7 @@ namespace MWarehouse.Service.Service
         {
             var data = await _iuow.GetRepository<TblXnkNhapKhoRawDatum>().GetAllAsync();
 
-            IEnumerable<ResponseGoodsReceiptDetailModel> result = _mapper.Map<IEnumerable<ResponseGoodsReceiptDetailModel>>(data.Where(r => r.NhapKhoId == code);
+            IEnumerable<ResponseGoodsReceiptDetailModel> result = _mapper.Map<IEnumerable<ResponseGoodsReceiptDetailModel>>(data.Where(r => r.NhapKhoId == code));
             return result;
         }
     }

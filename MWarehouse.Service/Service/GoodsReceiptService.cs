@@ -96,6 +96,20 @@ namespace MWarehouse.Service.Service
 
         }
 
+        public async Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync()
+        {
+            IEnumerable<ResponseGoodsReceiptModel> result = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Select(r => new ResponseGoodsReceiptModel()
+            {
+                AutoId = r.AutoId,
+                KhoId = r.KhoId,
+                NgayNhapKho = r.NgayNhapKho,
+                NccId = r.NccId,
+                GhiChu = r.GhiChu
+            }).ToListAsync();
+            return result;
+
+        }
+
         public async Task<ResponseGoodsReceiptModel> GetByIdAsync(int id)
         {
             ResponseGoodsReceiptModel result = _mapper.Map<ResponseGoodsReceiptModel>(await _iuow.GetRepository<TblXnkNhapKho>().GetByIdAsync(id));

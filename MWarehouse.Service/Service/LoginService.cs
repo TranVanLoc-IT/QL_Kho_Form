@@ -49,7 +49,7 @@ namespace MWarehouse.Service.Service
                              join b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                              on q.MaNhomNguoiDung equals b.MaNhomNguoiDung
                              where b.TenDangNhap == user.TenDangNhap
-                             select mh.MaManHinh).ToArray();
+                             select mh.TenManHinh).ToArray();
 
             return forms;
         }

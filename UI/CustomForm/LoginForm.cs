@@ -1,6 +1,7 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
 using MWarehouse.ModelViews.LoginModelView;
+using System.Text.RegularExpressions;
 using UI.Layouts;
 
 namespace UI.CustomForm
@@ -38,14 +39,24 @@ namespace UI.CustomForm
                 _errorProvider.SetError(this.userName, "Nhập mã người dùng");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(userName))
+
+            if (string.IsNullOrWhiteSpace(password))
             {
                 _errorProvider.SetError(this.password, "Nhập password");
                 return;
             }
+
+            string pattern = @"^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;'""\\|,.<>/?-]).+$";
+
+            if (!Regex.IsMatch(password, pattern))
+            {
+                _errorProvider.SetError(this.password, "Mật khẩu phải chứa ít nhất một chữ số và một ký tự đặc biệt");
+                return;
+            }
+
             try
             {
-                LoginModel login = new LoginModel(userName, password);
+                LoginModel login = new LoginModel(userName.ToLower(), password);
                 forms = _loginService.HandleLoginRequest(login);
                 this.user = _loginService.GetCurrentuser();
                 this.Close();
@@ -54,6 +65,8 @@ namespace UI.CustomForm
             catch (ErrorException ex)
             {
                 MessageBox.Show("ĐĂNG NHẬP THẤT BẠI");
+                this.userName.Text = string.Empty;
+                this.password.Text = string.Empty;
             }
         }
 

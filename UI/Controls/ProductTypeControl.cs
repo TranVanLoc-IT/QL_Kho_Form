@@ -1,6 +1,7 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.ProductModelViews;
 using MWarehouse.ModelViews.ProductTypeModelViews;
+using System.Windows.Forms;
 
 namespace UI.Controls
 {
@@ -28,6 +29,7 @@ namespace UI.Controls
             this.comboBoxProductList.DataSource = _products.ToList();
             this.comboBoxProductList.DisplayMember = "TenSanPham";
             this.comboBoxProductList.ValueMember = "AutoId";
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
 
@@ -61,11 +63,11 @@ namespace UI.Controls
 
         private async Task DataGridView_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewCellCollection cells = this.dataGridView.SelectedRows[0].Cells;
-            this.txtProductTypeCode.Text = cells[0].ToString();
-            this.txtProductTypeName.Text = cells[1].ToString();
-            this.txtNote.Text = cells[2].ToString();
-            await LoadDataSource(int.Parse(cells[0].ToString()));
+            var row = this.dataGridView.SelectedRows[0];
+            this.txtProductTypeCode.Text = row.Cells[0].ToString();
+            this.txtProductTypeName.Text = row.Cells[1].ToString();
+            this.txtNote.Text = row.Cells[2].ToString();
+            await LoadDataSource(int.Parse(row.Cells[0].ToString()));
         }
 
         private async Task DeleteButton_Click(object? sender, EventArgs e)
