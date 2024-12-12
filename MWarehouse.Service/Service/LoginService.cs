@@ -35,21 +35,15 @@ namespace MWarehouse.Service.Service
         /// <param name="login"></param>
         /// <returns></returns>
         /// <exception cref="ErrorException"></exception>
-        public string[] HandleLoginRequest(LoginModel login)
+        public string HandleLoginRequest(LoginModel login)
         {
             QlNguoiDung user = _iuow.GetRepository<QlNguoiDung>().Entities
                 .Where(u => u.MatKhau == login.MatKhau && 
                             u.TenDangNhap == login.TenDangNhap && u.TrangThai == 1).FirstOrDefault() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, ErrorCode.Code.NOT_FOUND.ToString(), "Không có người dùng nào");
             _user = user.TenDangNhap;
-            string[] forms = (from mh in _iuow.GetRepository<DmManHinh>().Entities
-                             join q in _iuow.GetRepository<QlPhanQuyen>().Entities
-                             on mh.MaManHinh equals q.MaManHinh
-                             join nnd in _iuow.GetRepository<QlNhomNguoiDung>().Entities
-                             on q.MaNhomNguoiDung equals nnd.MaNhom
-                             join b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
-                             on q.MaNhomNguoiDung equals b.MaNhomNguoiDung
+            string forms = (from b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                              where b.TenDangNhap == user.TenDangNhap
-                             select mh.TenManHinh).ToArray();
+                             select b.MaNhomNguoiDung).FirstOrDefault() ?? "";
 
             return forms;
         }
