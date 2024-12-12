@@ -23,25 +23,23 @@ namespace UI
 
         private static void AddControlService(this IServiceCollection services)
         {
-            services.AddScoped<UnitControl>();
-            services.AddScoped<ManageRoleControl>();
-            services.AddScoped<ProductControl>();
-            services.AddScoped<SupplierControl>();
             services.AddScoped<AIControl>();
-            services.AddScoped<ExportViewControl>();
-            services.AddScoped<ProductTypeControl>();
-            services.AddScoped<GoodsReceiptControl>();
+            services.AddScoped<UserRoleControl>();
+            services.AddScoped<GroupRoleControl>();
+            services.AddScoped<ConfirmExportControl>();
+            services.AddScoped<ConfirmImportControl>();
+            services.AddScoped<ReportExportControl>();
+            services.AddScoped<ReportImportControl>();
 
             // Register LayoutForm with DI and pass the control names you want
             services.AddScoped(provider => new LayoutForm(
-                provider.GetRequiredService<UnitControl>(),
-                provider.GetRequiredService<ManageRoleControl>(),
-                provider.GetRequiredService<ProductControl>(),
-                provider.GetRequiredService<SupplierControl>(),
                 provider.GetRequiredService<AIControl>(),
-                provider.GetRequiredService<ExportViewControl>(),
-                provider.GetRequiredService<ProductTypeControl>(),
-                provider.GetRequiredService<GoodsReceiptControl>(),
+                provider.GetRequiredService<UserRoleControl>(),
+                provider.GetRequiredService<GroupRoleControl>(),
+                provider.GetRequiredService<ConfirmImportControl>(),
+                provider.GetRequiredService<ConfirmExportControl>(),
+                provider.GetRequiredService<ReportExportControl>(),
+                provider.GetRequiredService<ReportImportControl>(),
                 provider.GetRequiredService<ILoginService>()
             ));
         }

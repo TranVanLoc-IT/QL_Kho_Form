@@ -43,20 +43,22 @@ namespace UI.Controls
         /// </summary>
         private void ComboBoxConfig()
         {
-            WarehousePage.HeaderPage = new PageViewModel() { PageName = "WarehousePage", PageTitle = "Quản lí kho"};
-            SupplierPage.HeaderPage = new PageViewModel() { PageName = "SupplierPage", PageTitle = "Nhà cung cấp" };
-            ProductPage.HeaderPage = new PageViewModel() { PageName = "ProductPage", PageTitle = "Quản lí sản phẩm" };
+            ConfirmPage.HeaderPage = new PageViewModel() { PageName = "ConfirmPageForm", PageTitle = "Duyệt phiếu"};
+            RolePage.HeaderPage = new PageViewModel() { PageName = "RolePageForm", PageTitle = "Quản lí phân quyền" };
+            ReportPage.HeaderPage = new PageViewModel() { PageName = "ReportPageForm", PageTitle = "Báo cáo phiếu" };
 
-            this.SupplierPage.PageViewList = new PageViewModel[] {new PageViewModel { PageName = "EditSupplierPage", PageTitle = "Thao tác" }
+            this.RolePage.PageViewList = new PageViewModel[] {new PageViewModel { PageName = "UserRolePage", PageTitle = "Phân quyền người dùng" },
+                new PageViewModel { PageName = "GroupRolePage", PageTitle = "Phân quyền nhóm người dùng" }
                                                               };
 
 
-            this.WarehousePage.PageViewList = new PageViewModel[] {
-                                                                    new PageViewModel { PageName = "ImportReceiptPage", PageTitle = "Nhập kho" },
-                                                                    new PageViewModel { PageName = "ExportReceiptPage", PageTitle = "Xuất kho" }
+            this.ReportPage.PageViewList = new PageViewModel[] {
+                                                                    new PageViewModel { PageName = "ReportExport", PageTitle = "Phiếu xuất" },
+                                                                    new PageViewModel { PageName = "ReportImport", PageTitle = "Phiếu nhập" }
                                                                 };
-            this.ProductPage.PageViewList = new PageViewModel[] {
-                                                                    new PageViewModel { PageName = "EditProductPage", PageTitle = "Thao tác" }
+            this.ConfirmPage.PageViewList = new PageViewModel[] {
+                                                                    new PageViewModel { PageName = "ConfirmExportPage", PageTitle = "Duyệt phiếu xuất" },
+                                                                    new PageViewModel { PageName = "ConfirmImportPage", PageTitle = "Duyệt phiếu nhập" }
                                                                 };
         }
 

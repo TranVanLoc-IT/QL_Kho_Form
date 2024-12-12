@@ -9,7 +9,7 @@ namespace MWarehouse.Contract.Service.Interface
 {
     public interface ILoginService
     {
-        string[] HandleLoginRequest(LoginModel login);
+        string HandleLoginRequest(LoginModel login);
         string GetCurrentuser();
     }
 }

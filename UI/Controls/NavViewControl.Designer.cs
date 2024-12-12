@@ -30,13 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavViewControl));
             panel1 = new Panel();
-            WarehousePage = new DropdownButton();
-            SupplierPage = new DropdownButton();
-            ProductTypePage = new Button();
-            ProductPage = new DropdownButton();
+            ReportPage = new DropdownButton();
+            ConfirmPage = new DropdownButton();
+            RolePage = new DropdownButton();
             ChatBot = new Button();
-            UnitPage = new Button();
-            RolePage = new Button();
             pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -45,13 +42,10 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonFace;
-            panel1.Controls.Add(WarehousePage);
-            panel1.Controls.Add(SupplierPage);
-            panel1.Controls.Add(ProductTypePage);
-            panel1.Controls.Add(ProductPage);
-            panel1.Controls.Add(ChatBot);
-            panel1.Controls.Add(UnitPage);
+            panel1.Controls.Add(ReportPage);
+            panel1.Controls.Add(ConfirmPage);
             panel1.Controls.Add(RolePage);
+            panel1.Controls.Add(ChatBot);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -59,59 +53,42 @@
             panel1.Size = new Size(183, 551);
             panel1.TabIndex = 0;
             // 
-            // WarehousePage
+            // ReportPage
             // 
-            WarehousePage.BackColor = SystemColors.ButtonFace;
-            WarehousePage.Dock = DockStyle.Top;
-            WarehousePage.HeaderPage = null;
-            WarehousePage.Location = new Point(0, 546);
-            WarehousePage.Name = "WarehousePage";
-            WarehousePage.PageViewList = null;
-            WarehousePage.Size = new Size(183, 90);
-            WarehousePage.TabIndex = 14;
-            WarehousePage.Visible = false;
+            ReportPage.BackColor = SystemColors.ButtonFace;
+            ReportPage.Dock = DockStyle.Top;
+            ReportPage.HeaderPage = null;
+            ReportPage.Location = new Point(0, 276);
+            ReportPage.Name = "ReportPage";
+            ReportPage.PageViewList = null;
+            ReportPage.Size = new Size(183, 90);
+            ReportPage.TabIndex = 14;
+            ReportPage.Visible = false;
             // 
-            // SupplierPage
+            // ConfirmPage
             // 
-            SupplierPage.BackColor = SystemColors.ButtonFace;
-            SupplierPage.Dock = DockStyle.Top;
-            SupplierPage.HeaderPage = null;
-            SupplierPage.Location = new Point(0, 456);
-            SupplierPage.Name = "SupplierPage";
-            SupplierPage.PageViewList = null;
-            SupplierPage.Size = new Size(183, 90);
-            SupplierPage.TabIndex = 13;
-            SupplierPage.Visible = false;
+            ConfirmPage.BackColor = SystemColors.ButtonFace;
+            ConfirmPage.Dock = DockStyle.Top;
+            ConfirmPage.HeaderPage = null;
+            ConfirmPage.Location = new Point(0, 186);
+            ConfirmPage.Name = "ConfirmPage";
+            ConfirmPage.PageViewList = null;
+            ConfirmPage.Size = new Size(183, 90);
+            ConfirmPage.TabIndex = 13;
+            ConfirmPage.Visible = false;
             // 
-            // ProductTypePage
+            // RolePage
             // 
-            ProductTypePage.BackgroundImageLayout = ImageLayout.Stretch;
-            ProductTypePage.Cursor = Cursors.Hand;
-            ProductTypePage.Dock = DockStyle.Top;
-            ProductTypePage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            ProductTypePage.ForeColor = Color.DodgerBlue;
-            ProductTypePage.Image = Resource.colors1;
-            ProductTypePage.ImageAlign = ContentAlignment.MiddleLeft;
-            ProductTypePage.Location = new Point(0, 366);
-            ProductTypePage.Name = "ProductTypePage";
-            ProductTypePage.Size = new Size(183, 90);
-            ProductTypePage.TabIndex = 12;
-            ProductTypePage.Text = "Loại sản phẩm";
-            ProductTypePage.TextAlign = ContentAlignment.MiddleRight;
-            ProductTypePage.UseVisualStyleBackColor = true;
-            ProductTypePage.Visible = false;
-            // 
-            // ProductPage
-            // 
-            ProductPage.BackColor = SystemColors.ButtonFace;
-            ProductPage.Dock = DockStyle.Top;
-            ProductPage.HeaderPage = null;
-            ProductPage.Location = new Point(0, 276);
-            ProductPage.Name = "ProductPage";
-            ProductPage.PageViewList = null;
-            ProductPage.Size = new Size(183, 90);
-            ProductPage.TabIndex = 11;
-            ProductPage.Visible = false;
+            RolePage.BackColor = SystemColors.ButtonFace;
+            RolePage.BackgroundImage = (Image)resources.GetObject("RolePage.BackgroundImage");
+            RolePage.Dock = DockStyle.Top;
+            RolePage.HeaderPage = null;
+            RolePage.Location = new Point(0, 96);
+            RolePage.Name = "RolePage";
+            RolePage.PageViewList = null;
+            RolePage.Size = new Size(183, 90);
+            RolePage.TabIndex = 11;
+            RolePage.Visible = false;
             // 
             // ChatBot
             // 
@@ -128,42 +105,6 @@
             ChatBot.Text = "AI";
             ChatBot.TextAlign = ContentAlignment.MiddleRight;
             ChatBot.UseVisualStyleBackColor = true;
-            // 
-            // UnitPage
-            // 
-            UnitPage.BackgroundImageLayout = ImageLayout.Stretch;
-            UnitPage.Cursor = Cursors.Hand;
-            UnitPage.Dock = DockStyle.Top;
-            UnitPage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            UnitPage.ForeColor = Color.DodgerBlue;
-            UnitPage.Image = Resource.calculator;
-            UnitPage.ImageAlign = ContentAlignment.MiddleLeft;
-            UnitPage.Location = new Point(0, 186);
-            UnitPage.Name = "UnitPage";
-            UnitPage.Size = new Size(183, 90);
-            UnitPage.TabIndex = 2;
-            UnitPage.Text = "Đơn vị tính";
-            UnitPage.TextAlign = ContentAlignment.MiddleRight;
-            UnitPage.UseVisualStyleBackColor = true;
-            UnitPage.Visible = false;
-            // 
-            // RolePage
-            // 
-            RolePage.BackgroundImage = Resource.dashboard;
-            RolePage.BackgroundImageLayout = ImageLayout.None;
-            RolePage.Cursor = Cursors.Hand;
-            RolePage.Dock = DockStyle.Top;
-            RolePage.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            RolePage.ForeColor = Color.DodgerBlue;
-            RolePage.ImageAlign = ContentAlignment.MiddleLeft;
-            RolePage.Location = new Point(0, 96);
-            RolePage.Name = "RolePage";
-            RolePage.Size = new Size(183, 90);
-            RolePage.TabIndex = 1;
-            RolePage.Text = "Phân quyền";
-            RolePage.TextAlign = ContentAlignment.MiddleRight;
-            RolePage.UseVisualStyleBackColor = true;
-            RolePage.Visible = false;
             // 
             // pictureBox1
             // 
@@ -191,12 +132,9 @@
         #endregion
         private PictureBox pictureBox1;
         public Panel panel1;
-        public Button RolePage;
-        public Button UnitPage;
         public Button ChatBot;
-        public Button ProductTypePage;
-        public DropdownButton ProductPage;
-        public DropdownButton WarehousePage;
-        public DropdownButton SupplierPage;
+        public DropdownButton RolePage;
+        public DropdownButton ReportPage;
+        public DropdownButton ConfirmPage;
     }
 }
