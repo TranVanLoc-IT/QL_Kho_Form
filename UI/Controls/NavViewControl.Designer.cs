@@ -63,7 +63,6 @@
             ReportPage.PageViewList = null;
             ReportPage.Size = new Size(183, 90);
             ReportPage.TabIndex = 14;
-            ReportPage.Visible = false;
             // 
             // ConfirmPage
             // 
@@ -75,7 +74,6 @@
             ConfirmPage.PageViewList = null;
             ConfirmPage.Size = new Size(183, 90);
             ConfirmPage.TabIndex = 13;
-            ConfirmPage.Visible = false;
             // 
             // RolePage
             // 
@@ -88,7 +86,6 @@
             RolePage.PageViewList = null;
             RolePage.Size = new Size(183, 90);
             RolePage.TabIndex = 11;
-            RolePage.Visible = false;
             // 
             // ChatBot
             // 

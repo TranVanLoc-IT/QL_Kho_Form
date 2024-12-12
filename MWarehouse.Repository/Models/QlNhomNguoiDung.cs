@@ -9,5 +9,7 @@ public partial class QlNhomNguoiDung
 
     public string TenNhom { get; set; }
 
-    public string GhiChu { get; set; }
+    public string? GhiChu { get; set; }
+
+    public bool? IsDeleted { get; set; }
 }

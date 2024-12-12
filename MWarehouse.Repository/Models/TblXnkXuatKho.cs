@@ -17,6 +17,8 @@ public partial class TblXnkXuatKho
 
     public bool? IsDeleted { get; set; }
 
+    public int? TrangThai { get; set; }
+
     public virtual TblDmKho Kho { get; set; }
 
     public virtual ICollection<TblXnkXuatKhoRawDatum> TblXnkXuatKhoRawData { get; set; } = new List<TblXnkXuatKhoRawDatum>();

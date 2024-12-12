@@ -31,8 +31,8 @@
             components = new System.ComponentModel.Container();
             navViewControl1 = new Controls.NavViewControl();
             header = new Panel();
-            button1 = new Button();
             timeWork = new Label();
+            button1 = new Button();
             label1 = new Label();
             Page = new Label();
             main = new Panel();
@@ -49,49 +49,50 @@
             navViewControl1.Dock = DockStyle.Left;
             navViewControl1.Location = new Point(0, 0);
             navViewControl1.Name = "navViewControl1";
-            navViewControl1.Size = new Size(211, 387);
+            navViewControl1.Size = new Size(234, 387);
             navViewControl1.TabIndex = 0;
             // 
             // header
             // 
             header.BorderStyle = BorderStyle.FixedSingle;
-            header.Controls.Add(button1);
             header.Controls.Add(timeWork);
+            header.Controls.Add(button1);
             header.Controls.Add(label1);
             header.Controls.Add(Page);
             header.Dock = DockStyle.Top;
-            header.Location = new Point(211, 0);
+            header.Location = new Point(234, 0);
             header.Name = "header";
-            header.Size = new Size(589, 80);
+            header.Size = new Size(566, 76);
             header.TabIndex = 1;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Orange;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 192, 128);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(3, 29);
-            button1.Name = "button1";
-            button1.Size = new Size(134, 46);
-            button1.TabIndex = 1;
-            button1.Text = "Đăng xuất";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // timeWork
             // 
             timeWork.AutoSize = true;
             timeWork.Dock = DockStyle.Right;
             timeWork.Font = new Font("Times New Roman", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            timeWork.Location = new Point(526, 0);
+            timeWork.Location = new Point(369, 0);
             timeWork.Name = "timeWork";
             timeWork.Size = new Size(61, 22);
-            timeWork.TabIndex = 3;
+            timeWork.TabIndex = 4;
             timeWork.Text = "label2";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Orange;
+            button1.Dock = DockStyle.Right;
+            button1.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
+            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
+            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 192, 128);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(430, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(134, 74);
+            button1.TabIndex = 1;
+            button1.Text = "Đăng xuất";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -120,9 +121,9 @@
             // 
             main.Controls.Add(button2);
             main.Dock = DockStyle.Fill;
-            main.Location = new Point(211, 80);
+            main.Location = new Point(234, 76);
             main.Name = "main";
-            main.Size = new Size(589, 307);
+            main.Size = new Size(566, 311);
             main.TabIndex = 2;
             // 
             // button2
@@ -143,7 +144,7 @@
             Controls.Add(header);
             Controls.Add(navViewControl1);
             Name = "LayoutForm";
-            Text = "LayoutForm";
+            Text = "Phần mềm quản lí kho";
             header.ResumeLayout(false);
             header.PerformLayout();
             main.ResumeLayout(false);
@@ -158,8 +159,8 @@
         private Panel main;
         private Label label1;
         private Button button2;
-        private Label timeWork;
         private System.Windows.Forms.Timer timer1;
         private Button button1;
+        private Label timeWork;
     }
 }

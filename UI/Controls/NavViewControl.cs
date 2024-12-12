@@ -44,11 +44,11 @@ namespace UI.Controls
         private void ComboBoxConfig()
         {
             ConfirmPage.HeaderPage = new PageViewModel() { PageName = "ConfirmPageForm", PageTitle = "Duyệt phiếu"};
-            RolePage.HeaderPage = new PageViewModel() { PageName = "RolePageForm", PageTitle = "Quản lí phân quyền" };
+            RolePage.HeaderPage = new PageViewModel() { PageName = "RolePageForm", PageTitle = "Phân quyền" };
             ReportPage.HeaderPage = new PageViewModel() { PageName = "ReportPageForm", PageTitle = "Báo cáo phiếu" };
 
             this.RolePage.PageViewList = new PageViewModel[] {new PageViewModel { PageName = "UserRolePage", PageTitle = "Phân quyền người dùng" },
-                new PageViewModel { PageName = "GroupRolePage", PageTitle = "Phân quyền nhóm người dùng" }
+                new PageViewModel { PageName = "GroupRolePage", PageTitle = "Phân quyền nhóm" }
                                                               };
 
 
