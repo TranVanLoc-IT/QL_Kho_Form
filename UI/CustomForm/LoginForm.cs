@@ -10,12 +10,11 @@ namespace UI.CustomForm
     {
         private readonly ILoginService _loginService;
         private ErrorProvider _errorProvider = new ErrorProvider();
-        public string[] forms;
+        public string role;
         public string user;
         public LoginForm(ILoginService loginService)
         {
             this._loginService = loginService;
-            forms = [];
             InitializeComponent();
             AlignCenterScreen();
             this.loginBtn.Text = "ĐĂNG NHẬP";
@@ -57,10 +56,13 @@ namespace UI.CustomForm
             try
             {
                 LoginModel login = new LoginModel(userName.ToLower(), password);
-                forms = _loginService.HandleLoginRequest(login);
-                this.user = _loginService.GetCurrentuser();
-                this.Close();
-                
+                role = _loginService.HandleLoginRequest(login);
+                if(role == "Admin")
+                {
+                    this.user = _loginService.GetCurrentuser();
+                    this.Close();
+                }
+                MessageBox.Show("Tài khoản này không có quyền đăng nhập !");
             }
             catch (ErrorException ex)
             {
