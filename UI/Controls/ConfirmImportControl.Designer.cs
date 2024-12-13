@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridView = new DataGridView();
+            comboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -50,16 +51,26 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(716, 217);
+            dataGridView.Size = new Size(754, 235);
             dataGridView.TabIndex = 2;
+            // 
+            // comboBox
+            // 
+            comboBox.Dock = DockStyle.Right;
+            comboBox.FormattingEnabled = true;
+            comboBox.Location = new Point(609, 235);
+            comboBox.Name = "comboBox";
+            comboBox.Size = new Size(145, 28);
+            comboBox.TabIndex = 3;
             // 
             // ConfirmImportControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBox);
             Controls.Add(dataGridView);
             Name = "ConfirmImportControl";
-            Size = new Size(716, 351);
+            Size = new Size(754, 406);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
@@ -67,5 +78,6 @@
         #endregion
 
         private DataGridView dataGridView;
+        private ComboBox comboBox;
     }
 }

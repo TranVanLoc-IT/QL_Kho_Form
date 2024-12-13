@@ -32,7 +32,7 @@ namespace UI
             services.AddScoped<ReportImportControl>();
 
             // Register LayoutForm with DI and pass the control names you want
-            services.AddScoped(provider => new LayoutForm(
+            services.AddTransient(provider => new LayoutForm(
                 provider.GetRequiredService<AIControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),

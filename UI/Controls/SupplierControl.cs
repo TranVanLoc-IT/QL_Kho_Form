@@ -17,10 +17,10 @@ namespace UI.Controls
     public partial class SupplierControl : UserControl
     {
         private readonly ISupplierService _supplierService;
-        private readonly IGoodsReceiptService _importService;
+        private readonly IImportReceiptService _importService;
         private readonly IProductService _productService;
         private IEnumerable<ResponseSupplierModel> _responseSupplierModels;
-        public SupplierControl(ISupplierService supplierService, IProductService productService, IGoodsReceiptService importService)
+        public SupplierControl(ISupplierService supplierService, IProductService productService, IImportReceiptService importService)
         {
             this._supplierService = supplierService;
             this._productService = productService;

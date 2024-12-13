@@ -5,6 +5,7 @@ using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
 using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
+using MWarehouse.ModelViews.ExportReceiptModelView;
 using MWarehouse.ModelViews.GoodsReceiptModelViews;
 using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
@@ -16,12 +17,12 @@ using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
-    public class GoodsReceiptService : IGoodsReceiptService
+    public class ImportReceiptService : IImportReceiptService
     {
         private readonly IUnitOfWork _iuow;
         private readonly IMapper _mapper;
 
-        public GoodsReceiptService(IUnitOfWork iuow, IMapper mapper)
+        public ImportReceiptService(IUnitOfWork iuow, IMapper mapper)
         {
             _iuow = iuow;
             _mapper = mapper;
@@ -108,6 +109,13 @@ namespace MWarehouse.Service.Service
             }).ToListAsync();
             return result;
 
+        }
+        public async Task ConfirmAsync(int id)
+        {
+            TblXnkNhapKho found = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.AutoId == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
+            found.TrangThai = 1;
+            await _iuow.GetRepository<TblXnkNhapKho>().UpdateAsync(found);
+            await _iuow.GetRepository<TblXnkNhapKho>().SaveAsync();
         }
 
         public async Task<ResponseGoodsReceiptModel> GetByIdAsync(int id)

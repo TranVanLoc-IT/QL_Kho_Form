@@ -81,6 +81,7 @@ public partial class QlKhoContext : DbContext
             entity.HasKey(e => e.TenDangNhap).HasName("PK__QL_Nguoi__55F68FC1E0996B0C");
 
             entity.ToTable("QL_NguoiDung");
+          
 
             entity.Property(e => e.TenDangNhap).HasMaxLength(100);
             entity.Property(e => e.Email)
@@ -126,7 +127,7 @@ public partial class QlKhoContext : DbContext
             entity
                 .HasNoKey()
                 .ToTable("QL_PhanQuyen");
-
+            entity.HasKey(q => new { q.MaManHinh, q.MaNhomNguoiDung }); 
             entity.Property(e => e.CoQuyen).HasDefaultValue(0);
             entity.Property(e => e.IsDeleted)
                 .HasDefaultValue(false)
