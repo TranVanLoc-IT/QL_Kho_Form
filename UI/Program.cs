@@ -18,6 +18,7 @@ namespace UI
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var serviceCollection = new ServiceCollection();
