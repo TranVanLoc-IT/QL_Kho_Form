@@ -27,7 +27,7 @@ namespace UI
             serviceCollection.AddInfrastructure();
             serviceCollection.AddModelViewService();
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            Application.Run(ServiceProvider.GetRequiredService<LayoutForm>());
+            Application.Run(ServiceProvider.GetRequiredService<Baocaotonkho>());
         }
     }
 }

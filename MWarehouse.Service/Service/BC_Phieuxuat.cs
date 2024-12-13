@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
-    public class BC_Phieunhap
+    public class BC_PHIEUXUAT
     {
+
         private readonly IUnitOfWork _iuow;
-        public BC_Phieunhap(IUnitOfWork iuow)
+        public BC_PHIEUXUAT(IUnitOfWork iuow)
         {
             _iuow = iuow;
         }
-
-        public DataTable GetBCphieuNhap(DateTime ngayNhap, DateTime ngayXuat)
+        public DataTable GetBCphieuXuat(DateTime ngayNhap, DateTime ngayXuat)
         {
             DataTable baoCaoTable = new DataTable();
 
@@ -27,7 +27,7 @@ namespace MWarehouse.Service.Service
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("[dbo].[sp_GetNhapKhoByDateRange]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[sp_GetXuatKhoByDateRange]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 

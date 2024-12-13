@@ -18,11 +18,13 @@ namespace UI.Layouts
         private readonly ILoginService _loginService;
         private readonly Tonkho tonkho;
         private readonly BC_Phieunhap bcpn;
+        private readonly BC_PHIEUXUAT bC_PHIEUXUAT;
         public Baocaotonkho()
         {
             InitializeComponent();
             tonkho = new Tonkho(null);
             bcpn = new BC_Phieunhap(null);
+            bC_PHIEUXUAT = new BC_PHIEUXUAT(null);
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace UI.Layouts
                 string ngayNhapString = ngayNhap.ToString("yyyy-MM-dd HH:mm:ss");
                 string ngayXuatString = ngayXuat.ToString("yyyy-MM-dd HH:mm:ss");
                 // Gọi hàm để lấy báo cáo
-                DataTable baoCaoTable = tonkho.GetBaoCaoTonKho(ngayNhap , ngayXuat);
+                DataTable baoCaoTable = tonkho.GetBaoCaoTonKho(ngayNhap, ngayXuat);
 
                 // Hiển thị dữ liệu trên DataGridView
                 if (baoCaoTable.Rows.Count > 0)
@@ -80,6 +82,33 @@ namespace UI.Layouts
                 if (bcpntable.Rows.Count > 0)
                 {
                     dataGridView1.DataSource = bcpntable;
+                }
+                else
+                {
+                    MessageBox.Show("chưa có du liệu");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lấy ngày nhập và ngày xuất từ giao diện
+                DateTime ngayNhap = dateTimePicker1.Value;
+                DateTime ngayXuat = dateTimePicker2.Value;
+
+                // Gọi hàm để lấy báo cáo
+                DataTable bcxuat = bC_PHIEUXUAT.GetBCphieuXuat(ngayNhap, ngayXuat);
+
+                // Hiển thị dữ liệu trên DataGridView
+                if (bcxuat.Rows.Count > 0)
+                {
+                    dataGridView1.DataSource = bcxuat;
                 }
                 else
                 {
