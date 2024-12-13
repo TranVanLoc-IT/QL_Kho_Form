@@ -8,8 +8,8 @@ namespace UI.Controls
 {
     public partial class GoodsReceiptControl : UserControl
     {
-        private readonly IGoodsReceiptService _goodsReceiptService;
-        private readonly IGoodsReceiptDetailService _goodsReceiptDetailService;
+        private readonly IImportReceiptService _goodsReceiptService;
+        private readonly IImportReceiptDetailService _goodsReceiptDetailService;
         private readonly ISupplierService _supplierService;
         private readonly IProductService _productService;
         private readonly IWarehouseService _warehouseService;
@@ -27,8 +27,8 @@ namespace UI.Controls
             public int Quantity { get; set; }
         }
 
-        public GoodsReceiptControl(IGoodsReceiptService goodsReceiptService, ISupplierService supplierService, 
-                                        IWarehouseService warehouseService, IProductService productService, IGoodsReceiptDetailService goodsReceiptDetailService)
+        public GoodsReceiptControl(IImportReceiptService goodsReceiptService, ISupplierService supplierService, 
+                                        IWarehouseService warehouseService, IProductService productService, IImportReceiptDetailService goodsReceiptDetailService)
         {
             this._productService = productService;
             this._supplierService = supplierService;

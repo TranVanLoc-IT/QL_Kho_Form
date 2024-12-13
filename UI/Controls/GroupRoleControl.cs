@@ -1,146 +1,303 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.RoleModelView;
-using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Data.Common;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UI.Controls
 {
     public partial class GroupRoleControl : UserControl
     {
         private readonly IRoleService roleService;
+        private List<ManHinhView> dsManHinh;
         public GroupRoleControl(IRoleService role)
         {
             
             InitializeComponent();
             this.roleService = role;
-            // Sự kiện này sẽ gọi lại dữ liệu cho các cột ComboBox khi DataGridView được load.
-            dataGridView.ColumnAdded += async (s, e) =>
-            {
-                if (dataGridView.ColumnCount <= 3) return;
-                foreach (DataGridViewRow row in dataGridView.Rows)
-                {
-                    var gr = row.Cells[0].Value?.ToString();
 
-                    // Cập nhật cột ComboBox có index = 2
-                    if (dataGridView.Columns[2] is DataGridViewComboBoxColumn com2)
-                    {
-                        com2.DataSource = await roleService.GetMhActivating(gr);
-                    }
-
-                    // Cập nhật cột ComboBox có index = 3
-                    if (dataGridView.Columns[3] is DataGridViewComboBoxColumn com3)
-                    {
-                        var act = await roleService.GetMhActivating(gr);
-                        var availableData = (await roleService.DsManHinh())
-                            .Except(act)
-                            .ToList();
-                        com3.DataSource = availableData;
-                    }
-                }
-            };
             this.Load += async (s, e) => await Config(s, e);
+            dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
+            
         }
+
+        private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
+            {
+                var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                var act = dataGridView.Rows[e.RowIndex].Cells[2] as DataGridViewComboBoxCell;
+                var allMhs = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
+
+                if (col.Index == 6)
+                {
+                    List<ManHinhView> actMhs = await roleService.GetMhActivating(gr);
+                    act.DataSource = actMhs;
+                    act.DisplayMember = "TenMH";
+                    act.ValueMember = "MaMH";
+
+                    var actMhsIds = new HashSet<string>(actMhs.Select(m => m.MaMH));
+                    var differentMhs = dsManHinh.Where(m => !actMhsIds.Contains(m.MaMH)).ToList();
+                    allMhs.DataSource = differentMhs;
+                    allMhs.DisplayMember = "TenMH";
+                    allMhs.ValueMember = "MaMH";
+
+                }
+                else
+                {
+                    if (col.Index == 4)
+                    {
+                        string mh = allMhs?.Value?.ToString();
+                        if (string.IsNullOrWhiteSpace(mh))
+                        {
+                            MessageBox.Show("Chọn màn hình mới để thêm !");
+                            return;
+                        }
+                        await roleService.AddMhToGroupRole(gr, mh);
+                    }
+                    if (col.Index == 5)
+                    {
+                        string mh = act?.Value?.ToString();
+
+                        if (string.IsNullOrWhiteSpace(mh))
+                        {
+                            MessageBox.Show("Chọn màn hình đang được truy cập để xóa !");
+                            return;
+                        }
+                        await roleService.DeleteMHFromGroupRole(gr, mh);
+                    }
+
+                    RefreshDatagridview(sender, e);
+                    MessageBox.Show("Cập nhật thành công");
+                }
+            }
+        }
+
         private async Task Config(object sender, EventArgs e)
         {
-            var screens = await roleService.DsManHinh();
+            dsManHinh = await roleService.DsManHinh();
+
+           
 
             var listRoles = await roleService.DsRole();
             dataGridView.DataSource = listRoles;
 
             DataGridViewComboBoxColumn actScreens = new DataGridViewComboBoxColumn();
-            actScreens.DataSource = screens;
-            actScreens.ValueMember = "MaMH";
-            actScreens.DisplayMember = "TenMH";
             actScreens.HeaderText = "Được truy cập";
             actScreens.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
             dataGridView.Columns.Add(actScreens);
 
             DataGridViewComboBoxColumn colScreens = new DataGridViewComboBoxColumn();
-            colScreens.DataSource = screens;
-            colScreens.ValueMember = "MaMH";
-            colScreens.DisplayMember = "TenMH";
+           
             colScreens.HeaderText = "Màn hình";
             colScreens.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
             dataGridView.Columns.Add(colScreens);
+
+            ButtonOptionConfig();
+
+            
+
+        }
+
+        private void ButtonOptionConfig()
+        {
             // Thêm các cột nút
             DataGridViewButtonColumn addColumn = new DataGridViewButtonColumn
             {
-                HeaderText = "Thêm",
+                HeaderText = "",
                 Text = "Thêm",
-                UseColumnTextForButtonValue = false // Không sử dụng văn bản mặc định
+                UseColumnTextForButtonValue = true // Hiển thị văn bản trên nút
             };
             dataGridView.Columns.Add(addColumn);
 
             DataGridViewButtonColumn removeColumn = new DataGridViewButtonColumn
             {
-                HeaderText = "Xóa",
+                HeaderText = "",
                 Text = "Xóa",
-                UseColumnTextForButtonValue = false // Không sử dụng văn bản mặc định
+                UseColumnTextForButtonValue = true
             };
             dataGridView.Columns.Add(removeColumn);
+
+            DataGridViewButtonColumn detailColumn = new DataGridViewButtonColumn
+            {
+                HeaderText = "",
+                Text = "Chi tiết",
+                UseColumnTextForButtonValue = true
+            };
+            dataGridView.Columns.Add(detailColumn);
 
             // Tùy chỉnh giao diện nút
             dataGridView.CellPainting += (s, e) =>
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
-                    (dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                    dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
                     // Hủy vẽ mặc định
                     e.Handled = true;
+
+                    // Vẽ nền
                     e.PaintBackground(e.CellBounds, true);
 
-                    bool isAddButton = dataGridView.Columns[e.ColumnIndex].HeaderText == "Thêm";
+                    // Xác định màu sắc và văn bản nút dựa vào tên cột
+                    Brush brush;
+                    string buttonText;
 
-                    using (Brush brush = new SolidBrush(isAddButton ? Color.Green : Color.Red))
+                    if (dataGridView.Columns[e.ColumnIndex] == addColumn)
                     {
-                        e.Graphics.FillRectangle(brush, e.CellBounds);
+                        brush = new SolidBrush(Color.Green);
+                        buttonText = "Thêm";
+                    }
+                    else if (dataGridView.Columns[e.ColumnIndex] == removeColumn)
+                    {
+                        brush = new SolidBrush(Color.Red);
+                        buttonText = "Xóa";
+                    }
+                    else if (dataGridView.Columns[e.ColumnIndex] == detailColumn)
+                    {
+                        brush = new SolidBrush(Color.Blue);
+                        buttonText = "Chi tiết";
+                    }
+                    else
+                    {
+                        return;
                     }
 
-                    string buttonText = isAddButton ? "Thêm" : "Xóa";
+                    // Vẽ nền nút
+                    e.Graphics.FillRectangle(brush, e.CellBounds);
+
+                    // Vẽ văn bản
                     TextRenderer.DrawText(e.Graphics, buttonText, e.CellStyle.Font, e.CellBounds,
                         Color.White, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
 
+                    // Vẽ viền
                     e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
+
+                    // Giải phóng brush
+                    brush.Dispose();
                 }
             };
-        
+            // Thêm các biến lưu trạng thái hover/click
+            int hoveredColumnIndex = -1;
+            int hoveredRowIndex = -1;
+            int clickedColumnIndex = -1;
+            int clickedRowIndex = -1;
 
-            dataGridView.CellContentClick += async (s, e) =>
+            // Tùy chỉnh giao diện nút
+            dataGridView.CellPainting += (s, e) =>
             {
-                if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
+                    dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
+                    // Hủy vẽ mặc định
+                    e.Handled = true;
 
-                    var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
+                    // Xác định trạng thái hover/click
+                    bool isHovered = e.ColumnIndex == hoveredColumnIndex && e.RowIndex == hoveredRowIndex;
+                    bool isClicked = e.ColumnIndex == clickedColumnIndex && e.RowIndex == clickedRowIndex;
 
-                    var comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
-                    var mh = comboBoxCell?.Value?.ToString();
+                    // Xác định màu sắc và văn bản nút dựa vào tên cột
+                    Brush brush;
+                    string buttonText;
 
-                    if (string.IsNullOrWhiteSpace(mh))
+                    if (dataGridView.Columns[e.ColumnIndex] == addColumn)
                     {
-                        MessageBox.Show("Chọn màn hình !");
+                        brush = new SolidBrush(isClicked ? Color.DarkGreen : isHovered ? Color.LightGreen : Color.Green);
+                        buttonText = "Thêm";
+                    }
+                    else if (dataGridView.Columns[e.ColumnIndex] == removeColumn)
+                    {
+                        brush = new SolidBrush(isClicked ? Color.DarkRed : isHovered ? Color.LightCoral : Color.Red);
+                        buttonText = "Xóa";
+                    }
+                    else if (dataGridView.Columns[e.ColumnIndex] == detailColumn)
+                    {
+                        brush = new SolidBrush(isClicked ? Color.LightSkyBlue : isHovered ? Color.LightBlue : Color.Blue);
+                        buttonText = "Chi tiết";
+                    }
+                    else
+                    {
                         return;
                     }
-                    if (col.Index == 3)
-                    {
-                        await roleService.AddMhToGroupRole(gr, mh);
-                    }
-                    if (col.Index == 4)
-                    {
-                        await roleService.DeleteMHFromGroupRole(gr, mh);
-                    }
-                    await Config(s, e);
-                    MessageBox.Show("Cập nhật thành công");
+
+                    // Vẽ nền nút
+                    e.Graphics.FillRectangle(brush, e.CellBounds);
+
+                    // Vẽ văn bản
+                    TextRenderer.DrawText(e.Graphics, buttonText, e.CellStyle.Font, e.CellBounds,
+                        Color.White, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+                    // Vẽ viền
+                    e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
+
+                    // Giải phóng brush
+                    brush.Dispose();
                 }
-                
             };
+
+            // Thêm sự kiện hover
+            dataGridView.CellMouseEnter += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
+                    dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                {
+                    hoveredColumnIndex = e.ColumnIndex;
+                    hoveredRowIndex = e.RowIndex;
+                    dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex); // Vẽ lại ô
+                }
+            };
+
+            dataGridView.CellMouseLeave += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
+                    dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                {
+                    hoveredColumnIndex = -1;
+                    hoveredRowIndex = -1;
+                    dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex); // Vẽ lại ô
+                }
+            };
+
+            dataGridView.CellClick += (s, e) =>
+            {
+                // Kiểm tra chỉ số cột và hàng hợp lệ
+                if (e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count &&
+                    e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView.Columns.Count &&
+                    dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                {
+                    clickedColumnIndex = e.ColumnIndex;
+                    clickedRowIndex = e.RowIndex;
+
+                    // Vẽ lại ô để hiển thị hiệu ứng click
+                    dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex);
+
+                    // Đặt trạng thái clicked về mặc định sau một thời gian ngắn (hiệu ứng click)
+                    Task.Delay(200).ContinueWith(_ =>
+                    {
+                        clickedColumnIndex = -1;
+                        clickedRowIndex = -1;
+                        dataGridView.Invoke(new Action(() =>
+                        {
+                            // Kiểm tra lại chỉ số trước khi vẽ lại
+                            if (e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count &&
+                                e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView.Columns.Count)
+                            {
+                                dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex);
+                            }
+                        }));
+                    });
+                }
+            };
+
+
+        }
+        private async Task RefreshDatagridview(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = null;
+
+            dataGridView.Columns.Clear();
+            dataGridView.Rows.Clear();
+
+            dataGridView.Refresh();
+            await Config(sender, e);
 
         }
     }

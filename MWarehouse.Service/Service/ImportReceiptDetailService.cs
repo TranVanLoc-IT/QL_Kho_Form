@@ -17,12 +17,12 @@ using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
-    public class GoodsReceiptDetailService : IGoodsReceiptDetailService
+    public class ImportReceiptDetailService : IImportReceiptDetailService
     {
         private readonly IUnitOfWork _iuow;
         private readonly IMapper _mapper;
 
-        public GoodsReceiptDetailService(IUnitOfWork iuow, IMapper mapper)
+        public ImportReceiptDetailService(IUnitOfWork iuow, IMapper mapper)
         {
             _iuow = iuow;
             _mapper = mapper;

@@ -8,12 +8,13 @@ using MWarehouse.Core.Base;
 using MWarehouse.ModelViews.UnitModelViews;
 namespace MWarehouse.Contract.Service.Interface
 {
-    public interface IGoodsReceiptService
+    public interface IImportReceiptService
     {
         // async
         Task CreateAsync(CreateGoodsReceiptModel obj);
         Task UpdateAsync(UpdateGoodsReceiptModel obj);
-        Task DeleteAsync(int id); 
+        Task DeleteAsync(int id);
+        Task ConfirmAsync(int id);
         Task<IEnumerable<ReceiptResultModel>> GetAllByBrandAsync(int code);
         Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync();
         Task<ResponseGoodsReceiptModel> GetByIdAsync(int id);

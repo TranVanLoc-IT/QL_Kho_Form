@@ -35,6 +35,7 @@
             // 
             // hinhAnh
             // 
+            hinhAnh.BackgroundImage = Resource.box;
             hinhAnh.BackgroundImageLayout = ImageLayout.Stretch;
             hinhAnh.Dock = DockStyle.Top;
             hinhAnh.Location = new Point(0, 0);

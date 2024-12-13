@@ -16,7 +16,7 @@ namespace MWarehouse.Contract.Service.Interface
         Task<List<ManHinhView>> GetMhActivating(string maNhom);
         Task AddMhToGroupRole(string maNhom, string maMh);
         Task DeleteMHFromGroupRole(string maNhom, string maMh);
-        Task UpdateUserRole(string user, string role);
+        Task UpdateUserRole(string user, string oldRole, string newRole);
         Task DeleteUserRole(string user, string role);
     }
 }

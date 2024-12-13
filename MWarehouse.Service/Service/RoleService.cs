@@ -54,39 +54,55 @@ namespace MWarehouse.Service.Service
 
         public async Task<List<ManHinhView>> GetMhActivating(string maNhom)
         {
-            List<ManHinhView> manHinhs = _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaNhomNguoiDung == maNhom && r.CoQuyen == 1).Select(r => new ManHinhView()
-            {
-                MaMH = r.MaManHinh,
-                TenMH = _iuow.GetRepository<DmManHinh>().Entities.Where(e => e.MaManHinh == r.MaManHinh).Select(r => r.TenManHinh).First()
-            }).ToList();
+
+            var manHinhs = await (from pq in _iuow.GetRepository<QlPhanQuyen>().Entities
+                                  join mh in _iuow.GetRepository<DmManHinh>().Entities
+                                      on pq.MaManHinh equals mh.MaManHinh
+                                  where pq.MaNhomNguoiDung == maNhom && pq.CoQuyen == 1
+                                  select new ManHinhView
+                                  {
+                                      MaMH = pq.MaManHinh,
+                                      TenMH = mh.TenManHinh
+                                  }).AsNoTracking().ToListAsync();
+
+
             return manHinhs;
+
         }
 
         public async Task<List<UserRoleModelView>> GetUsers()
         {
-            List<UserRoleModelView> manHinhs = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap != "admin").Select(r => new UserRoleModelView()
+            List<UserRoleModelView> users = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap != "admin" && r.IsDeleted == false).Select(r => new UserRoleModelView()
             {
                 User = r.TenDangNhap,
-                GroupUser = _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(e => e.MaNhom == r.MaNhomNguoiDung).Select(r => r.TenNhom).First(),
+                GroupUser =  _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(e => e.MaNhom == r.MaNhomNguoiDung).Select(r => r.TenNhom).First(),
                 Decsription = r.GhiChu
 
             }).ToListAsync();
-            return manHinhs;
+            return users;
         }
 
         public async Task AddMhToGroupRole(string maNhom, string maMh)
         {
-            QlPhanQuyen pq = new QlPhanQuyen();
-            pq.MaManHinh = maMh;
-            pq.MaNhomNguoiDung = maNhom;
-            pq.CoQuyen = 1;
-
-            await _iuow.GetRepository<QlPhanQuyen>().InsertAsync(pq);
+            QlPhanQuyen pq = await _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaManHinh == maMh && r.MaNhomNguoiDung == maNhom).FirstOrDefaultAsync();
+            if(pq != null)
+            {
+                pq.CoQuyen = 1;
+                await _iuow.GetRepository<QlPhanQuyen>().UpdateAsync(pq);
+            }
+            else
+            {
+                pq = new QlPhanQuyen();
+                pq.MaNhomNguoiDung = maNhom;
+                pq.MaManHinh = maMh;
+                pq.CoQuyen = 1;
+                await _iuow.GetRepository<QlPhanQuyen>().InsertAsync(pq);
+            }
             await _iuow.GetRepository<QlPhanQuyen>().SaveAsync();
         }
         public async Task DeleteMHFromGroupRole(string maNhom, string maMh)
         {
-            QlPhanQuyen pq = await _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaManHinh == maMh && r.MaNhomNguoiDung == maNhom).FirstAsync(); ;
+            QlPhanQuyen pq = await _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaManHinh == maMh && r.MaNhomNguoiDung == maNhom).FirstOrDefaultAsync(); ;
             pq.CoQuyen = 0;
             await _iuow.GetRepository<QlPhanQuyen>().UpdateAsync(pq);
             await _iuow.GetRepository<QlPhanQuyen>().SaveAsync();
@@ -95,21 +111,52 @@ namespace MWarehouse.Service.Service
         {
             QlNguoiDungNhomNguoiDung pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap == user && r.MaNhomNguoiDung == role).FirstAsync();
             pq.IsDeleted = true;
+
+            QlNguoiDungNhomNguoiDung? hasDeleted = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap == user && r.MaNhomNguoiDung == "0").FirstOrDefaultAsync();
+                                                    
+            if(hasDeleted != null)
+            {
+                // mo quyen bi xoa
+                hasDeleted.IsDeleted = false;
+                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(hasDeleted);
+            }
+            else
+            {
+                hasDeleted = new QlNguoiDungNhomNguoiDung()
+                            { TenDangNhap = user, MaNhomNguoiDung = "0" };
+                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().InsertAsync(hasDeleted);
+            }
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(pq);
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
         }
 
-        public async Task UpdateUserRole(string user, string role)
+        public async Task UpdateUserRole(string user, string oldRole, string newRole)
         {
-            QlNguoiDungNhomNguoiDung pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap == user && r.MaNhomNguoiDung == role).FirstOrDefaultAsync() ?? new QlNguoiDungNhomNguoiDung() { MaNhomNguoiDung = role, TenDangNhap = user };
-            if (pq != null)
+            QlNguoiDungNhomNguoiDung pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
+                                          .Where(r => r.TenDangNhap == user &&
+                                          r.MaNhomNguoiDung == oldRole
+                                          ).FirstAsync();
+
+            QlNguoiDungNhomNguoiDung? hasNewRole = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
+                                          .Where(r => r.TenDangNhap == user &&
+                                          r.MaNhomNguoiDung == newRole
+                                          ).FirstOrDefaultAsync();
+            if(hasNewRole != null)
             {
-                pq.IsDeleted = true;
-                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(pq);
-                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
-                return;
+                hasNewRole.IsDeleted = false;
+                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(hasNewRole);
             }
-            await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().InsertAsync(pq);
+            else
+            {
+                hasNewRole = new QlNguoiDungNhomNguoiDung()
+                {
+                    TenDangNhap = user,
+                    MaNhomNguoiDung = newRole
+                };
+                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().InsertAsync(hasNewRole);
+            }
+            pq.IsDeleted = true;
+            await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(pq);
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
         }
 
