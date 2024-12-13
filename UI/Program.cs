@@ -18,6 +18,7 @@ namespace UI
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var serviceCollection = new ServiceCollection();
@@ -26,7 +27,7 @@ namespace UI
             serviceCollection.AddInfrastructure();
             serviceCollection.AddModelViewService();
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            Application.Run(ServiceProvider.GetRequiredService<LayoutForm>());
+            Application.Run(ServiceProvider.GetRequiredService<Baocaotonkho>());
         }
     }
 }

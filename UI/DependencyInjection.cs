@@ -16,7 +16,8 @@ namespace UI
         {
             // Thêm cấu hình cho DbContext QlKhoContext
             service.AddDbContext<QlKhoContext>(options =>
-                options.UseSqlServer("Server=MSI;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
+                //options.UseSqlServer("Server=MSI;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
+            options.UseSqlServer("Server=DESKTOP-QBTN8I9\\SQLEXPRESS;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
 
             AddControlService(service);
         }
@@ -30,7 +31,7 @@ namespace UI
             services.AddScoped<ConfirmImportControl>();
             services.AddScoped<ReportExportControl>();
             services.AddScoped<ReportImportControl>();
-
+            services.AddScoped<Baocaotonkho>();
             // Register LayoutForm with DI and pass the control names you want
             services.AddTransient(provider => new LayoutForm(
                 provider.GetRequiredService<AIControl>(),

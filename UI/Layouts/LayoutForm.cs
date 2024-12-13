@@ -46,7 +46,7 @@ namespace UI.Layouts
                        ReportImportControl _reportImportControl, ILoginService loginService)
         {
             // Initialize controls with DI
-         
+
             this._loginService = loginService;
             this._aiControl = _aiControl;
             this._reportExportControl = _reportExportControl;
@@ -173,5 +173,7 @@ namespace UI.Layouts
         {
             Login();
         }
+
+       
     }
 }
