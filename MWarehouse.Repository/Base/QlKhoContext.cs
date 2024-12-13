@@ -15,6 +15,8 @@ public partial class QlKhoContext : DbContext
     {
     }
 
+    public virtual DbSet<AuthCode> AuthCodes { get; set; }
+
     public virtual DbSet<DmManHinh> DmManHinhs { get; set; }
 
     public virtual DbSet<QlNguoiDung> QlNguoiDungs { get; set; }
@@ -28,8 +30,6 @@ public partial class QlKhoContext : DbContext
     public virtual DbSet<TblDmDonViTinh> TblDmDonViTinhs { get; set; }
 
     public virtual DbSet<TblDmKho> TblDmKhos { get; set; }
-
-    public virtual DbSet<TblDmKhoUser> TblDmKhoUsers { get; set; }
 
     public virtual DbSet<TblDmLoaiSanPham> TblDmLoaiSanPhams { get; set; }
 
@@ -48,49 +48,77 @@ public partial class QlKhoContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-QBTN8I9\\SQLEXPRESS;Database=QL_Kho;User Id=sa;Password=123;Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer("Server=MSI;Database=QL_KHO;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("Vietnamese_CI_AS");
+
+        modelBuilder.Entity<AuthCode>(entity =>
+        {
+            entity.ToTable("Auth_Code");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.KeyValue)
+                .HasMaxLength(100)
+                .HasColumnName("Key_value");
+        });
+
         modelBuilder.Entity<DmManHinh>(entity =>
         {
-            entity.HasKey(e => e.MaManHinh).HasName("PK__DM_ManHi__D84939223C4F834C");
+            entity.HasKey(e => e.MaManHinh).HasName("PK__DM_ManHi__D8493922F4A1ED9F");
 
             entity.ToTable("DM_ManHinh");
 
             entity.Property(e => e.MaManHinh).HasMaxLength(100);
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("isDeleted");
             entity.Property(e => e.TenManHinh).HasMaxLength(100);
         });
 
         modelBuilder.Entity<QlNguoiDung>(entity =>
         {
-            entity.HasKey(e => e.TenDangNhap).HasName("PK__QL_Nguoi__55F68FC1DECCDAE7");
+            entity.HasKey(e => e.TenDangNhap).HasName("PK__QL_Nguoi__55F68FC1E0996B0C");
 
             entity.ToTable("QL_NguoiDung");
 
             entity.Property(e => e.TenDangNhap).HasMaxLength(100);
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("isDeleted");
             entity.Property(e => e.MatKhau).HasMaxLength(100);
             entity.Property(e => e.TrangThai).HasDefaultValue(0);
         });
 
         modelBuilder.Entity<QlNguoiDungNhomNguoiDung>(entity =>
         {
-            entity.HasKey(e => new { e.TenDangNhap, e.MaNhomNguoiDung }).HasName("PK__QL_Nguoi__77F599D82B75C7C7");
+            entity.HasKey(e => new { e.TenDangNhap, e.MaNhomNguoiDung }).HasName("PK__QL_Nguoi__77F599D892D04492");
 
             entity.ToTable("QL_NguoiDungNhomNguoiDung");
 
             entity.Property(e => e.TenDangNhap).HasMaxLength(100);
             entity.Property(e => e.MaNhomNguoiDung).HasMaxLength(100);
             entity.Property(e => e.GhiChu).HasMaxLength(100);
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("isDeleted");
         });
 
         modelBuilder.Entity<QlNhomNguoiDung>(entity =>
         {
-            entity.HasKey(e => e.MaNhom).HasName("PK__QL_NhomN__234F91CDC2E46656");
+            entity.HasKey(e => e.MaNhom).HasName("PK__QL_NhomN__234F91CD7CCC46AC");
 
             entity.ToTable("QL_NhomNguoiDung");
 
             entity.Property(e => e.MaNhom).HasMaxLength(100);
             entity.Property(e => e.GhiChu).HasMaxLength(100);
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("isDeleted");
             entity.Property(e => e.TenNhom).HasMaxLength(100);
         });
 
@@ -101,13 +129,16 @@ public partial class QlKhoContext : DbContext
                 .ToTable("QL_PhanQuyen");
 
             entity.Property(e => e.CoQuyen).HasDefaultValue(0);
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("isDeleted");
             entity.Property(e => e.MaManHinh).HasMaxLength(100);
             entity.Property(e => e.MaNhomNguoiDung).HasMaxLength(100);
         });
 
         modelBuilder.Entity<TblDmDonViTinh>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_D__F82B8823737A5D70");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_D__F82B88232B6A15BA");
 
             entity.ToTable("tbl_DM_Don_Vi_Tinh");
 
@@ -126,7 +157,7 @@ public partial class QlKhoContext : DbContext
 
         modelBuilder.Entity<TblDmKho>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_K__F82B8823CBA6D63D");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_K__F82B8823115A9466");
 
             entity.ToTable("tbl_DM_Kho");
 
@@ -143,29 +174,9 @@ public partial class QlKhoContext : DbContext
                 .HasColumnName("Ten_Kho");
         });
 
-        modelBuilder.Entity<TblDmKhoUser>(entity =>
-        {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_K__F82B88231A5016C9");
-
-            entity.ToTable("tbl_DM_Kho_User");
-
-            entity.Property(e => e.AutoId).HasColumnName("Auto_ID");
-            entity.Property(e => e.IsDeleted)
-                .HasDefaultValue(false)
-                .HasColumnName("isDeleted");
-            entity.Property(e => e.KhoId).HasColumnName("Kho_ID");
-            entity.Property(e => e.MaDangNhap)
-                .HasMaxLength(50)
-                .HasColumnName("Ma_Dang_Nhap");
-
-            entity.HasOne(d => d.Kho).WithMany(p => p.TblDmKhoUsers)
-                .HasForeignKey(d => d.KhoId)
-                .HasConstraintName("FK__tbl_DM_Kh__Kho_I__3E52440B");
-        });
-
         modelBuilder.Entity<TblDmLoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_L__F82B88231628643D");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_L__F82B8823EC99A6A2");
 
             entity.ToTable("tbl_DM_Loai_San_Pham");
 
@@ -184,7 +195,7 @@ public partial class QlKhoContext : DbContext
 
         modelBuilder.Entity<TblDmNcc>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_N__F82B8823346379D7");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_N__F82B8823666F0971");
 
             entity.ToTable("tbl_DM_NCC");
 
@@ -203,7 +214,7 @@ public partial class QlKhoContext : DbContext
 
         modelBuilder.Entity<TblDmSanPham>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_S__F82B882313FA479B");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_DM_S__F82B8823CB8F090F");
 
             entity.ToTable("tbl_DM_San_Pham");
 
@@ -221,16 +232,16 @@ public partial class QlKhoContext : DbContext
 
             entity.HasOne(d => d.DonViTinh).WithMany(p => p.TblDmSanPhams)
                 .HasForeignKey(d => d.DonViTinhId)
-                .HasConstraintName("FK__tbl_DM_Sa__DonVi__48CFD27E");
+                .HasConstraintName("FK__tbl_DM_Sa__DonVi__0F624AF8");
 
             entity.HasOne(d => d.LoaiSanPham).WithMany(p => p.TblDmSanPhams)
                 .HasForeignKey(d => d.LoaiSanPhamId)
-                .HasConstraintName("FK__tbl_DM_Sa__LoaiS__47DBAE45");
+                .HasConstraintName("FK__tbl_DM_Sa__LoaiS__0E6E26BF");
         });
 
         modelBuilder.Entity<TblXnkNhapKho>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B88236130D508");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B88234D10B64D");
 
             entity.ToTable("tbl_XNK_Nhap_Kho");
 
@@ -245,19 +256,20 @@ public partial class QlKhoContext : DbContext
             entity.Property(e => e.SoPhieuNhap)
                 .HasMaxLength(100)
                 .HasColumnName("So_Phieu_Nhap");
+            entity.Property(e => e.TrangThai).HasDefaultValue(0);
 
             entity.HasOne(d => d.Kho).WithMany(p => p.TblXnkNhapKhos)
                 .HasForeignKey(d => d.KhoId)
-                .HasConstraintName("FK__tbl_XNK_N__Kho_I__5535A963");
+                .HasConstraintName("FK__tbl_XNK_N__Kho_I__10566F31");
 
             entity.HasOne(d => d.Ncc).WithMany(p => p.TblXnkNhapKhos)
                 .HasForeignKey(d => d.NccId)
-                .HasConstraintName("FK__tbl_XNK_N__NCC_I__5629CD9C");
+                .HasConstraintName("FK__tbl_XNK_N__NCC_I__114A936A");
         });
 
         modelBuilder.Entity<TblXnkNhapKhoRawDatum>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B882316E450C0");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B88235BE46E31");
 
             entity.ToTable("tbl_XNK_Nhap_Kho_Raw_Data");
 
@@ -276,16 +288,16 @@ public partial class QlKhoContext : DbContext
 
             entity.HasOne(d => d.NhapKho).WithMany(p => p.TblXnkNhapKhoRawData)
                 .HasForeignKey(d => d.NhapKhoId)
-                .HasConstraintName("FK__tbl_XNK_N__Nhap___59FA5E80");
+                .HasConstraintName("FK__tbl_XNK_N__Nhap___123EB7A3");
 
             entity.HasOne(d => d.SanPham).WithMany(p => p.TblXnkNhapKhoRawData)
                 .HasForeignKey(d => d.SanPhamId)
-                .HasConstraintName("FK__tbl_XNK_N__San_P__5AEE82B9");
+                .HasConstraintName("FK__tbl_XNK_N__San_P__1332DBDC");
         });
 
         modelBuilder.Entity<TblXnkXuatKho>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B8823153C1D0E");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B8823B78D18B7");
 
             entity.ToTable("tbl_XNK_Xuat_Kho");
 
@@ -299,15 +311,16 @@ public partial class QlKhoContext : DbContext
             entity.Property(e => e.SoPhieuXuat)
                 .HasMaxLength(100)
                 .HasColumnName("So_Phieu_Xuat");
+            entity.Property(e => e.TrangThai).HasDefaultValue(0);
 
             entity.HasOne(d => d.Kho).WithMany(p => p.TblXnkXuatKhos)
                 .HasForeignKey(d => d.KhoId)
-                .HasConstraintName("FK__tbl_XNK_X__Kho_I__4CA06362");
+                .HasConstraintName("FK__tbl_XNK_X__Kho_I__14270015");
         });
 
         modelBuilder.Entity<TblXnkXuatKhoRawDatum>(entity =>
         {
-            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B88234FE6A596");
+            entity.HasKey(e => e.AutoId).HasName("PK__tbl_XNK___F82B8823B74F467D");
 
             entity.ToTable("tbl_XNK_Xuat_Kho_Raw_Data");
 
@@ -326,11 +339,11 @@ public partial class QlKhoContext : DbContext
 
             entity.HasOne(d => d.SanPham).WithMany(p => p.TblXnkXuatKhoRawData)
                 .HasForeignKey(d => d.SanPhamId)
-                .HasConstraintName("FK__tbl_XNK_X__San_P__5165187F");
+                .HasConstraintName("FK__tbl_XNK_X__San_P__160F4887");
 
             entity.HasOne(d => d.XuatKho).WithMany(p => p.TblXnkXuatKhoRawData)
                 .HasForeignKey(d => d.XuatKhoId)
-                .HasConstraintName("FK__tbl_XNK_X__Xuat___5070F446");
+                .HasConstraintName("FK__tbl_XNK_X__Xuat___151B244E");
         });
 
         OnModelCreatingPartial(modelBuilder);

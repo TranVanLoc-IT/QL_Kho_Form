@@ -39,7 +39,7 @@ namespace MWarehouse.Service.Service
         {
             QlNguoiDung user = _iuow.GetRepository<QlNguoiDung>().Entities
                 .Where(u => u.MatKhau == login.MatKhau && 
-                            u.TenDangNhap == login.TenDangNhap && u.TrangThai == 1).FirstOrDefault() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, ErrorCode.Code.NOT_FOUND.ToString(), "Không có người dùng nào");
+                            u.TenDangNhap == login.TenDangNhap).FirstOrDefault() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, ErrorCode.Code.NOT_FOUND.ToString(), "Không có người dùng nào");
             _user = user.TenDangNhap;
             string forms = (from b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                              where b.TenDangNhap == user.TenDangNhap

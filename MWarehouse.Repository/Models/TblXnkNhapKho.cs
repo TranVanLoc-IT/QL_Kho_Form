@@ -15,9 +15,11 @@ public partial class TblXnkNhapKho
 
     public DateOnly? NgayNhapKho { get; set; }
 
-    public string? GhiChu { get; set; }
+    public string GhiChu { get; set; }
 
     public bool? IsDeleted { get; set; }
+
+    public int? TrangThai { get; set; }
 
     public virtual TblDmKho Kho { get; set; }
 

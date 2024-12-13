@@ -8,4 +8,6 @@ public partial class DmManHinh
     public string MaManHinh { get; set; }
 
     public string TenManHinh { get; set; }
+
+    public bool? IsDeleted { get; set; }
 }

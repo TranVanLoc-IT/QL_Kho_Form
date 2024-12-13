@@ -74,14 +74,14 @@ namespace UI.Controls
             btn.Image = Resource.down_arrow;
             switch (pageName)
             {
-                case "ProductPage":
-                    btn.BackgroundImage = Resource.box;
+                case "RolePageForm":
+                    btn.BackgroundImage = Resource.role;
                     break;
-                case "SupplierPage":
-                   btn.BackgroundImage = Resource.delivery_courier;
+                case "ConfirmPageForm":
+                   btn.BackgroundImage = Resource.cconfirm;
                     break;
-                case "WarehousePage":
-                   btn.BackgroundImage = Resource.warehouseIC;
+                case "ReportPageForm":
+                   btn.BackgroundImage = Resource.report;
                     break;
 
                 default:

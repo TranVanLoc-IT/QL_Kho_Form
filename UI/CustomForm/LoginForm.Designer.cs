@@ -166,6 +166,7 @@
             Controls.Add(label3);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            ImeMode = ImeMode.Off;
             KeyPreview = true;
             Name = "LoginForm";
             Text = "Đăng nhập quản lí kho";

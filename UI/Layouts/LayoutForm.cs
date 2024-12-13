@@ -39,11 +39,11 @@ namespace UI.Layouts
 
 
         public LayoutForm(AIControl _aiControl, UserRoleControl _userRoleControl,
-        GroupRoleControl _groupRoleControl,
-        ConfirmImportControl _confirmImportControl,
-        ConfirmExportControl _confirmExportControl,
-        ReportExportControl _reportExportControl,
-           ReportImportControl _reportImportControl, ILoginService loginService)
+                        GroupRoleControl _groupRoleControl,
+                        ConfirmImportControl _confirmImportControl,
+                        ConfirmExportControl _confirmExportControl,
+                        ReportExportControl _reportExportControl,
+                       ReportImportControl _reportImportControl, ILoginService loginService)
         {
             // Initialize controls with DI
          

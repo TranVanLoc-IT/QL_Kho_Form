@@ -10,4 +10,8 @@ public partial class QlNguoiDung
     public string MatKhau { get; set; }
 
     public int? TrangThai { get; set; }
+
+    public string Email { get; set; }
+
+    public bool? IsDeleted { get; set; }
 }

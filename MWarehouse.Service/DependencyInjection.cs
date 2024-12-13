@@ -16,6 +16,7 @@ namespace MWarehouse.Service
         {
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<ISupplierService, SupplierService>();

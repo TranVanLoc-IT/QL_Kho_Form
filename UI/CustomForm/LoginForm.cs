@@ -62,7 +62,10 @@ namespace UI.CustomForm
                     this.user = _loginService.GetCurrentuser();
                     this.Close();
                 }
-                MessageBox.Show("Tài khoản này không có quyền đăng nhập !");
+                else
+                {
+                    MessageBox.Show("Tài khoản này không có quyền đăng nhập !");
+                }
             }
             catch (ErrorException ex)
             {
