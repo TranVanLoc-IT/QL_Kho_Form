@@ -3,6 +3,7 @@ using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core.Utils;
 using System.Windows.Forms;
 using UI.Controls;
+using UI.Controls.UCButton;
 using UI.CustomForm;
 
 namespace UI.Layouts
@@ -13,10 +14,9 @@ namespace UI.Layouts
         private readonly UserRoleControl _userRoleControl;
         private readonly GroupRoleControl _groupRoleControl;
         private readonly ConfirmImportControl _confirmImportControl;
-        private readonly ConfirmExportControl _confirmExportControl;
+        private readonly ConfirmReportBCTK _confirmExportControl;
         private readonly ReportExportControl _reportExportControl;
         private readonly ReportImportControl _reportImportControl;
-
         private readonly ILoginService _loginService;
 
         private string userName;
@@ -37,13 +37,22 @@ namespace UI.Layouts
             }
         }
 
+        public AIControl AIControl { get; }
+        public UserRoleControl UserRoleControl { get; }
+        public GroupRoleControl GroupRoleControl { get; }
+        public ConfirmImportControl ConfirmImportControl { get; }
+        public ConfirmReportBCTK ConfirmReportBCTK { get; }
+        public ReportExportControl ReportExportControl { get; }
+        public ReportImportControl ReportImportControl { get; }
+        public ILoginService LoginService { get; }
 
         public LayoutForm(AIControl _aiControl, UserRoleControl _userRoleControl,
                         GroupRoleControl _groupRoleControl,
                         ConfirmImportControl _confirmImportControl,
-                        ConfirmExportControl _confirmExportControl,
+                        ConfirmReportBCTK _confirmExportControl,
                         ReportExportControl _reportExportControl,
-                       ReportImportControl _reportImportControl, ILoginService loginService)
+                     
+        ReportImportControl _reportImportControl, ILoginService loginService)
         {
             // Initialize controls with DI
 
@@ -54,6 +63,7 @@ namespace UI.Layouts
             this._confirmExportControl = _confirmExportControl;
             this._confirmImportControl = _confirmImportControl;
             this._groupRoleControl = _groupRoleControl;
+        
             this._userRoleControl = _userRoleControl;
             InitializeComponent();
             Login();
@@ -66,6 +76,9 @@ namespace UI.Layouts
             timer1.Start();
 
         }
+
+       
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.timeWork.Text = TimeHelper.ConvertToUtcPlus7(DateTime.Now).ToString();
@@ -150,6 +163,7 @@ namespace UI.Layouts
                     _confirmImportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_confirmImportControl);
                     break;
+                
 
             }
         }

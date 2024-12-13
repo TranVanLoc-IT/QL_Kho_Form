@@ -1,6 +1,6 @@
 ﻿namespace UI.Controls
 {
-    partial class ConfirmExportControl
+    partial class ConfirmReportBCTK
     {
         /// <summary> 
         /// Required designer variable.

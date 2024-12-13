@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public partial class ConfirmExportControl : UserControl
+    public partial class ConfirmReportBCTK : UserControl
     {
-        public ConfirmExportControl()
+        public ConfirmReportBCTK()
         {
             InitializeComponent();
         }

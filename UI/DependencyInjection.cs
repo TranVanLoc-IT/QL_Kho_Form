@@ -5,6 +5,7 @@ using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Repository.Models;
 using System.Configuration;
 using UI.Controls;
+using UI.Controls.UCButton;
 using UI.Layouts;
 
 namespace UI
@@ -27,18 +28,19 @@ namespace UI
             services.AddScoped<AIControl>();
             services.AddScoped<UserRoleControl>();
             services.AddScoped<GroupRoleControl>();
-            services.AddScoped<ConfirmExportControl>();
+            services.AddScoped<ConfirmReportBCTK>();
             services.AddScoped<ConfirmImportControl>();
             services.AddScoped<ReportExportControl>();
             services.AddScoped<ReportImportControl>();
             services.AddScoped<Baocaotonkho>();
+      
             // Register LayoutForm with DI and pass the control names you want
             services.AddScoped(provider => new LayoutForm(
                 provider.GetRequiredService<AIControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),
                 provider.GetRequiredService<ConfirmImportControl>(),
-                provider.GetRequiredService<ConfirmExportControl>(),
+                provider.GetRequiredService<ConfirmReportBCTK>(),
                 provider.GetRequiredService<ReportExportControl>(),
                 provider.GetRequiredService<ReportImportControl>(),
                 provider.GetRequiredService<ILoginService>()
