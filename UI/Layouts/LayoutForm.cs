@@ -17,6 +17,8 @@ namespace UI.Layouts
         private readonly ReportExportControl _reportExportControl;
         private readonly ReportImportControl _reportImportControl;
 
+        private readonly ViewReportControl _viewReportControl;
+
         private readonly ILoginService _loginService;
 
         private string userName;
@@ -39,6 +41,7 @@ namespace UI.Layouts
 
 
         public LayoutForm(AIControl _aiControl, UserRoleControl _userRoleControl,
+                        ViewReportControl viewReport,
                         GroupRoleControl _groupRoleControl,
                         ConfirmImportControl _confirmImportControl,
                         ConfirmExportControl _confirmExportControl,
@@ -55,6 +58,7 @@ namespace UI.Layouts
             this._confirmImportControl = _confirmImportControl;
             this._groupRoleControl = _groupRoleControl;
             this._userRoleControl = _userRoleControl;
+            this._viewReportControl = viewReport;
             InitializeComponent();
             Login();
             this.WindowState = FormWindowState.Maximized;
@@ -149,6 +153,11 @@ namespace UI.Layouts
                     this.main.Controls.Clear();
                     _confirmImportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_confirmImportControl);
+                    break;
+                case "ViewReportPage":
+                    this.main.Controls.Clear();
+                    _viewReportControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_viewReportControl);
                     break;
 
             }
