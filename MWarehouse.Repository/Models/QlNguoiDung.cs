@@ -14,4 +14,6 @@ public partial class QlNguoiDung
     public string Email { get; set; }
 
     public bool? IsDeleted { get; set; }
+
+    public virtual ICollection<TheoDoi> TheoDois { get; set; } = new List<TheoDoi>();
 }

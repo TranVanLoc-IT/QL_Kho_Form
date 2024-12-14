@@ -1,5 +1,7 @@
 ﻿using MWarehouse.Contract.Service.Interface;
+using MWarehouse.ModelViews.LoginModelView;
 using MWarehouse.ModelViews.RoleModelView;
+using MWarehouse.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UI.Controls
 {
@@ -17,12 +20,28 @@ namespace UI.Controls
     {
         private readonly IRoleService roleService;
         private List<RoleView> roles;
+        private class Option
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+        }
         public ManageUserControl(IRoleService role)
         {
 
             InitializeComponent();
             this.roleService = role;
+            var options = new List<Option>
+                    {
+                        new Option { Text = "Mở", Value = 0 },
+                        new Option { Text = "Khóa", Value = 1 }
+            };
+
+            status.DataSource = options;
+            status.DisplayMember = "Text";
+            status.ValueMember = "Value";
+            status.SelectedValue = 0;
             this.Load += async (s, e) => await Config(s, e);
+           
             this.createButton.button.Click += async (s, e) => await CreateBtnClick(s, e);
             this.updateButton.button.Click += async (s, e) => await UpdateBtnClick(s, e);
             dataGridView.RowHeaderMouseClick += DataGridView_RowHeaderMouseClick;
@@ -33,18 +52,22 @@ namespace UI.Controls
         {
             var row = dataGridView.SelectedRows[0];
             tendn.Text = row.Cells[0].Value.ToString();
-            email.Text = row.Cells[3].Value == null ? "" : row.Cells[3].Value.ToString();
-            ghichu.Text = row.Cells[2].Value == null ? "" : row.Cells[2].Value.ToString();
+            email.Text = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
+            status.SelectedValue = int.Parse(row.Cells[2].Value.ToString());
         }
 
         private async Task CreateBtnClick(object sender, EventArgs e)
         {
             if (!Validate()) return;
 
-            string result = await roleService.CreateNewUser(tendn.Text, email.Text, pass.Text);
+            EditUserModel user = new EditUserModel();
+            user.Name= tendn.Text;
+            user.Mail = email.Text;
+            user.Status = int.Parse(status.SelectedValue.ToString());
+            user.Pass = pass.Text;
+            string result = await roleService.CreateNewUser(user);
             MessageBox.Show(result);
             await RefreshDatagridview(sender, e);
-
         }
 
         private bool Validate()
@@ -78,7 +101,13 @@ namespace UI.Controls
         {
             if (!Validate()) return;
 
-            string result = await roleService.UpdateUser(tendn.Text, email.Text, pass.Text);
+
+            EditUserModel user = new EditUserModel();
+            user.Name = tendn.Text;
+            user.Mail = email.Text;
+            user.Status = int.Parse(status.SelectedValue.ToString());
+            user.Pass = pass.Text;
+            string result = await roleService.UpdateUser(user);
             MessageBox.Show(result);
             await RefreshDatagridview(sender, e);
         }
@@ -87,7 +116,7 @@ namespace UI.Controls
         {
             dataGridView.DataSource = null;
             roles = await roleService.Roles();
-            dataGridView.DataSource = await roleService.GetUsers();
+            dataGridView.DataSource = await roleService.GetUserInfo();
 
         }
         private async Task RefreshDatagridview(object sender, EventArgs e)

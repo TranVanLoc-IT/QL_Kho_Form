@@ -19,6 +19,7 @@ namespace UI.Layouts
         private readonly ManageGroupUserRole _guser;
         private readonly Baocaotonkho bc;
         private readonly ViewReportControl _viewReportControl;
+        private readonly TheoDoiForm _theoDoiControl;
 
         private readonly ILoginService _loginService;
 
@@ -41,7 +42,7 @@ namespace UI.Layouts
         }
 
 
-        public LayoutForm(ManageGroupUserRole guser, ManageUserControl muser,
+        public LayoutForm(ManageGroupUserRole guser,TheoDoiForm theodoi, ManageUserControl muser,
                        UserRoleControl _userRoleControl,
                         ViewReportControl viewReport,
                         GroupRoleControl _groupRoleControl,
@@ -54,6 +55,7 @@ namespace UI.Layouts
 
             this._loginService = loginService;
             this._muser = muser;
+            this._theoDoiControl= theodoi;
             this.bc = bc;
             this._guser = guser;
             this._reportExportControl = _reportExportControl;
@@ -173,6 +175,11 @@ namespace UI.Layouts
                     this.main.Controls.Clear();
                     _muser.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_muser);
+                    break;
+                case "TheoDoi":
+                    this.main.Controls.Clear();
+                    _theoDoiControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_theoDoiControl);
                     break;
 
             }

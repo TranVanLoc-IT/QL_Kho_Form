@@ -99,7 +99,7 @@ namespace MWarehouse.Service.Service
 
         public async Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync()
         {
-            IEnumerable<ResponseGoodsReceiptModel> result = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Select(r => new ResponseGoodsReceiptModel()
+            IEnumerable<ResponseGoodsReceiptModel> result = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.IsDeleted == false).Select(r => new ResponseGoodsReceiptModel()
             {
                 AutoId = r.AutoId,
                 KhoId = r.KhoId,

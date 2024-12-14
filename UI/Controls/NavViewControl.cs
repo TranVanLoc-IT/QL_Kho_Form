@@ -62,7 +62,8 @@ namespace UI.Controls
                                                                 };
             this.ConfirmPage.PageViewList = new PageViewModel[] {
                                                                     new PageViewModel { PageName = "ConfirmExportPage", PageTitle = "Duyệt phiếu xuất" },
-                                                                    new PageViewModel { PageName = "ConfirmImportPage", PageTitle = "Duyệt phiếu nhập" }
+                                                                    new PageViewModel { PageName = "ConfirmImportPage", PageTitle = "Duyệt phiếu nhập" },
+                                                                    new PageViewModel { PageName = "TheoDoi", PageTitle = "Theo dõi phiếu" },
                                                                 };
         }
 

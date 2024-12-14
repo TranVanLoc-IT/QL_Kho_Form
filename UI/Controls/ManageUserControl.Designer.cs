@@ -30,13 +30,14 @@
         {
             dataGridView = new DataGridView();
             tendn = new TextBox();
-            ghichu = new TextBox();
             createButton = new UCButton.CreateButton();
             label1 = new Label();
             email = new TextBox();
             pass = new TextBox();
             label2 = new Label();
             updateButton = new UCButton.UpdateButton();
+            label3 = new Label();
+            status = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -62,15 +63,6 @@
             tendn.PlaceholderText = "Tên đăng nhập";
             tendn.Size = new Size(271, 34);
             tendn.TabIndex = 1;
-            // 
-            // ghichu
-            // 
-            ghichu.Location = new Point(67, 447);
-            ghichu.Multiline = true;
-            ghichu.Name = "ghichu";
-            ghichu.PlaceholderText = "Ghi chú thêm";
-            ghichu.Size = new Size(271, 68);
-            ghichu.TabIndex = 2;
             // 
             // createButton
             // 
@@ -121,17 +113,35 @@
             updateButton.Size = new Size(72, 70);
             updateButton.TabIndex = 14;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(786, 389);
+            label3.Name = "label3";
+            label3.Size = new Size(106, 26);
+            label3.TabIndex = 15;
+            label3.Text = "Trạng thái";
+            // 
+            // status
+            // 
+            status.FormattingEnabled = true;
+            status.Location = new Point(916, 377);
+            status.Name = "status";
+            status.Size = new Size(226, 34);
+            status.TabIndex = 16;
+            // 
             // ManageUserControl
             // 
             AutoScaleDimensions = new SizeF(13F, 26F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(status);
+            Controls.Add(label3);
             Controls.Add(updateButton);
             Controls.Add(pass);
             Controls.Add(label2);
             Controls.Add(email);
             Controls.Add(label1);
             Controls.Add(createButton);
-            Controls.Add(ghichu);
             Controls.Add(tendn);
             Controls.Add(dataGridView);
             Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -146,12 +156,13 @@
         #endregion
         private DataGridView dataGridView;
         private TextBox tendn;
-        private TextBox ghichu;
         private UCButton.CreateButton createButton;
         private Label label1;
         private TextBox email;
         private TextBox pass;
         private Label label2;
         private UCButton.UpdateButton updateButton;
+        private Label label3;
+        private ComboBox status;
     }
 }
