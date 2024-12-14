@@ -21,7 +21,7 @@ namespace MWarehouse.Service.Service
         {
             DataTable baoCaoTable = new DataTable();
 
-            using (SqlConnection connection = new SqlConnection("Server=DESKTOP-QBTN8I9\\SQLEXPRESS;Database=QL_Kho;User Id=sa;Password=123;Trust Server Certificate=True;"))
+            using (SqlConnection connection = new SqlConnection("Server=KIETBANHTRAI\\SQLEXPRESS;Database=QL_Kho;User Id=sa;Password=123;Trust Server Certificate=True;"))
             {
                 try
                 {

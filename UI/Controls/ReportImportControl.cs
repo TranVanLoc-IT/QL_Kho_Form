@@ -16,11 +16,11 @@ namespace UI.Controls
     {
         private readonly ILoginService _loginService;
         private readonly BC_Phieunhap PCPN;
-        
+
         public ReportImportControl()
         {
             InitializeComponent();
-       
+
             PCPN = new BC_Phieunhap(null);
         }
 
@@ -49,6 +49,11 @@ namespace UI.Controls
             {
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
