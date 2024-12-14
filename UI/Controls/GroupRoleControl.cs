@@ -16,13 +16,15 @@ namespace UI.Controls
             this.roleService = role;
 
             this.Load += async (s, e) => await Config(s, e);
+
             dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
             
         }
 
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+            
+
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
                 var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
@@ -34,7 +36,8 @@ namespace UI.Controls
                     allMhs = dataGridView.Rows[e.RowIndex].Cells[1] as DataGridViewComboBoxCell;
                     gr = dataGridView.Rows[e.RowIndex].Cells[5].Value?.ToString();
                 }
-                if (6 - col.Index == 2 || col.Index == 6)
+
+                if (6 - col.Index == 2 && col.Text == "Chi tiết" || col.Index == 6)
                 {
                     if(act == null)
                     {
@@ -74,7 +77,7 @@ namespace UI.Controls
                         }
                         await roleService.AddMhToGroupRole(gr, mh);
                     }
-                    if (6 - col.Index == 3 || col.Index == 5)
+                    else if (6 - col.Index == 3 || col.Index == 5)
                     {
                         string mh = act?.Value?.ToString();
 
@@ -85,7 +88,7 @@ namespace UI.Controls
                         }
                         await roleService.DeleteMHFromGroupRole(gr, mh);
                     }
-
+                    await RefreshDatagridview(sender, e);
                     MessageBox.Show("Cập nhật thành công");
                 }
             }
@@ -95,7 +98,6 @@ namespace UI.Controls
         {
             dsManHinh = await roleService.DsManHinh();
 
-           
 
             var listRoles = await roleService.DsRole();
             dataGridView.DataSource = listRoles;
@@ -113,7 +115,7 @@ namespace UI.Controls
 
             ButtonOptionConfig();
 
-            
+
 
         }
 
