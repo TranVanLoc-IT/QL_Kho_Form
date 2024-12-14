@@ -169,5 +169,42 @@ namespace MWarehouse.Service.Service
             }).ToListAsync();
             return manHinhs;
         }
+
+        public async Task CreateNewUser(string name, string role)
+        {
+
+            // check user existed
+            QlNguoiDung newUser = new QlNguoiDung();
+            newUser.TenDangNhap = name;
+            newUser.MatKhau = name + "@123";
+
+            QlNguoiDungNhomNguoiDung userRole = new QlNguoiDungNhomNguoiDung();
+            userRole.TenDangNhap = name;
+            userRole.MaNhomNguoiDung = role;
+
+            await _iuow.GetRepository<QlNguoiDung>().InsertAsync(newUser);
+            await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
+            await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().InsertAsync(userRole);
+            await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
+        }
+
+        public async Task CreateNewGroupUser(string name, string[] manHinhs)
+        {
+            QlNhomNguoiDung newGroup = new QlNhomNguoiDung();
+            newGroup.TenNhom = name;
+            newGroup.GhiChu = "";
+
+            await _iuow.GetRepository<QlNhomNguoiDung>().InsertAsync(newGroup);
+            await _iuow.GetRepository<QlNhomNguoiDung>().SaveAsync();
+
+            foreach (string mh in manHinhs)
+            {
+                QlPhanQuyen pq = new QlPhanQuyen();
+                pq.MaManHinh = mh;
+                pq.MaNhomNguoiDung = name;
+                await _iuow.GetRepository<QlPhanQuyen>().InsertAsync(pq);
+            }
+            await _iuow.GetRepository<QlPhanQuyen>().SaveAsync();
+        }
     }
 }

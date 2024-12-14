@@ -105,7 +105,8 @@ namespace MWarehouse.Service.Service
                 KhoId = r.KhoId,
                 NgayNhapKho = r.NgayNhapKho,
                 NccId = r.NccId,
-                GhiChu = r.GhiChu
+                GhiChu = r.GhiChu,
+                TrangThai = r.TrangThai
             }).ToListAsync();
             return result;
 

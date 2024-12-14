@@ -18,5 +18,7 @@ namespace MWarehouse.Contract.Service.Interface
         Task DeleteMHFromGroupRole(string maNhom, string maMh);
         Task UpdateUserRole(string user, string oldRole, string newRole);
         Task DeleteUserRole(string user, string role);
+        Task CreateNewUser(string name, string role);
+        Task CreateNewGroupUser(string name, string[] manHinhs);
     }
 }

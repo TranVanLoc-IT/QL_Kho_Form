@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MWarehouse.ModelViews.ExportReceiptDetailModelView;
+using MWarehouse.ModelViews.ExportReceiptModelView;
 using MWarehouse.ModelViews.GoodsReceiptDetailModelViews;
 using MWarehouse.ModelViews.GoodsReceiptModelDetailViews;
 using MWarehouse.ModelViews.GoodsReceiptModelViews;
@@ -16,8 +18,8 @@ namespace MWarehouse.Service.MapperProfile
         public GoodsReceiptDetailProfileMapper()
         {
             // Mapper qua lại
-            CreateMap<CreateGoodsReceiptDetailModel, TblXnkNhapKhoRawDatum>().ReverseMap();
-            CreateMap<ResponseGoodsReceiptDetailModel, TblXnkNhapKhoRawDatum>().ReverseMap();
+            CreateMap<ResponseExportReceiptDetailModel, TblXnkXuatKhoRawDatum>().ReverseMap();
+            CreateMap<ResponseExportReceiptModel, TblXnkXuatKho>().ReverseMap();
         }
     }
 }

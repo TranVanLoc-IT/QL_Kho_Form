@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
@@ -44,6 +45,12 @@ namespace MWarehouse.Service.Service
         public async Task<IEnumerable<ResponseWarehouseModel>> GetAllAsync()
         {
             IEnumerable<ResponseWarehouseModel> result = _mapper.Map<IEnumerable<ResponseWarehouseModel>>(await _iuow.GetRepository<TblDmKho>().GetAllAsync());
+            return result;
+        }
+
+        public async Task<ResponseWarehouseModel> GetByIDAsync(int code)
+        {
+            ResponseWarehouseModel result = _mapper.Map<ResponseWarehouseModel>(await _iuow.GetRepository<TblDmKho>().Entities.Where(r => r.AutoId == code).FirstAsync());
             return result;
         }
 

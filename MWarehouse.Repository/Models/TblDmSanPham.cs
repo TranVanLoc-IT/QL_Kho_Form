@@ -15,7 +15,7 @@ public partial class TblDmSanPham
 
     public int? DonViTinhId { get; set; }
 
-    public string GhiChu { get; set; }
+    public string? GhiChu { get; set; }
 
     public bool? IsDeleted { get; set; }
 

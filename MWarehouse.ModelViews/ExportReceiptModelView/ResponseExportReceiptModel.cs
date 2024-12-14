@@ -12,17 +12,17 @@ namespace MWarehouse.ModelViews.ExportReceiptModelView
         [DisplayName("Mã code")]
         public int AutoId { get; set; }
 
-        [DisplayName("Tên kho")]
-        public string? Kho { get; set; }
+        [DisplayName("Mã kho")]
+        public int? KhoId { get; set; }
 
         [DisplayName("Ngày xuất kho")]
         public DateOnly? NgayXuatKho { get; set; }
 
         [DisplayName("Ghi chú")]
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
 
         [DisplayName("Trạng thái")]
-        public int? TrangThai { get; set; }
+        public int TrangThai { get; set; }
 
     }
 }
