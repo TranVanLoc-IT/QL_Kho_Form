@@ -36,7 +36,6 @@ namespace UI.Controls
                     allMhs = dataGridView.Rows[e.RowIndex].Cells[1] as DataGridViewComboBoxCell;
                     gr = dataGridView.Rows[e.RowIndex].Cells[5].Value?.ToString();
                 }
-                MessageBox.Show(col.Index.ToString());
 
                 if (6 - col.Index == 2 && col.Text == "Chi tiết" || col.Index == 6)
                 {
