@@ -132,6 +132,7 @@
             userName.Anchor = AnchorStyles.None;
             userName.BackColor = Color.WhiteSmoke;
             userName.BorderStyle = BorderStyle.FixedSingle;
+            userName.Enabled = false;
             userName.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             userName.Location = new Point(178, 24);
             userName.MaxLength = 30;
@@ -139,6 +140,7 @@
             userName.PlaceholderText = "Nhập tên đăng nhập";
             userName.Size = new Size(249, 34);
             userName.TabIndex = 1;
+            userName.Text = "admin";
             // 
             // label1
             // 

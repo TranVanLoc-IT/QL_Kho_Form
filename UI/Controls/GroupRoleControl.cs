@@ -22,29 +22,49 @@ namespace UI.Controls
 
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+           
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
                 var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var act = dataGridView.Rows[e.RowIndex].Cells[2] as DataGridViewComboBoxCell;
                 var allMhs = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
-
-                if (col.Index == 6)
+                if (6 - col.Index == 2 || 6 - col.Index == 3 || 6 -  col.Index == 4)
                 {
+                    act = dataGridView.Rows[e.RowIndex].Cells[0] as DataGridViewComboBoxCell;
+                    allMhs = dataGridView.Rows[e.RowIndex].Cells[1] as DataGridViewComboBoxCell;
+                    gr = dataGridView.Rows[e.RowIndex].Cells[5].Value?.ToString();
+                }
+                if (6 - col.Index == 2 || col.Index == 6)
+                {
+                    if(act == null)
+                    {
+
+                        act = new DataGridViewComboBoxCell();
+                        allMhs = new DataGridViewComboBoxCell();
+                    }
+
                     List<ManHinhView> actMhs = await roleService.GetMhActivating(gr);
                     act.DataSource = actMhs;
                     act.DisplayMember = "TenMH";
                     act.ValueMember = "MaMH";
+                    if (actMhs.Count > 0)
+                    {
+                        act.Value = actMhs.First().MaMH;
+                    }
 
                     var actMhsIds = new HashSet<string>(actMhs.Select(m => m.MaMH));
                     var differentMhs = dsManHinh.Where(m => !actMhsIds.Contains(m.MaMH)).ToList();
                     allMhs.DataSource = differentMhs;
                     allMhs.DisplayMember = "TenMH";
                     allMhs.ValueMember = "MaMH";
-
+                    if (differentMhs.Count > 0)
+                    {
+                        allMhs.Value = differentMhs.First().MaMH;
+                    }
                 }
                 else
                 {
-                    if (col.Index == 4)
+                    if (6 - col.Index == 4 || col.Index == 4)
                     {
                         string mh = allMhs?.Value?.ToString();
                         if (string.IsNullOrWhiteSpace(mh))
@@ -54,7 +74,7 @@ namespace UI.Controls
                         }
                         await roleService.AddMhToGroupRole(gr, mh);
                     }
-                    if (col.Index == 5)
+                    if (6 - col.Index == 3 || col.Index == 5)
                     {
                         string mh = act?.Value?.ToString();
 
@@ -66,7 +86,6 @@ namespace UI.Controls
                         await roleService.DeleteMHFromGroupRole(gr, mh);
                     }
 
-                    RefreshDatagridview(sender, e);
                     MessageBox.Show("Cập nhật thành công");
                 }
             }

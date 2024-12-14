@@ -55,7 +55,7 @@
             dataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView.Size = new Size(1113, 443);
+            dataGridView.Size = new Size(1113, 472);
             dataGridView.TabIndex = 1;
             // 
             // UserRoleControl
@@ -66,7 +66,7 @@
             Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 4, 5, 4);
             Name = "UserRoleControl";
-            Size = new Size(1113, 443);
+            Size = new Size(1113, 472);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }

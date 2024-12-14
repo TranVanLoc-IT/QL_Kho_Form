@@ -51,14 +51,14 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(754, 235);
+            dataGridView.Size = new Size(754, 317);
             dataGridView.TabIndex = 2;
             // 
             // comboBox
             // 
             comboBox.Dock = DockStyle.Right;
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(609, 235);
+            comboBox.Location = new Point(609, 317);
             comboBox.Name = "comboBox";
             comboBox.Size = new Size(145, 28);
             comboBox.TabIndex = 3;

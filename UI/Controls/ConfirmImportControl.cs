@@ -34,14 +34,12 @@ namespace UI.Controls
 
             this.Load += async (s, e) => await Config(s, e);
             dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
-
         }
         private class Option
         {
             public string Text { get; set; }
             public string Value { get; set; }
         }
-
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
@@ -62,7 +60,6 @@ namespace UI.Controls
                 }
             }
         }
-
 
         private async Task Config(object sender, EventArgs e)
         {
