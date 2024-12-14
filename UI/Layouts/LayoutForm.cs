@@ -48,7 +48,7 @@ namespace UI.Layouts
                         ConfirmImportControl _confirmImportControl,
                         ConfirmExportControl _confirmExportControl,
                         ReportExportControl _reportExportControl,
-                       ReportImportControl _reportImportControl,Baocaotonkho bc, ILoginService loginService)
+                       ReportImportControl _reportImportControl, Baocaotonkho bc, ILoginService loginService)
         {
             // Initialize controls with DI
 
@@ -147,6 +147,16 @@ namespace UI.Layouts
                     this.main.Controls.Clear();
                     _reportImportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_reportImportControl);
+                    break;
+                case "ConfirmExportPage":
+                    this.main.Controls.Clear();
+                    _confirmExportControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_confirmExportControl);
+                    break;
+                case "ConfirmImportPage":
+                    this.main.Controls.Clear();
+                    _confirmImportControl.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_confirmImportControl);
                     break;
                 case "ViewReportPage":
                     this.main.Controls.Clear();

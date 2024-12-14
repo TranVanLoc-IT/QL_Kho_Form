@@ -126,12 +126,21 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(830, 317);
-            dataGridView.TabIndex = 4;
+            dataGridViewCellStyle3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView.Size = new Size(830, 260);
+            dataGridView.TabIndex = 25;
             // 
-            // ConfirmReportBCTK
+            // dssp
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            dssp.Location = new Point(3, 267);
+            dssp.Name = "dssp";
+            dssp.Size = new Size(824, 185);
+            dssp.TabIndex = 24;
+            // 
+            // ConfirmExportControl
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(acceptButton);
             Controls.Add(ngayxuat);
@@ -140,8 +149,9 @@
             Controls.Add(label1);
             Controls.Add(comboBox);
             Controls.Add(dataGridView);
+            Controls.Add(dssp);
             Name = "ConfirmExportControl";
-            Size = new Size(830, 463);
+            Size = new Size(830, 612);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

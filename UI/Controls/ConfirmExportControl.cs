@@ -115,7 +115,6 @@ namespace UI.Controls
                     int khoid = int.Parse(GetCellValue("KhoId", e.RowIndex).ToString()!);
                     var tt = int.Parse(GetCellValue("TrangThai", e.RowIndex).ToString());
                     acceptButton.Enabled = false;
-
                     if (tt == 0)
                     {
                         acceptButton.Enabled = true;
