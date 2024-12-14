@@ -18,7 +18,7 @@ namespace UI
             // Thêm cấu hình cho DbContext QlKhoContext
             service.AddDbContext<QlKhoContext>(options =>
                 //options.UseSqlServer("Server=MSI;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
-            options.UseSqlServer("Server=DESKTOP-QBTN8I9\\SQLEXPRESS;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
+            options.UseSqlServer("Server=KIETBANHTRAI\\SQLEXPRESS;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
 
             AddControlService(service);
         }
@@ -28,8 +28,6 @@ namespace UI
             services.AddScoped<AIControl>();
             services.AddScoped<UserRoleControl>();
             services.AddScoped<GroupRoleControl>();
-            services.AddScoped<ConfirmReportBCTK>();
-            services.AddScoped<ConfirmImportControl>();
             services.AddScoped<ReportExportControl>();
             services.AddScoped<ReportImportControl>();
             services.AddScoped<Baocaotonkho>();
@@ -39,8 +37,6 @@ namespace UI
                 provider.GetRequiredService<AIControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),
-                provider.GetRequiredService<ConfirmImportControl>(),
-                provider.GetRequiredService<ConfirmReportBCTK>(),
                 provider.GetRequiredService<ReportExportControl>(),
                 provider.GetRequiredService<ReportImportControl>(),
                 provider.GetRequiredService<ILoginService>()
