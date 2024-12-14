@@ -13,8 +13,6 @@ namespace UI.Layouts
         private readonly AIControl _aiControl;
         private readonly UserRoleControl _userRoleControl;
         private readonly GroupRoleControl _groupRoleControl;
-        private readonly ConfirmImportControl _confirmImportControl;
-        private readonly ConfirmReportBCTK _confirmExportControl;
         private readonly ReportExportControl _reportExportControl;
         private readonly ReportImportControl _reportImportControl;
         private readonly ILoginService _loginService;
@@ -40,16 +38,12 @@ namespace UI.Layouts
         public AIControl AIControl { get; }
         public UserRoleControl UserRoleControl { get; }
         public GroupRoleControl GroupRoleControl { get; }
-        public ConfirmImportControl ConfirmImportControl { get; }
-        public ConfirmReportBCTK ConfirmReportBCTK { get; }
         public ReportExportControl ReportExportControl { get; }
         public ReportImportControl ReportImportControl { get; }
         public ILoginService LoginService { get; }
 
         public LayoutForm(AIControl _aiControl, UserRoleControl _userRoleControl,
                         GroupRoleControl _groupRoleControl,
-                        ConfirmImportControl _confirmImportControl,
-                        ConfirmReportBCTK _confirmExportControl,
                         ReportExportControl _reportExportControl,
                      
         ReportImportControl _reportImportControl, ILoginService loginService)
@@ -60,8 +54,6 @@ namespace UI.Layouts
             this._aiControl = _aiControl;
             this._reportExportControl = _reportExportControl;
             this._reportImportControl = _reportImportControl;
-            this._confirmExportControl = _confirmExportControl;
-            this._confirmImportControl = _confirmImportControl;
             this._groupRoleControl = _groupRoleControl;
         
             this._userRoleControl = _userRoleControl;
@@ -152,16 +144,6 @@ namespace UI.Layouts
                     this.main.Controls.Clear();
                     _reportImportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_reportImportControl);
-                    break;
-                case "ConfirmExportPage":
-                    this.main.Controls.Clear();
-                    _confirmExportControl.Dock = DockStyle.Fill;
-                    this.main.Controls.Add(_confirmExportControl);
-                    break;
-                case "ConfirmImportPage":
-                    this.main.Controls.Clear();
-                    _confirmImportControl.Dock = DockStyle.Fill;
-                    this.main.Controls.Add(_confirmImportControl);
                     break;
                 
 
