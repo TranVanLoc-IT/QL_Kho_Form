@@ -148,16 +148,6 @@ namespace UI.Layouts
                     _reportImportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_reportImportControl);
                     break;
-                case "ConfirmExportPage":
-                    this.main.Controls.Clear();
-                    _confirmExportControl.Dock = DockStyle.Fill;
-                    this.main.Controls.Add(_confirmExportControl);
-                    break;
-                case "ConfirmImportPage":
-                    this.main.Controls.Clear();
-                    _confirmImportControl.Dock = DockStyle.Fill;
-                    this.main.Controls.Add(_confirmImportControl);
-                    break;
                 case "ViewReportPage":
                     this.main.Controls.Clear();
                     _viewReportControl.Dock = DockStyle.Fill;

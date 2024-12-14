@@ -75,14 +75,14 @@
             // 
             deleteButton.Location = new Point(683, 441);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(66, 68);
+            deleteButton.Size = new Size(56, 55);
             deleteButton.TabIndex = 5;
             // 
             // createButton
             // 
             createButton.Location = new Point(683, 367);
             createButton.Name = "createButton";
-            createButton.Size = new Size(66, 68);
+            createButton.Size = new Size(56, 55);
             createButton.TabIndex = 4;
             // 
             // manhom

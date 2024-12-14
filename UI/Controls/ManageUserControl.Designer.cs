@@ -76,7 +76,7 @@
             // 
             createButton.Location = new Point(783, 447);
             createButton.Name = "createButton";
-            createButton.Size = new Size(66, 68);
+            createButton.Size = new Size(72, 70);
             createButton.TabIndex = 8;
             // 
             // label1
@@ -118,7 +118,7 @@
             // 
             updateButton.Location = new Point(906, 447);
             updateButton.Name = "updateButton";
-            updateButton.Size = new Size(66, 68);
+            updateButton.Size = new Size(72, 70);
             updateButton.TabIndex = 14;
             // 
             // ManageUserControl

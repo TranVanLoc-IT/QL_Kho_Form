@@ -28,16 +28,17 @@ namespace UI.Controls
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
                 var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
-                var act = dataGridView.Rows[e.RowIndex].Cells[2] as DataGridViewComboBoxCell;
-                var allMhs = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
-                if (6 - col.Index == 2 || 6 - col.Index == 3 || 6 -  col.Index == 4)
+                var act = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
+                var allMhs = dataGridView.Rows[e.RowIndex].Cells[4] as DataGridViewComboBoxCell;
+
+                if (7 - col.Index == 3 || 7 - col.Index == 4 || 7 -  col.Index == 5)
                 {
                     act = dataGridView.Rows[e.RowIndex].Cells[0] as DataGridViewComboBoxCell;
                     allMhs = dataGridView.Rows[e.RowIndex].Cells[1] as DataGridViewComboBoxCell;
                     gr = dataGridView.Rows[e.RowIndex].Cells[5].Value?.ToString();
                 }
 
-                if (6 - col.Index == 2 && col.Text == "Chi tiết" || col.Index == 6)
+                if (7 - col.Index == 3 && col.Text == "Chi tiết" || col.Index == 7)
                 {
                     if(act == null)
                     {
@@ -67,7 +68,7 @@ namespace UI.Controls
                 }
                 else
                 {
-                    if (6 - col.Index == 4 || col.Index == 4)
+                    if (7 - col.Index == 5 || col.Index == 5)
                     {
                         string mh = allMhs?.Value?.ToString();
                         if (string.IsNullOrWhiteSpace(mh))
@@ -77,7 +78,7 @@ namespace UI.Controls
                         }
                         await roleService.AddMhToGroupRole(gr, mh);
                     }
-                    else if (6 - col.Index == 3 || col.Index == 5)
+                    else if (7 - col.Index == 4 || col.Index == 6)
                     {
                         string mh = act?.Value?.ToString();
 

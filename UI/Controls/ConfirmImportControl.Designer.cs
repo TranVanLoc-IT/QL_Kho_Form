@@ -78,90 +78,22 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridView.Size = new Size(754, 310);
-            dataGridView.TabIndex = 13;
-            // 
-            // acceptButton
-            // 
-            acceptButton.Enabled = false;
-            acceptButton.Location = new Point(629, 593);
-            acceptButton.Name = "acceptButton";
-            acceptButton.Size = new Size(67, 62);
-            acceptButton.TabIndex = 23;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            label2.Location = new Point(323, 593);
-            label2.Name = "label2";
-            label2.Size = new Size(151, 25);
-            label2.TabIndex = 22;
-            label2.Text = "Nhà cung cấp";
-            // 
-            // ngaynhap
-            // 
-            ngaynhap.Enabled = false;
-            ngaynhap.Font = new Font("Times New Roman", 13.8F);
-            ngaynhap.Location = new Point(23, 625);
-            ngaynhap.Name = "ngaynhap";
-            ngaynhap.Size = new Size(269, 34);
-            ngaynhap.TabIndex = 21;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            label3.Location = new Point(23, 593);
-            label3.Name = "label3";
-            label3.Size = new Size(121, 25);
-            label3.TabIndex = 20;
-            label3.Text = "Ngày nhập";
-            // 
-            // ncc
-            // 
-            ncc.Enabled = false;
-            ncc.Font = new Font("Times New Roman", 13.8F);
-            ncc.Location = new Point(323, 625);
-            ncc.Name = "ncc";
-            ncc.Size = new Size(269, 34);
-            ncc.TabIndex = 19;
-            // 
-            // kho
-            // 
-            kho.Enabled = false;
-            kho.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            kho.ForeColor = Color.Red;
-            kho.Location = new Point(95, 534);
-            kho.Name = "kho";
-            kho.Size = new Size(197, 34);
-            kho.TabIndex = 18;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            label1.Location = new Point(23, 543);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 25);
-            label1.TabIndex = 17;
-            label1.Text = "Kho";
+            dataGridView.Size = new Size(754, 317);
+            dataGridView.TabIndex = 2;
             // 
             // comboBox
             // 
             comboBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             comboBox.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(595, 530);
+            comboBox.Location = new Point(609, 317);
             comboBox.Name = "comboBox";
-            comboBox.Size = new Size(145, 34);
-            comboBox.TabIndex = 16;
+            comboBox.Size = new Size(145, 28);
+            comboBox.TabIndex = 3;
             // 
             // ConfirmImportControl
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(acceptButton);
             Controls.Add(label2);
@@ -172,9 +104,8 @@
             Controls.Add(label1);
             Controls.Add(comboBox);
             Controls.Add(dataGridView);
-            Controls.Add(dssp);
             Name = "ConfirmImportControl";
-            Size = new Size(754, 666);
+            Size = new Size(754, 406);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
