@@ -54,7 +54,9 @@ namespace UI.Controls
 
             this.ReportPage.PageViewList = new PageViewModel[] {
                                                                     new PageViewModel { PageName = "ReportExport", PageTitle = "Phiếu xuất" },
-                                                                    new PageViewModel { PageName = "ReportImport", PageTitle = "Phiếu nhập" }
+                                                                    new PageViewModel { PageName = "ReportImport", PageTitle = "Phiếu nhập" },
+                                                                    new PageViewModel { PageName = "ViewReportPage", PageTitle = "Xem báo cáo" }
+
                                                                 };
             this.ConfirmPage.PageViewList = new PageViewModel[] {
                                                                     new PageViewModel { PageName = "ConfirmExportPage", PageTitle = "Duyệt phiếu xuất" },

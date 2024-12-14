@@ -26,6 +26,7 @@ namespace UI
         private static void AddControlService(this IServiceCollection services)
         {
             services.AddScoped<AIControl>();
+            services.AddScoped<ViewReportControl>();
             services.AddScoped<UserRoleControl>();
             services.AddScoped<GroupRoleControl>();
             services.AddScoped<ReportExportControl>();
@@ -36,6 +37,7 @@ namespace UI
             services.AddTransient(provider => new LayoutForm(
                 provider.GetRequiredService<AIControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
+                provider.GetRequiredService<ViewReportControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),
                 provider.GetRequiredService<ReportExportControl>(),
                 provider.GetRequiredService<ReportImportControl>(),
