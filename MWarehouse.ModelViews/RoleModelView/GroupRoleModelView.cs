@@ -9,6 +9,10 @@ namespace MWarehouse.ModelViews.RoleModelView
 {
     public class GroupRoleModelView
     {
+
+        [DisplayName("Mã nhóm người dùng")]
+        public string GroupId { get; set; }
+
         [DisplayName("Nhóm người dùng")]
         public string GroupUser { get; set; }
 

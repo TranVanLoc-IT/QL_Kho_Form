@@ -25,10 +25,12 @@ namespace UI
 
         private static void AddControlService(this IServiceCollection services)
         {
-            services.AddScoped<AIControl>();
             services.AddScoped<ViewReportControl>();
             services.AddScoped<UserRoleControl>();
             services.AddScoped<ConfirmImportControl>();
+            services.AddScoped<ManageGroupUserRole>();
+            services.AddScoped<ManageUserControl>();
+            services.AddScoped<ManageRoleControl>();
             services.AddScoped<ConfirmExportControl>();
             services.AddScoped<GroupRoleControl>();
             services.AddScoped<ReportExportControl>();
@@ -37,7 +39,8 @@ namespace UI
       
             // Register LayoutForm with DI and pass the control names you want
             services.AddTransient(provider => new LayoutForm(
-                provider.GetRequiredService<AIControl>(),
+                provider.GetRequiredService<ManageGroupUserRole>(),
+                provider.GetRequiredService<ManageUserControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
                 provider.GetRequiredService<ViewReportControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),
@@ -45,6 +48,7 @@ namespace UI
                 provider.GetRequiredService<ConfirmExportControl>(),
                 provider.GetRequiredService<ReportExportControl>(),
                 provider.GetRequiredService<ReportImportControl>(),
+                provider.GetRequiredService<Baocaotonkho>(),
                 provider.GetRequiredService<ILoginService>()
             ));
         }

@@ -9,14 +9,15 @@ namespace UI.Layouts
 {
     public partial class LayoutForm : Form
     {
-        private readonly AIControl _aiControl;
         private readonly UserRoleControl _userRoleControl;
         private readonly GroupRoleControl _groupRoleControl;
         private readonly ConfirmImportControl _confirmImportControl;
         private readonly ConfirmExportControl _confirmExportControl;
         private readonly ReportExportControl _reportExportControl;
         private readonly ReportImportControl _reportImportControl;
-
+        private readonly ManageUserControl _muser;
+        private readonly ManageGroupUserRole _guser;
+        private readonly Baocaotonkho bc;
         private readonly ViewReportControl _viewReportControl;
 
         private readonly ILoginService _loginService;
@@ -40,18 +41,21 @@ namespace UI.Layouts
         }
 
 
-        public LayoutForm(AIControl _aiControl, UserRoleControl _userRoleControl,
+        public LayoutForm(ManageGroupUserRole guser, ManageUserControl muser,
+                       UserRoleControl _userRoleControl,
                         ViewReportControl viewReport,
                         GroupRoleControl _groupRoleControl,
                         ConfirmImportControl _confirmImportControl,
                         ConfirmExportControl _confirmExportControl,
                         ReportExportControl _reportExportControl,
-                       ReportImportControl _reportImportControl, ILoginService loginService)
+                       ReportImportControl _reportImportControl,Baocaotonkho bc, ILoginService loginService)
         {
             // Initialize controls with DI
 
             this._loginService = loginService;
-            this._aiControl = _aiControl;
+            this._muser = muser;
+            this.bc = bc;
+            this._guser = guser;
             this._reportExportControl = _reportExportControl;
             this._reportImportControl = _reportImportControl;
             this._confirmExportControl = _confirmExportControl;
@@ -148,6 +152,17 @@ namespace UI.Layouts
                     this.main.Controls.Clear();
                     _viewReportControl.Dock = DockStyle.Fill;
                     this.main.Controls.Add(_viewReportControl);
+                    break;
+                case "ManageGroupRole":
+                    this.main.Controls.Clear();
+                    _guser.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_guser);
+                    break;
+                    break;
+                case "ManageUserRole":
+                    this.main.Controls.Clear();
+                    _muser.Dock = DockStyle.Fill;
+                    this.main.Controls.Add(_muser);
                     break;
 
             }

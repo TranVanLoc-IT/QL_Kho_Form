@@ -6,6 +6,7 @@ using MWarehouse.ModelViews.RoleModelView;
 using MWarehouse.Repository.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace MWarehouse.Service.Service
 
         public async Task<List<GroupRoleModelView>> DsRole()
         {
-            var nhomNguoiDung = _iuow.GetRepository<QlNhomNguoiDung>().Entities
+            var nhomNguoiDung = _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.IsDeleted == false)
                                     .Select(r => new
                                     {
                                         r.TenNhom,
@@ -44,7 +45,8 @@ namespace MWarehouse.Service.Service
 
             var manHinhs = nhomNguoiDung.Select(r => new GroupRoleModelView
             {
-                GroupUser = r.MaNhom,
+                GroupId = r.MaNhom,
+                GroupUser = r.TenNhom,
                 Decsription = r.GhiChu
             }).ToList();
 
@@ -76,7 +78,8 @@ namespace MWarehouse.Service.Service
             {
                 User = r.TenDangNhap,
                 GroupUser =  _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(e => e.MaNhom == r.MaNhomNguoiDung).Select(r => r.TenNhom).First(),
-                Decsription = r.GhiChu
+                Decsription = r.GhiChu,
+                Email = _iuow.GetRepository<QlNguoiDung>().Entities.Where(e => e.TenDangNhap == r.TenDangNhap).Select(r => r.Email).First(),
 
             }).ToListAsync();
             return users;
@@ -168,6 +171,92 @@ namespace MWarehouse.Service.Service
                 MaQuyen = r.MaNhom
             }).ToListAsync();
             return manHinhs;
+        }
+
+        public async Task<string> CreateNewGroupUser(string manhom, string name, string ghichu)
+        {
+
+            // check user existed
+            QlNhomNguoiDung newGroup = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.TenNhom.Equals(name)).FirstOrDefaultAsync();
+            if (newGroup != null)
+            {
+                return "Đã có nhóm người dùng này !";
+            }
+            newGroup = new QlNhomNguoiDung();
+            newGroup.MaNhom = manhom;
+            newGroup.TenNhom = name;
+            newGroup.GhiChu = ghichu;
+
+            await _iuow.GetRepository<QlNhomNguoiDung>().InsertAsync(newGroup);
+            await _iuow.GetRepository<QlNhomNguoiDung>().SaveAsync();
+            return "Tạo thành công nhóm !";
+
+        }
+        public async Task<string> DeleteGroupUser(string name)
+        {
+            // check user existed
+            QlNhomNguoiDung oldGroup = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.TenNhom.Equals(name)).FirstOrDefaultAsync();
+            if (oldGroup == null)
+            {
+                return "Chưa có nhóm người dùng này !";
+            }
+            oldGroup.IsDeleted = true;
+            await _iuow.GetRepository<QlNhomNguoiDung>().UpdateAsync(oldGroup);
+            await _iuow.GetRepository<QlNhomNguoiDung>().SaveAsync();
+            return "Xóa thành công nhóm !";
+
+        }
+
+        public async Task<string> DeleteUser(string name)
+        {
+            // check user existed
+            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(name)).FirstOrDefaultAsync();
+            if(user == null)
+            {
+                return "Không thấy người dùng !";
+            }
+            user.IsDeleted = true;
+
+            await _iuow.GetRepository<QlNguoiDung>().UpdateAsync(user);
+            await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
+            return "Xóa thành công!";
+
+        }
+
+        public async Task<string> CreateNewUser(string name, string email, string pass)
+        {
+            // check user existed
+            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(name)).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                return "Đã có người dùng này !";
+            }
+            // check user existed
+            user = new QlNguoiDung();
+            user.TenDangNhap = name;
+            user.MatKhau = pass;
+            user.Email = email;
+
+            await _iuow.GetRepository<QlNguoiDung>().InsertAsync(user);
+            await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
+            return "Tạo thành công !";
+        }
+
+        public async Task<string> UpdateUser(string name, string email, string pass)
+        {
+            // check user existed
+            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(name)).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return "Không có người dùng này !";
+            }
+            // check user existed
+            user.MatKhau = pass;
+            user.Email = email;
+
+            await _iuow.GetRepository<QlNguoiDung>().UpdateAsync(user);
+            await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
+            return "Cập nhật thành công !";
         }
     }
 }

@@ -13,13 +13,14 @@ namespace MWarehouse.ModelViews.ExportReceiptDetailModelView
         public int AutoId { get; set; }
 
         [DisplayName("Sản phẩm")]
-        public string? SanPham { get; set; }
+        public int? SanPhamId { get; set; }
 
         [DisplayName("Số lượng xuất")]
         public decimal? SlXuat { get; set; }
 
         [DisplayName("Đơn giá xuất")]
         public decimal? DonGiaXuat { get; set; }
+
 
     }
 }

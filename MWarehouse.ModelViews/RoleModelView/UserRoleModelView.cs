@@ -17,5 +17,8 @@ namespace MWarehouse.ModelViews.RoleModelView
 
         [DisplayName("Mô tả")]
         public string? Decsription { get; set; }
+
+        [DisplayName("Email")]
+        public string? Email { get; set; }
     }
 }

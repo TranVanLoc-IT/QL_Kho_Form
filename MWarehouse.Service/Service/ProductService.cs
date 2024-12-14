@@ -57,7 +57,7 @@ namespace MWarehouse.Service.Service
             return result;
         }
 
-        public async Task<ResponseProductModel> GetByIdAsync(int id)
+        public async Task<ResponseProductModel> GetByIdAsync(int? id)
         {
             ResponseProductModel result = _mapper.Map<ResponseProductModel>(await _iuow.GetRepository<TblDmSanPham>().GetByIdAsync(id));
             return result;
@@ -88,6 +88,16 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<TblDmSanPham>().UpdateAsync(product);
 
             await _iuow.SaveAsync();
+        }
+
+        public Task UpdateQuantityExportAsync(int code, int sl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateQuantityImportAsync(int code, int sl)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task UpdateUnitAsync(int id, int[] obj)

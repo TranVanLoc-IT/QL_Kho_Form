@@ -22,7 +22,7 @@ namespace MWarehouse.ModelViews.WarehouseModelViews
         ///     Ghi chú cho kho: Vị trí, vai trò
         /// </summary>
 
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
 
     }
 }

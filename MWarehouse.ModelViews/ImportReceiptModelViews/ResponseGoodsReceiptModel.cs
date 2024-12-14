@@ -37,7 +37,13 @@ namespace MWarehouse.ModelViews.GoodsReceiptModelViews
         ///     Ghi chú
         /// </summary>
         [DisplayName("Ghi chú")]
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
+
+        /// <summary>
+        ///     Trạng thái
+        /// </summary>
+        [DisplayName("Trạng thái")]
+        public int TrangThai { get; set; }
 
     }
 }

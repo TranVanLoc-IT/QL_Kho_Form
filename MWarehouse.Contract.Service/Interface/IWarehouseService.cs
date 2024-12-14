@@ -15,5 +15,6 @@ namespace MWarehouse.Contract.Service.Interface
         Task UpdateAsync(int id, ResponseWarehouseModel obj);
         Task DeleteAsync(int id);
         Task<IEnumerable<ResponseWarehouseModel>> GetAllAsync();
+        Task<ResponseWarehouseModel> GetByIDAsync(int code);
     }
 }

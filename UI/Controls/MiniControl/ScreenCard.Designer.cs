@@ -30,6 +30,7 @@
         {
             hinhAnh = new PictureBox();
             TenMH = new TextBox();
+            price = new TextBox();
             ((System.ComponentModel.ISupportInitialize)hinhAnh).BeginInit();
             SuspendLayout();
             // 
@@ -40,28 +41,41 @@
             hinhAnh.Dock = DockStyle.Top;
             hinhAnh.Location = new Point(0, 0);
             hinhAnh.Name = "hinhAnh";
-            hinhAnh.Size = new Size(171, 133);
+            hinhAnh.Size = new Size(184, 101);
             hinhAnh.TabIndex = 0;
             hinhAnh.TabStop = false;
             // 
             // TenMH
             // 
-            TenMH.Dock = DockStyle.Bottom;
+            TenMH.BorderStyle = BorderStyle.None;
+            TenMH.Dock = DockStyle.Top;
             TenMH.Font = new Font("Times New Roman", 10.8F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            TenMH.Location = new Point(0, 139);
+            TenMH.Location = new Point(0, 101);
             TenMH.Multiline = true;
             TenMH.Name = "TenMH";
-            TenMH.Size = new Size(171, 42);
+            TenMH.Size = new Size(184, 42);
             TenMH.TabIndex = 1;
+            // 
+            // price
+            // 
+            price.BorderStyle = BorderStyle.None;
+            price.Dock = DockStyle.Top;
+            price.Font = new Font("Times New Roman", 10.8F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            price.Location = new Point(0, 143);
+            price.Multiline = true;
+            price.Name = "price";
+            price.Size = new Size(184, 42);
+            price.TabIndex = 2;
             // 
             // ScreenCard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(price);
             Controls.Add(TenMH);
             Controls.Add(hinhAnh);
             Name = "ScreenCard";
-            Size = new Size(171, 181);
+            Size = new Size(184, 181);
             ((System.ComponentModel.ISupportInitialize)hinhAnh).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -71,5 +85,6 @@
 
         public PictureBox hinhAnh;
         public TextBox TenMH;
+        public TextBox price;
     }
 }
