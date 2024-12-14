@@ -100,7 +100,7 @@ namespace UI.Controls
             {
                 HeaderText = "",
                 Text = "Sửa",
-                UseColumnTextForButtonValue = true // Hiển thị văn bản trên nút
+                UseColumnTextForButtonValue = true 
             };
             dataGridView.Columns.Add(editColumn);
 
@@ -108,24 +108,20 @@ namespace UI.Controls
             {
                 HeaderText = "",
                 Text = "Xóa",
-                UseColumnTextForButtonValue = true // Hiển thị văn bản trên nút
+                UseColumnTextForButtonValue = true 
             };
             dataGridView.Columns.Add(deleteColumn);
 
-            // Tùy chỉnh giao diện nút
             dataGridView.CellPainting += (s, e) =>
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
                     dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
-                    // Hủy vẽ mặc định
                     e.Handled = true;
 
-                    // Xác định trạng thái hover/click
                     bool isHovered = e.ColumnIndex == hoveredColumnIndex && e.RowIndex == hoveredRowIndex;
                     bool isClicked = e.ColumnIndex == clickedColumnIndex && e.RowIndex == clickedRowIndex;
 
-                    // Xác định màu sắc và văn bản nút
                     Brush brush;
                     string buttonText;
 
@@ -144,22 +140,17 @@ namespace UI.Controls
                         return;
                     }
 
-                    // Vẽ nền nút
                     e.Graphics.FillRectangle(brush, e.CellBounds);
 
-                    // Vẽ văn bản
                     TextRenderer.DrawText(e.Graphics, buttonText, e.CellStyle.Font, e.CellBounds,
                         Color.White, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
 
-                    // Vẽ viền
                     e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
 
-                    // Giải phóng brush
                     brush.Dispose();
                 }
             };
 
-            // Thêm sự kiện hover
             dataGridView.CellMouseEnter += (s, e) =>
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
@@ -182,7 +173,6 @@ namespace UI.Controls
                 }
             };
 
-            // Thêm sự kiện click
             dataGridView.CellClick += (s, e) =>
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
@@ -192,7 +182,6 @@ namespace UI.Controls
                     clickedRowIndex = e.RowIndex;
                     dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex); // Vẽ lại ô
 
-                    // Đặt trạng thái clicked về mặc định sau một thời gian ngắn (hiệu ứng click)
                     Task.Delay(200).ContinueWith(_ =>
                     {
                         clickedColumnIndex = -1;
