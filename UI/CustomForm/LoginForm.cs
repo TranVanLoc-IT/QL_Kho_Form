@@ -70,7 +70,6 @@ namespace UI.CustomForm
             catch (ErrorException ex)
             {
                 MessageBox.Show("ĐĂNG NHẬP THẤT BẠI");
-                this.userName.Text = string.Empty;
                 this.password.Text = string.Empty;
             }
         }

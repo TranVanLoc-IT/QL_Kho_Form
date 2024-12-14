@@ -11,7 +11,7 @@ public partial class TblDmLoaiSanPham
 
     public string TenLsp { get; set; }
 
-    public string GhiChu { get; set; }
+    public string? GhiChu { get; set; }
 
     public bool? IsDeleted { get; set; }
 

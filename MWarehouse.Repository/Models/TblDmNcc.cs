@@ -11,7 +11,7 @@ public partial class TblDmNcc
 
     public string TenNcc { get; set; }
 
-    public string GhiChu { get; set; }
+    public string? GhiChu { get; set; }
 
     public bool? IsDeleted { get; set; }
 

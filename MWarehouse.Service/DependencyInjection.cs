@@ -24,6 +24,7 @@ namespace MWarehouse.Service
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
+            services.AddScoped<ITheoDoiService, TheoDoiService>();
             services.AddScoped<IExportReceiptService, ExportReceiptService>();
             services.AddScoped<IExportReceiptDetailService, ExportReceiptDetailService>();
             services.AddScoped<IImportReceiptService, ImportReceiptService>();

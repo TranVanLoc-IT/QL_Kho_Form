@@ -38,7 +38,7 @@ namespace MWarehouse.Service.Service
 
         public async Task<IEnumerable<ResponseExportReceiptModel>> GetAllAsync()
         {
-            IEnumerable<TblXnkXuatKho> data = await _iuow.GetRepository<TblXnkXuatKho>().GetAllAsync();
+            IEnumerable<TblXnkXuatKho> data = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.IsDeleted == false).ToListAsync();
             var result = _mapper.Map<IEnumerable<ResponseExportReceiptModel>>(data);
             return result;
         }

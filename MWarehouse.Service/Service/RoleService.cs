@@ -1,16 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
+using MWarehouse.ModelViews.LoginModelView;
 using MWarehouse.ModelViews.RoleModelView;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MWarehouse.Service.Service
 {
@@ -81,6 +75,16 @@ namespace MWarehouse.Service.Service
                 Decsription = r.GhiChu,
                 Email = _iuow.GetRepository<QlNguoiDung>().Entities.Where(e => e.TenDangNhap == r.TenDangNhap).Select(r => r.Email).First(),
 
+            }).ToListAsync();
+            return users;
+        }
+        public async Task<List<UserModelView>> GetUserInfo()
+        {
+            List<UserModelView> users = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap != "admin" && r.IsDeleted == false).Select(r => new UserModelView()
+            {
+                TenDangNhap = r.TenDangNhap,
+                Email=r.Email ?? "",
+                TrangThai = r.TrangThai
             }).ToListAsync();
             return users;
         }
@@ -223,36 +227,38 @@ namespace MWarehouse.Service.Service
 
         }
 
-        public async Task<string> CreateNewUser(string name, string email, string pass)
+        public async Task<string> CreateNewUser(EditUserModel u)
         {
             // check user existed
-            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(name)).FirstOrDefaultAsync();
+            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(u.Name)).FirstOrDefaultAsync();
             if (user != null)
             {
                 return "Đã có người dùng này !";
             }
             // check user existed
             user = new QlNguoiDung();
-            user.TenDangNhap = name;
-            user.MatKhau = pass;
-            user.Email = email;
+            user.TenDangNhap = u.Name;
+            user.MatKhau = u.Pass;
+            user.Email = u.Mail;
+            user.TrangThai = u.Status;
 
             await _iuow.GetRepository<QlNguoiDung>().InsertAsync(user);
             await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
             return "Tạo thành công !";
         }
 
-        public async Task<string> UpdateUser(string name, string email, string pass)
+        public async Task<string> UpdateUser(EditUserModel u)
         {
             // check user existed
-            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(name)).FirstOrDefaultAsync();
+            QlNguoiDung user = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap.Equals(u.Name)).FirstOrDefaultAsync();
             if (user == null)
             {
                 return "Không có người dùng này !";
             }
             // check user existed
-            user.MatKhau = pass;
-            user.Email = email;
+            user.MatKhau = u.Pass;
+            user.Email = u.Mail;
+            user.TrangThai = u.Status;
 
             await _iuow.GetRepository<QlNguoiDung>().UpdateAsync(user);
             await _iuow.GetRepository<QlNguoiDung>().SaveAsync();
