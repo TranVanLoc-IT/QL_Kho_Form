@@ -1,6 +1,5 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.RoleModelView;
-using MWarehouse.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +12,11 @@ using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public partial class UserRoleControl : UserControl
+    public partial class ManageUserControl : UserControl
     {
         private readonly IRoleService roleService;
         private List<RoleView> roles;
-        public UserRoleControl(IRoleService role)
+        public ManageUserControl(IRoleService role)
         {
 
             InitializeComponent();
@@ -35,35 +34,21 @@ namespace UI.Controls
                 var user = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var oldRole = dataGridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
                 // lay ma cua role
-                oldRole = roles.Where(r => r.TenQuyen.Equals(oldRole)).Select(r => r.MaQuyen).FirstOrDefault();
+                oldRole = roles.Where(r => r.TenQuyen.Equals(oldRole)).Select(r => r.MaQuyen).First();
                 var comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
                 var role = comboBoxCell?.Value?.ToString();
-                // index 1: update
-                if(5 - col.Index == 4 || 5 - col.Index == 3)
-                {
-                     user = dataGridView.Rows[e.RowIndex].Cells[3].Value?.ToString();
-                     oldRole = dataGridView.Rows[e.RowIndex].Cells[4].Value?.ToString();
-                    // lay ma cua role
-                    oldRole = roles.Where(r => r.TenQuyen.Equals(oldRole)).Select(r => r.MaQuyen).First();
-                    comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[0] as DataGridViewComboBoxCell;
-                    role = comboBoxCell?.Value?.ToString();
-                }
-                if (5 - col.Index == 4 || col.Index == 4)
+
+                if (col.Index == 4)
                 {
                     if (string.IsNullOrWhiteSpace(role))
                     {
                         MessageBox.Show("Chọn quyền mới !");
                         return;
                     }
-                    if (oldRole.Equals(role))
-                    {
-                        MessageBox.Show("Chọn quyền khác với quyền hiện tại !");
-                        return;
-                    }
                     await roleService.UpdateUserRole(user, oldRole, role);
                     MessageBox.Show("Cập nhật quyền thành công");
                 }
-                if (5 - col.Index == 2 || col.Index == 5)
+                if (col.Index == 5)
                 {
                     await roleService.DeleteUserRole(user, oldRole);
                     MessageBox.Show("Xóa quyền thành công");

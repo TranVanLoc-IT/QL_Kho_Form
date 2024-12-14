@@ -55,7 +55,7 @@ namespace UI.CustomForm
 
             try
             {
-                LoginModel login = new LoginModel(userName.ToLower(), password);
+                LoginModel login = new LoginModel("admin", password);
                 role = _loginService.HandleLoginRequest(login);
                 if (role == "Admin")
                 {

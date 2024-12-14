@@ -1,91 +1,61 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.RoleModelView;
-using System.Data.Common;
+using MWarehouse.Repository.Models;
+using MWarehouse.Service.Service;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public partial class GroupRoleControl : UserControl
+    public partial class ConfirmImportControl : UserControl
     {
-        private readonly IRoleService roleService;
-        private List<ManHinhView> dsManHinh;
-        public GroupRoleControl(IRoleService role)
+        private readonly IImportReceiptService _importService;
+        public ConfirmImportControl(IImportReceiptService importService)
         {
-            
+
             InitializeComponent();
-            this.roleService = role;
+            this._importService = importService;
+            var options = new List<Option>
+                    {
+                        new Option { Text = "Chưa duyệt", Value = "UnConfirmed" },
+                        new Option { Text = "Đã duyệt", Value = "Confirmed" }
+                    };
+
+            comboBox.DataSource = options;
+            comboBox.DisplayMember = "Text";
+            comboBox.ValueMember = "Value";
 
             this.Load += async (s, e) => await Config(s, e);
             dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
-            
         }
-
+        private class Option
+        {
+            public string Text { get; set; }
+            public string Value { get; set; }
+        }
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
                 var gr = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var act = dataGridView.Rows[e.RowIndex].Cells[2] as DataGridViewComboBoxCell;
                 var allMhs = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
-                if (6 - col.Index == 2 || 6 - col.Index == 3 || 6 -  col.Index == 4)
+
+                if (col.Index == 6)
                 {
-                    act = dataGridView.Rows[e.RowIndex].Cells[0] as DataGridViewComboBoxCell;
-                    allMhs = dataGridView.Rows[e.RowIndex].Cells[1] as DataGridViewComboBoxCell;
-                    gr = dataGridView.Rows[e.RowIndex].Cells[5].Value?.ToString();
-                }
-                if (6 - col.Index == 2 || col.Index == 6)
-                {
-                    if(act == null)
-                    {
+                   
 
-                        act = new DataGridViewComboBoxCell();
-                        allMhs = new DataGridViewComboBoxCell();
-                    }
-
-                    List<ManHinhView> actMhs = await roleService.GetMhActivating(gr);
-                    act.DataSource = actMhs;
-                    act.DisplayMember = "TenMH";
-                    act.ValueMember = "MaMH";
-                    if (actMhs.Count > 0)
-                    {
-                        act.Value = actMhs.First().MaMH;
-                    }
-
-                    var actMhsIds = new HashSet<string>(actMhs.Select(m => m.MaMH));
-                    var differentMhs = dsManHinh.Where(m => !actMhsIds.Contains(m.MaMH)).ToList();
-                    allMhs.DataSource = differentMhs;
-                    allMhs.DisplayMember = "TenMH";
-                    allMhs.ValueMember = "MaMH";
-                    if (differentMhs.Count > 0)
-                    {
-                        allMhs.Value = differentMhs.First().MaMH;
-                    }
                 }
                 else
                 {
-                    if (6 - col.Index == 4 || col.Index == 4)
-                    {
-                        string mh = allMhs?.Value?.ToString();
-                        if (string.IsNullOrWhiteSpace(mh))
-                        {
-                            MessageBox.Show("Chọn màn hình mới để thêm !");
-                            return;
-                        }
-                        await roleService.AddMhToGroupRole(gr, mh);
-                    }
-                    if (6 - col.Index == 3 || col.Index == 5)
-                    {
-                        string mh = act?.Value?.ToString();
-
-                        if (string.IsNullOrWhiteSpace(mh))
-                        {
-                            MessageBox.Show("Chọn màn hình đang được truy cập để xóa !");
-                            return;
-                        }
-                        await roleService.DeleteMHFromGroupRole(gr, mh);
-                    }
-
+                  
                     MessageBox.Show("Cập nhật thành công");
                 }
             }
@@ -93,53 +63,28 @@ namespace UI.Controls
 
         private async Task Config(object sender, EventArgs e)
         {
-            dsManHinh = await roleService.DsManHinh();
+            dataGridView.DataSource = null;
 
-           
-
-            var listRoles = await roleService.DsRole();
-            dataGridView.DataSource = listRoles;
-
-            DataGridViewComboBoxColumn actScreens = new DataGridViewComboBoxColumn();
-            actScreens.HeaderText = "Được truy cập";
-            actScreens.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-            dataGridView.Columns.Add(actScreens);
-
-            DataGridViewComboBoxColumn colScreens = new DataGridViewComboBoxColumn();
-           
-            colScreens.HeaderText = "Màn hình";
-            colScreens.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-            dataGridView.Columns.Add(colScreens);
+            dataGridView.DataSource = await _importService.GetAllAsync();
 
             ButtonOptionConfig();
 
-            
-
         }
-
         private void ButtonOptionConfig()
         {
             // Thêm các cột nút
-            DataGridViewButtonColumn addColumn = new DataGridViewButtonColumn
+            DataGridViewButtonColumn confirmColumn = new DataGridViewButtonColumn
             {
                 HeaderText = "",
                 Text = "Thêm",
                 UseColumnTextForButtonValue = true // Hiển thị văn bản trên nút
             };
-            dataGridView.Columns.Add(addColumn);
-
-            DataGridViewButtonColumn removeColumn = new DataGridViewButtonColumn
-            {
-                HeaderText = "",
-                Text = "Xóa",
-                UseColumnTextForButtonValue = true
-            };
-            dataGridView.Columns.Add(removeColumn);
+            dataGridView.Columns.Add(confirmColumn);
 
             DataGridViewButtonColumn detailColumn = new DataGridViewButtonColumn
             {
                 HeaderText = "",
-                Text = "Chi tiết",
+                Text = "Xác nhận",
                 UseColumnTextForButtonValue = true
             };
             dataGridView.Columns.Add(detailColumn);
@@ -160,15 +105,10 @@ namespace UI.Controls
                     Brush brush;
                     string buttonText;
 
-                    if (dataGridView.Columns[e.ColumnIndex] == addColumn)
+                    if (dataGridView.Columns[e.ColumnIndex] == confirmColumn)
                     {
                         brush = new SolidBrush(Color.Green);
-                        buttonText = "Thêm";
-                    }
-                    else if (dataGridView.Columns[e.ColumnIndex] == removeColumn)
-                    {
-                        brush = new SolidBrush(Color.Red);
-                        buttonText = "Xóa";
+                        buttonText = "Xác nhận";
                     }
                     else if (dataGridView.Columns[e.ColumnIndex] == detailColumn)
                     {
@@ -217,14 +157,9 @@ namespace UI.Controls
                     Brush brush;
                     string buttonText;
 
-                    if (dataGridView.Columns[e.ColumnIndex] == addColumn)
+                    if (dataGridView.Columns[e.ColumnIndex] == confirmColumn)
                     {
-                        brush = new SolidBrush(isClicked ? Color.DarkGreen : isHovered ? Color.LightGreen : Color.Green);
-                        buttonText = "Thêm";
-                    }
-                    else if (dataGridView.Columns[e.ColumnIndex] == removeColumn)
-                    {
-                        brush = new SolidBrush(isClicked ? Color.DarkRed : isHovered ? Color.LightCoral : Color.Red);
+                        brush = new SolidBrush(isClicked ? Color.DarkGreen : isHovered ? Color.Green : Color.LightGreen);
                         buttonText = "Xóa";
                     }
                     else if (dataGridView.Columns[e.ColumnIndex] == detailColumn)
@@ -288,7 +223,6 @@ namespace UI.Controls
                     // Vẽ lại ô để hiển thị hiệu ứng click
                     dataGridView.InvalidateCell(e.ColumnIndex, e.RowIndex);
 
-                    // Đặt trạng thái clicked về mặc định sau một thời gian ngắn (hiệu ứng click)
                     Task.Delay(200).ContinueWith(_ =>
                     {
                         clickedColumnIndex = -1;
@@ -306,17 +240,6 @@ namespace UI.Controls
                 }
             };
 
-
-        }
-        private async Task RefreshDatagridview(object sender, EventArgs e)
-        {
-            dataGridView.DataSource = null;
-
-            dataGridView.Columns.Clear();
-            dataGridView.Rows.Clear();
-
-            dataGridView.Refresh();
-            await Config(sender, e);
 
         }
     }

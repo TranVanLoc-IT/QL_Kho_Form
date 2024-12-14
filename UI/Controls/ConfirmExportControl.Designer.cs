@@ -1,6 +1,6 @@
 ﻿namespace UI.Controls
 {
-    partial class UserRoleControl
+    partial class ConfirmExportControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,50 +29,55 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            comboBox = new ComboBox();
             dataGridView = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
+            // comboBox
+            // 
+            comboBox.Dock = DockStyle.Right;
+            comboBox.FormattingEnabled = true;
+            comboBox.Location = new Point(685, 317);
+            comboBox.Name = "comboBox";
+            comboBox.Size = new Size(145, 28);
+            comboBox.TabIndex = 5;
+            // 
             // dataGridView
             // 
-            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.Dock = DockStyle.Top;
             dataGridView.Location = new Point(0, 0);
-            dataGridView.Margin = new Padding(5, 4, 5, 4);
             dataGridView.Name = "dataGridView";
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView.Size = new Size(1113, 472);
-            dataGridView.TabIndex = 1;
+            dataGridView.Size = new Size(830, 317);
+            dataGridView.TabIndex = 4;
             // 
-            // UserRoleControl
+            // ConfirmExportControl
             // 
-            AutoScaleDimensions = new SizeF(13F, 26F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBox);
             Controls.Add(dataGridView);
-            Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(5, 4, 5, 4);
-            Name = "UserRoleControl";
-            Size = new Size(1113, 472);
+            Name = "ConfirmExportControl";
+            Size = new Size(830, 463);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
+        private ComboBox comboBox;
         private DataGridView dataGridView;
     }
 }
