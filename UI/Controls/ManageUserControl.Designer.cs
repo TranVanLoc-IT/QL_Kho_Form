@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             dataGridView = new DataGridView();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            createButton1 = new UCButton.CreateButton();
-            deleteButton1 = new UCButton.DeleteButton();
+            tendn = new TextBox();
+            ghichu = new TextBox();
+            createButton = new UCButton.CreateButton();
+            label1 = new Label();
+            email = new TextBox();
+            pass = new TextBox();
+            label2 = new Label();
+            updateButton = new UCButton.UpdateButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // dataGridView
             // 
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -47,56 +51,88 @@
             dataGridView.Margin = new Padding(5, 4, 5, 4);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(1341, 306);
+            dataGridView.Size = new Size(1341, 350);
             dataGridView.TabIndex = 4;
             // 
-            // textBox1
+            // tendn
             // 
-            textBox1.Location = new Point(120, 342);
-            textBox1.Margin = new Padding(5, 4, 5, 4);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Tên đăng nhập";
-            textBox1.Size = new Size(201, 34);
-            textBox1.TabIndex = 5;
+            tendn.Location = new Point(67, 379);
+            tendn.Margin = new Padding(5, 4, 5, 4);
+            tendn.Name = "tendn";
+            tendn.PlaceholderText = "Tên đăng nhập";
+            tendn.Size = new Size(271, 34);
+            tendn.TabIndex = 1;
             // 
-            // textBox2
+            // ghichu
             // 
-            textBox2.Location = new Point(412, 342);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(208, 34);
-            textBox2.TabIndex = 6;
+            ghichu.Location = new Point(67, 447);
+            ghichu.Multiline = true;
+            ghichu.Name = "ghichu";
+            ghichu.PlaceholderText = "Ghi chú thêm";
+            ghichu.Size = new Size(271, 68);
+            ghichu.TabIndex = 2;
             // 
-            // textBox3
+            // createButton
             // 
-            textBox3.Location = new Point(120, 410);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(201, 68);
-            textBox3.TabIndex = 7;
+            createButton.Location = new Point(783, 447);
+            createButton.Name = "createButton";
+            createButton.Size = new Size(66, 68);
+            createButton.TabIndex = 8;
             // 
-            // createButton1
+            // label1
             // 
-            createButton1.Location = new Point(398, 410);
-            createButton1.Name = "createButton1";
-            createButton1.Size = new Size(66, 68);
-            createButton1.TabIndex = 8;
+            label1.AutoSize = true;
+            label1.Location = new Point(378, 389);
+            label1.Name = "label1";
+            label1.Size = new Size(65, 26);
+            label1.TabIndex = 10;
+            label1.Text = "Email";
             // 
-            // deleteButton1
+            // email
             // 
-            deleteButton1.Location = new Point(518, 410);
-            deleteButton1.Name = "deleteButton1";
-            deleteButton1.Size = new Size(66, 68);
-            deleteButton1.TabIndex = 9;
+            email.Location = new Point(485, 379);
+            email.Margin = new Padding(5, 4, 5, 4);
+            email.Name = "email";
+            email.PlaceholderText = "Nhập email";
+            email.Size = new Size(271, 34);
+            email.TabIndex = 11;
+            // 
+            // pass
+            // 
+            pass.Location = new Point(485, 481);
+            pass.Margin = new Padding(5, 4, 5, 4);
+            pass.Name = "pass";
+            pass.Size = new Size(271, 34);
+            pass.TabIndex = 13;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(378, 493);
+            label2.Name = "label2";
+            label2.Size = new Size(99, 26);
+            label2.TabIndex = 12;
+            label2.Text = "Mật khẩu";
+            // 
+            // updateButton
+            // 
+            updateButton.Location = new Point(906, 447);
+            updateButton.Name = "updateButton";
+            updateButton.Size = new Size(66, 68);
+            updateButton.TabIndex = 14;
             // 
             // ManageUserControl
             // 
             AutoScaleDimensions = new SizeF(13F, 26F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(deleteButton1);
-            Controls.Add(createButton1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(updateButton);
+            Controls.Add(pass);
+            Controls.Add(label2);
+            Controls.Add(email);
+            Controls.Add(label1);
+            Controls.Add(createButton);
+            Controls.Add(ghichu);
+            Controls.Add(tendn);
             Controls.Add(dataGridView);
             Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 4, 5, 4);
@@ -109,10 +145,13 @@
 
         #endregion
         private DataGridView dataGridView;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private UCButton.CreateButton createButton1;
-        private UCButton.DeleteButton deleteButton1;
+        private TextBox tendn;
+        private TextBox ghichu;
+        private UCButton.CreateButton createButton;
+        private Label label1;
+        private TextBox email;
+        private TextBox pass;
+        private Label label2;
+        private UCButton.UpdateButton updateButton;
     }
 }

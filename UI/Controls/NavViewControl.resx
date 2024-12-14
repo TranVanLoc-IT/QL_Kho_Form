@@ -121,7 +121,7 @@
   <data name="RolePage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        1QAADdUBPdZY8QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAEptSURBVHhe7d0H
+        1AAADdQB75G6FQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAEptSURBVHhe7d0H
         3C1Fff/xSy8iVcAKFkBQwYK9IbaYKEKwYQ8qqKgo9ooisYBERVQsWCIaCyaK7a8YDXbFWInGXrFFjb2X
         /L9f2KvD8rv3Ps/szO7ZOZ/f6/XOKw4ws2dmdp45e2Zn1vzf//0fAABYMmEiAABoW5gIAADaFiYCAIC2
         hYkAAKBtYSIAAGhbmAgAANoWJgIAgLaFiQAAoG1hIgAAaFuYCAAA2hYmAgCAtoWJAACgbWEiAABoW5gI
@@ -440,22 +440,6 @@
         bQsTAQBA28JEAADQtjARAAC0LUwEAABtCxMBAEDbwkQAANC2MBEAALQtTAQAAG0LEwEAQNvCRAAA0LYw
         EQAAtC1MBAAAbQsTAQBA28JEAADQtjARAAC0LUwEAABtCxMBAEDbwkQAANC2MBEAALQtTAQAAG0LEwEA
         QNvCRAAA0LYwEQAAtC1MBAAALfu/Nf8fEY69foWC0m8AAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="ChatBot.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAB2
-        GwAAdhsB9YbelQAAAlJJREFUWEfFl09u1DAUxtMbsOAM1Ek3RSB6C3qCcgoOUIluOoIrUNINYkWFIBE3
-        4ASgdhIN+850RGOnGbEI74teRp7EziQdM/1Jnxz7OX7Pz38y4/1PwpviMJzmEiU3bZfzaR6dz+5KlNy0
-        Pc7m80c0+wUCQIk6m7ZDeJMfVbNnoc6mboJYvYS4em/I6YUeAOps6kbEagFxdRBV2q/zo3B295nS/lcP
-        gOsXH6b5q7N52V4OzNqP1TGpZB03MyFS9d5PVYGSmyp4t0f1mq9TOMsX1DdeOR0iklJzXgltbPaCVL0g
-        52Ut1NmEdGdNJz2V8RCet2vIANrYjNmf6gGIcTZik5sM1Nj2gEhlshJAqhI2LdloD9Rg1vrMQTCR+7rz
-        pa7kU+7SAs70AFBn03DEWL0xBSCS7IS7tEAm9ABQZ9NwRCJ/mgLwE/mLu7RwdhMGV7eB0XmtcbbHXVts
-        /C3YmxQ+OfnYcqqJsvPJFkR4XRxSABlKblpPcCn3sebWtNtEyyESddK1Ma3gUsE5J6crR+2+onFSGm/k
-        X6oDdmEH16ppEFfC+OzKDHUqmi85VsGuzDx4BsCD7oEmTk9BWe4IGf2A8Myt/dn0HvD/fD3wVVxWomdu
-        HgYHYXReqeMmFFk0qgPAMzcPx7octm9B6e0I9f2ZkPHvZQD0vKu+PYeNe/Wn79fwye2Xx76M3pImteO2
-        yCajd+jLr62n7+8BGvi12alB1Jdf60efX0SYFe149xkAuCcaAZyyqY3rPQC6fhXbcHYKamjWxv8FNpzc
-        Axux9ib0vH/UhG+uWu2LZAAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

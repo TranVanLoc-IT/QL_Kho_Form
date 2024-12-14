@@ -33,7 +33,6 @@
             ReportPage = new DropdownButton();
             ConfirmPage = new DropdownButton();
             RolePage = new DropdownButton();
-            ChatBot = new Button();
             pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -45,7 +44,6 @@
             panel1.Controls.Add(ReportPage);
             panel1.Controls.Add(ConfirmPage);
             panel1.Controls.Add(RolePage);
-            panel1.Controls.Add(ChatBot);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -87,22 +85,6 @@
             RolePage.Size = new Size(183, 90);
             RolePage.TabIndex = 11;
             // 
-            // ChatBot
-            // 
-            ChatBot.Cursor = Cursors.Hand;
-            ChatBot.Dock = DockStyle.Bottom;
-            ChatBot.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            ChatBot.ForeColor = Color.DodgerBlue;
-            ChatBot.Image = (Image)resources.GetObject("ChatBot.Image");
-            ChatBot.ImageAlign = ContentAlignment.MiddleLeft;
-            ChatBot.Location = new Point(0, 461);
-            ChatBot.Name = "ChatBot";
-            ChatBot.Size = new Size(183, 90);
-            ChatBot.TabIndex = 8;
-            ChatBot.Text = "AI";
-            ChatBot.TextAlign = ContentAlignment.MiddleRight;
-            ChatBot.UseVisualStyleBackColor = true;
-            // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = Resource.warehouse;
@@ -129,7 +111,6 @@
         #endregion
         private PictureBox pictureBox1;
         public Panel panel1;
-        public Button ChatBot;
         public DropdownButton RolePage;
         public DropdownButton ReportPage;
         public DropdownButton ConfirmPage;

@@ -48,7 +48,9 @@ namespace UI.Controls
             ReportPage.HeaderPage = new PageViewModel() { PageName = "ReportPageForm", PageTitle = "Báo cáo phiếu" };
 
             this.RolePage.PageViewList = new PageViewModel[] {new PageViewModel { PageName = "UserRolePage", PageTitle = "Phân quyền người dùng" },
-                new PageViewModel { PageName = "GroupRolePage", PageTitle = "Phân quyền nhóm" }
+                new PageViewModel { PageName = "GroupRolePage", PageTitle = "Phân quyền nhóm" },
+                new PageViewModel { PageName = "ManageGroupRole", PageTitle = "Quản lí nhóm người dùng" },
+                new PageViewModel { PageName = "ManageUserRole", PageTitle = "Quản lí người dùng" }
                                                               };
 
 
