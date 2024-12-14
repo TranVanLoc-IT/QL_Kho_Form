@@ -57,7 +57,7 @@ namespace UI.CustomForm
             {
                 LoginModel login = new LoginModel("admin", password);
                 role = _loginService.HandleLoginRequest(login);
-                if(role == "Admin")
+                if (role == "Admin")
                 {
                     this.user = _loginService.GetCurrentuser();
                     this.Close();
@@ -76,6 +76,11 @@ namespace UI.CustomForm
         }
 
         private void loginBtn_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
         {
 
         }

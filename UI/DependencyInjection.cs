@@ -5,6 +5,7 @@ using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Repository.Models;
 using System.Configuration;
 using UI.Controls;
+using UI.Controls.UCButton;
 using UI.Layouts;
 
 namespace UI
@@ -17,7 +18,7 @@ namespace UI
             // Thêm cấu hình cho DbContext QlKhoContext
             service.AddDbContext<QlKhoContext>(options =>
                 //options.UseSqlServer("Server=MSI;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
-            options.UseSqlServer("Server=DESKTOP-QBTN8I9\\SQLEXPRESS;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
+            options.UseSqlServer("Server=KIETBANHTRAI\\SQLEXPRESS;Database=QL_Kho;Trusted_Connection=True;TrustServerCertificate=True;"));
 
             AddControlService(service);
         }
@@ -28,19 +29,16 @@ namespace UI
             services.AddScoped<ViewReportControl>();
             services.AddScoped<UserRoleControl>();
             services.AddScoped<GroupRoleControl>();
-            services.AddScoped<ConfirmExportControl>();
-            services.AddScoped<ConfirmImportControl>();
             services.AddScoped<ReportExportControl>();
             services.AddScoped<ReportImportControl>();
             services.AddScoped<Baocaotonkho>();
+      
             // Register LayoutForm with DI and pass the control names you want
             services.AddTransient(provider => new LayoutForm(
                 provider.GetRequiredService<AIControl>(),
                 provider.GetRequiredService<UserRoleControl>(),
                 provider.GetRequiredService<ViewReportControl>(),
                 provider.GetRequiredService<GroupRoleControl>(),
-                provider.GetRequiredService<ConfirmImportControl>(),
-                provider.GetRequiredService<ConfirmExportControl>(),
                 provider.GetRequiredService<ReportExportControl>(),
                 provider.GetRequiredService<ReportImportControl>(),
                 provider.GetRequiredService<ILoginService>()

@@ -49,9 +49,10 @@
             label3.FlatStyle = FlatStyle.System;
             label3.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.SteelBlue;
-            label3.Location = new Point(456, 61);
+            label3.Location = new Point(570, 76);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(398, 35);
+            label3.Size = new Size(477, 41);
             label3.TabIndex = 5;
             label3.Text = "PHẦN MỀM QUẢN LÍ KHO";
             // 
@@ -61,8 +62,9 @@
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(4, 4, 4, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(399, 383);
+            panel1.Size = new Size(499, 479);
             panel1.TabIndex = 6;
             // 
             // panel2
@@ -73,16 +75,18 @@
             panel2.Controls.Add(label2);
             panel2.Controls.Add(userName);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(427, 120);
+            panel2.Location = new Point(534, 150);
+            panel2.Margin = new Padding(4, 4, 4, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(459, 242);
+            panel2.Size = new Size(574, 302);
             panel2.TabIndex = 7;
             // 
             // button1
             // 
-            button1.Location = new Point(396, 162);
+            button1.Location = new Point(495, 202);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(8, 8);
+            button1.Size = new Size(10, 10);
             button1.TabIndex = 9;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -94,9 +98,10 @@
             loginBtn.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             loginBtn.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             loginBtn.ForeColor = Color.LightSkyBlue;
-            loginBtn.Location = new Point(177, 142);
+            loginBtn.Location = new Point(221, 178);
+            loginBtn.Margin = new Padding(4, 4, 4, 4);
             loginBtn.Name = "loginBtn";
-            loginBtn.Size = new Size(198, 54);
+            loginBtn.Size = new Size(248, 68);
             loginBtn.TabIndex = 8;
             loginBtn.Text = "ĐĂNG NHẬP";
             loginBtn.UseVisualStyleBackColor = false;
@@ -107,11 +112,12 @@
             password.BackColor = Color.WhiteSmoke;
             password.BorderStyle = BorderStyle.FixedSingle;
             password.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            password.Location = new Point(178, 72);
+            password.Location = new Point(222, 90);
+            password.Margin = new Padding(4, 4, 4, 4);
             password.Name = "password";
             password.PasswordChar = '*';
             password.PlaceholderText = "Nhập mật khẩu";
-            password.Size = new Size(249, 34);
+            password.Size = new Size(311, 39);
             password.TabIndex = 2;
             // 
             // label2
@@ -121,9 +127,10 @@
             label2.BackColor = Color.WhiteSmoke;
             label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(2, 38);
+            label2.Location = new Point(2, 48);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(170, 25);
+            label2.Size = new Size(207, 32);
             label2.TabIndex = 7;
             label2.Text = "Tên người dùng";
             // 
@@ -134,11 +141,12 @@
             userName.BorderStyle = BorderStyle.FixedSingle;
             userName.Enabled = false;
             userName.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            userName.Location = new Point(178, 24);
+            userName.Location = new Point(222, 30);
+            userName.Margin = new Padding(4, 4, 4, 4);
             userName.MaxLength = 30;
             userName.Name = "userName";
             userName.PlaceholderText = "Nhập tên đăng nhập";
-            userName.Size = new Size(249, 34);
+            userName.Size = new Size(311, 39);
             userName.TabIndex = 1;
             userName.Text = "admin";
             // 
@@ -149,19 +157,20 @@
             label1.BackColor = Color.WhiteSmoke;
             label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(3, 81);
+            label1.Location = new Point(4, 101);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(111, 25);
+            label1.Size = new Size(131, 32);
             label1.TabIndex = 4;
             label1.Text = "Mật khẩu";
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(899, 383);
+            ClientSize = new Size(1124, 479);
             ControlBox = false;
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -170,9 +179,11 @@
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             ImeMode = ImeMode.Off;
             KeyPreview = true;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "LoginForm";
             Text = "Đăng nhập quản lí kho";
             TransparencyKey = Color.Transparent;
+            Load += LoginForm_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
