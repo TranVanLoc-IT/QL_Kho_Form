@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridView = new DataGridView();
+            buttonRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.Dock = DockStyle.Top;
             dataGridView.Location = new Point(0, 0);
             dataGridView.Margin = new Padding(5, 4, 5, 4);
             dataGridView.Name = "dataGridView";
@@ -55,18 +56,29 @@
             dataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView.Size = new Size(1113, 472);
+            dataGridView.Size = new Size(1113, 413);
             dataGridView.TabIndex = 1;
+            // 
+            // buttonRefresh
+            // 
+            buttonRefresh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonRefresh.Location = new Point(994, 413);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(119, 76);
+            buttonRefresh.TabIndex = 2;
+            buttonRefresh.Text = "Làm mới";
+            buttonRefresh.UseVisualStyleBackColor = true;
             // 
             // UserRoleControl
             // 
             AutoScaleDimensions = new SizeF(13F, 26F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(buttonRefresh);
             Controls.Add(dataGridView);
             Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 4, 5, 4);
             Name = "UserRoleControl";
-            Size = new Size(1113, 472);
+            Size = new Size(1113, 489);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
@@ -74,5 +86,6 @@
         #endregion
 
         private DataGridView dataGridView;
+        private Button buttonRefresh;
     }
 }
