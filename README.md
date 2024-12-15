@@ -93,7 +93,9 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 
 <h1 id="feature">Cơ sở dữ liệu</h1>
-
+<p align="center">
+  ![image alt](https://github.com/LeKiet2711/QL_Kho/blob/2ecae0eee885b4947c6f5f74e195de1f1919a7cd/database.png)
+</p>
 <h2 id="assigntask">Phân công công việc</h2>
 
 <table align="center">
@@ -263,7 +265,18 @@ This section should list any major frameworks/libraries used to bootstrap your p
     <td>Lộc</td>
   </tr>
 </table>
-<h2 id="ai">Ứng dụng AI - Chatbot AI</h2>
-<p><b>Chat bot phát hiện gian lận, sử dụng tập dữ liệu số lượng, giá và thời gian tạo phát hiện chỉnh sửa cập nhật gian lận trong xuất nhập kho hàng !</b></p>
 
+<h2 id="ai">Chức năng nổi bật</h2>
+
+<p><b>Xuất phiếu nhập / xuất gửi về Email người dùng có mã hóa bảo mật</b></p>
+
+<p><b>Xuất báo cáo từng kỳ</b></p>
+<hr/>
+<h2 id="ai">Ứng dụng AI - thuật toán FastTree</h2>
+<p><b>Chương trình sử dụng thuật toán FastTree từ thư viện ML.NET để thực hiện phân loại nhị phân.</b></p>
+<p>Mục đích: Xây dựng mô hình phân loại nhị phân để phát hiện gian lận trong dữ liệu xuất kho.</p>
+<p>Luồng hoạt động:</p>
+<p>+ Đọc dữ liệu huấn luyện từ file.</p>
+<p>+ Huấn luyện mô hình bằng cách sử dụng pipeline với thuật toán FastTree.</p>
+<p>+ Dự đoán kết quả gian lận cho dữ liệu mới.</p>
 
