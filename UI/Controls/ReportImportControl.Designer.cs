@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dateTimePickerBatdau = new DateTimePicker();
             dateTimePickerKetthuc = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            dataGridView1 = new DataGridView();
             pictureBox1 = new PictureBox();
             button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dataGridView = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // dateTimePickerBatdau
@@ -48,7 +51,6 @@
             dateTimePickerBatdau.Name = "dateTimePickerBatdau";
             dateTimePickerBatdau.Size = new Size(333, 31);
             dateTimePickerBatdau.TabIndex = 1;
-
             // 
             // dateTimePickerKetthuc
             // 
@@ -58,7 +60,6 @@
             dateTimePickerKetthuc.Name = "dateTimePickerKetthuc";
             dateTimePickerKetthuc.Size = new Size(333, 31);
             dateTimePickerKetthuc.TabIndex = 2;
-          
             // 
             // label1
             // 
@@ -84,7 +85,6 @@
             label2.Size = new Size(164, 25);
             label2.TabIndex = 4;
             label2.Text = "Chọn ngày bắt đầu";
-           
             // 
             // label3
             // 
@@ -96,18 +96,6 @@
             label3.Size = new Size(166, 25);
             label3.TabIndex = 5;
             label3.Text = "Chọn ngày kết thúc";
-         
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 458);
-            dataGridView1.Margin = new Padding(4, 5, 4, 5);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1093, 347);
-            dataGridView1.TabIndex = 6;
-         
             // 
             // pictureBox1
             // 
@@ -119,7 +107,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
-         
             // 
             // button1
             // 
@@ -135,14 +122,46 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // dataGridView
+            // 
+            dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView.BackgroundColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(29, 495);
+            dataGridView.Margin = new Padding(5, 4, 5, 4);
+            dataGridView.Name = "dataGridView";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView.Size = new Size(1035, 350);
+            dataGridView.TabIndex = 19;
+            // 
             // ReportImportControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Linen;
+            Controls.Add(dataGridView);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
-            Controls.Add(dataGridView1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -151,8 +170,8 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "ReportImportControl";
             Size = new Size(1146, 810);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -163,8 +182,8 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private DataGridView dataGridView1;
         private PictureBox pictureBox1;
         private Button button1;
+        private DataGridView dataGridView;
     }
 }

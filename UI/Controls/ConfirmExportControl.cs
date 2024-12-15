@@ -13,7 +13,7 @@ namespace UI.Controls
         private readonly IExportReceiptDetailService _exportDetailService;
         private readonly IWarehouseService _warehouseService;
         private IEnumerable<ResponseExportReceiptModel> receipts;
-        private int code;
+        private string code;
         private class Option
         {
             public string Text { get; set; }
@@ -52,7 +52,7 @@ namespace UI.Controls
             {
                 try
                 {
-                    await _exportService.ConfirmAsync(code);
+                    await _exportService.ConfirmAsync(await _exportService.GetAutoId(code));
                     MessageBox.Show("Xác nhận thành công");
                 }
                 catch (ErrorException ex)
@@ -96,7 +96,7 @@ namespace UI.Controls
         {
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
-                code = int.Parse(GetCellValue("AutoId", e.RowIndex).ToString()!);
+                code = GetCellValue("SoPhieuXuat", e.RowIndex).ToString();
                 // bi nhay index neu filter thay doi
                 if (col.Index == 5 || col.Index == 0)
                 {
@@ -111,11 +111,11 @@ namespace UI.Controls
                     kho.Text = (await _warehouseService.GetByIDAsync(khoid)).TenKho;
                     ngayxuat.Text = GetCellValue("NgayXuatKho", e.RowIndex).ToString();
                     dssp.Controls.Clear();
-                    foreach (var product in (await _exportDetailService.GetDetailAsync(code)))
+                    foreach (var product in (await _exportDetailService.GetDetailAsync(await _exportService.GetAutoId(code))))
                     {
                         ScreenCard card = new ScreenCard();
                         card.TenMH.Text = (await _productService.GetByIdAsync(product.SanPhamId)).TenSanPham + $" SL: {product.SlXuat}";
-                        card.price.Text = product.DonGiaXuat.ToString() + "VND";
+                        card.price.Text = product.DonGiaXuat.ToString() + " VND";
                         dssp.Controls.Add(card);
                     }
                 }

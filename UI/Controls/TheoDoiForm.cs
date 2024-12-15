@@ -20,6 +20,12 @@ namespace UI.Controls
             this._theoDoi = theoDoiService;
             resetAll.Click += async (s, e) => await Click(s, e);
             this.Load += async (s, e) => await config(s, e);
+            this.buttonRefresh.Click += async (s, e) => await refreshClick(s, e);
+        }
+
+        private async Task refreshClick(object sender, EventArgs e)
+        {
+            await RefreshDatagridview(sender, e);
         }
         private async Task config(object sender, EventArgs e)
         {

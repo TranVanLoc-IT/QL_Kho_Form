@@ -12,8 +12,8 @@ namespace MWarehouse.ModelViews.GoodsReceiptModelViews
         /// <summary>
         ///     Mã phiếu
         /// </summary>
-        [DisplayName("Mã")]
-        public int AutoId { get; set; }
+        [DisplayName("Số phiếu nhập")]
+        public string Id { get; set; }
 
         /// <summary>
         ///     Mã kho 

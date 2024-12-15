@@ -10,7 +10,7 @@ using MWarehouse.ModelViews.GoodsReceiptModelViews;
 using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic;   
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,7 +101,7 @@ namespace MWarehouse.Service.Service
         {
             IEnumerable<ResponseGoodsReceiptModel> result = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.IsDeleted == false).Select(r => new ResponseGoodsReceiptModel()
             {
-                AutoId = r.AutoId,
+                Id = r.SoPhieuNhap,
                 KhoId = r.KhoId,
                 NgayNhapKho = r.NgayNhapKho,
                 NccId = r.NccId,
@@ -111,9 +111,9 @@ namespace MWarehouse.Service.Service
             return result;
 
         }
-        public async Task ConfirmAsync(int id)
+        public async Task ConfirmAsync(string id)
         {
-            TblXnkNhapKho found = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.AutoId == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
+            TblXnkNhapKho found = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.SoPhieuNhap == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
             found.TrangThai = 1;
             await _iuow.GetRepository<TblXnkNhapKho>().UpdateAsync(found);
             await _iuow.GetRepository<TblXnkNhapKho>().SaveAsync();
@@ -123,6 +123,10 @@ namespace MWarehouse.Service.Service
         {
             ResponseGoodsReceiptModel result = _mapper.Map<ResponseGoodsReceiptModel>(await _iuow.GetRepository<TblXnkNhapKho>().GetByIdAsync(id));
             return result;
+        }
+        public async Task<int> GetAutoId(string id)
+        {
+            return await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.SoPhieuNhap == id).Select(r => r.AutoId).FirstAsync();
         }
     }
 }

@@ -42,11 +42,6 @@ namespace UI.Controls
                 err.SetError(manhom, "Nhập mã nhóm người dùng");
                 return;
             }
-            if (!Regex.IsMatch(uname, "^[a-zA-Z]+$"))
-            {
-                err.SetError(tendn, "Tên đăng nhập chỉ được chứa chữ cái (a-z, A-Z)");
-                return;
-            }
 
             err.SetError(tendn, null);
             string result = await roleService.CreateNewGroupUser(manom, uname, ghichu.Text);

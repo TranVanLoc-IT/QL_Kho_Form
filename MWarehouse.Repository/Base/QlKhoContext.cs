@@ -126,10 +126,7 @@ public partial class QlKhoContext : DbContext
 
         modelBuilder.Entity<QlPhanQuyen>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("QL_PhanQuyen");
-
+            entity.HasKey(e => new {e.MaNhomNguoiDung, e.MaManHinh}).HasName("PK_QL_PhanQuyen");
             entity.Property(e => e.CoQuyen).HasDefaultValue(0);
             entity.Property(e => e.IsDeleted)
                 .HasDefaultValue(false)

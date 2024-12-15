@@ -48,8 +48,9 @@
             navViewControl1.AutoScrollMinSize = new Size(0, 538);
             navViewControl1.Dock = DockStyle.Left;
             navViewControl1.Location = new Point(0, 0);
+            navViewControl1.Margin = new Padding(5, 5, 5, 5);
             navViewControl1.Name = "navViewControl1";
-            navViewControl1.Size = new Size(234, 632);
+            navViewControl1.Size = new Size(292, 790);
             navViewControl1.TabIndex = 0;
             // 
             // header
@@ -60,9 +61,10 @@
             header.Controls.Add(label1);
             header.Controls.Add(Page);
             header.Dock = DockStyle.Top;
-            header.Location = new Point(234, 0);
+            header.Location = new Point(292, 0);
+            header.Margin = new Padding(4, 4, 4, 4);
             header.Name = "header";
-            header.Size = new Size(774, 77);
+            header.Size = new Size(968, 96);
             header.TabIndex = 1;
             // 
             // timeWork
@@ -70,9 +72,10 @@
             timeWork.AutoSize = true;
             timeWork.Dock = DockStyle.Right;
             timeWork.Font = new Font("Times New Roman", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            timeWork.Location = new Point(577, 0);
+            timeWork.Location = new Point(725, 0);
+            timeWork.Margin = new Padding(4, 0, 4, 0);
             timeWork.Name = "timeWork";
-            timeWork.Size = new Size(61, 22);
+            timeWork.Size = new Size(73, 27);
             timeWork.TabIndex = 4;
             timeWork.Text = "label2";
             // 
@@ -86,9 +89,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(638, 0);
+            button1.Location = new Point(798, 0);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(134, 75);
+            button1.Size = new Size(168, 94);
             button1.TabIndex = 1;
             button1.Text = "Đăng xuất";
             button1.UseVisualStyleBackColor = false;
@@ -100,8 +104,9 @@
             label1.Dock = DockStyle.Left;
             label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(0, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(207, 26);
+            label1.Size = new Size(244, 33);
             label1.TabIndex = 2;
             label1.Text = "Nhân viên - Chức vụ";
             // 
@@ -111,9 +116,10 @@
             Page.AutoSize = true;
             Page.Font = new Font("Times New Roman", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Page.ForeColor = SystemColors.MenuHighlight;
-            Page.Location = new Point(186, 19);
+            Page.Location = new Point(341, 28);
+            Page.Margin = new Padding(4, 0, 4, 0);
             Page.Name = "Page";
-            Page.Size = new Size(293, 32);
+            Page.Size = new Size(339, 37);
             Page.TabIndex = 0;
             Page.Text = "Phần mềm quản lí Kho";
             // 
@@ -121,28 +127,31 @@
             // 
             main.Controls.Add(button2);
             main.Dock = DockStyle.Fill;
-            main.Location = new Point(234, 77);
+            main.Location = new Point(292, 96);
+            main.Margin = new Padding(4, 4, 4, 4);
             main.Name = "main";
-            main.Size = new Size(774, 555);
+            main.Size = new Size(968, 694);
             main.TabIndex = 2;
             // 
             // button2
             // 
-            button2.Location = new Point(498, 61);
+            button2.Location = new Point(622, 76);
+            button2.Margin = new Padding(4, 4, 4, 4);
             button2.Name = "button2";
-            button2.Size = new Size(8, 8);
+            button2.Size = new Size(10, 10);
             button2.TabIndex = 0;
             button2.Text = "button2";
             button2.UseVisualStyleBackColor = true;
             // 
             // LayoutForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 632);
+            ClientSize = new Size(1260, 790);
             Controls.Add(main);
             Controls.Add(header);
             Controls.Add(navViewControl1);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "LayoutForm";
             Text = "Phần mềm quản lí kho";
             header.ResumeLayout(false);

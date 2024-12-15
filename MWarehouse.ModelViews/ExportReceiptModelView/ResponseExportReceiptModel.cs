@@ -9,8 +9,8 @@ namespace MWarehouse.ModelViews.ExportReceiptModelView
 {
     public class ResponseExportReceiptModel
     {
-        [DisplayName("Mã code")]
-        public int AutoId { get; set; }
+        [DisplayName("Số phiếu xuất")]
+        public string SoPhieuXuat { get; set; }
 
         [DisplayName("Mã kho")]
         public int? KhoId { get; set; }

@@ -3,17 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
-using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
 using MWarehouse.ModelViews.ExportReceiptModelView;
-using MWarehouse.ModelViews.GoodsReceiptModelViews;
-using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
@@ -29,8 +21,7 @@ namespace MWarehouse.Service.Service
         }
 
         public async Task ConfirmAsync(int id)
-        {
-            TblXnkXuatKho found = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.AutoId == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
+        {   TblXnkXuatKho found = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.AutoId == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
             found.TrangThai = 1;
             await _iuow.GetRepository<TblXnkXuatKho>().UpdateAsync(found);
             await _iuow.GetRepository<TblXnkXuatKho>().SaveAsync();
@@ -41,6 +32,12 @@ namespace MWarehouse.Service.Service
             IEnumerable<TblXnkXuatKho> data = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.IsDeleted == false).ToListAsync();
             var result = _mapper.Map<IEnumerable<ResponseExportReceiptModel>>(data);
             return result;
+        }
+
+        public async Task<int> GetAutoId(string id)
+        {
+            return await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.SoPhieuXuat == id).Select(r => r.AutoId).FirstAsync();
+
         }
     }
 }

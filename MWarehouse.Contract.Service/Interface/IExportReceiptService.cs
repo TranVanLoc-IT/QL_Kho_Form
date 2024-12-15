@@ -12,5 +12,6 @@ namespace MWarehouse.Contract.Service.Interface
     {
         Task<IEnumerable<ResponseExportReceiptModel>> GetAllAsync();
         Task ConfirmAsync(int id);
+        Task<int> GetAutoId(string id);
     }
 }

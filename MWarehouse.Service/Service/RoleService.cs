@@ -172,7 +172,7 @@ namespace MWarehouse.Service.Service
 
         public async Task<List<RoleView>> Roles()
         {
-            List<RoleView> manHinhs = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Select(r => new RoleView()
+            List<RoleView> manHinhs = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r=>r.IsDeleted==false).Select(r => new RoleView()
             {
                 TenQuyen = r.TenNhom,
                 MaQuyen = r.MaNhom
@@ -184,7 +184,7 @@ namespace MWarehouse.Service.Service
         {
 
             // check user existed
-            QlNhomNguoiDung newGroup = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.TenNhom.Equals(name)).FirstOrDefaultAsync();
+            QlNhomNguoiDung newGroup = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.TenNhom.Equals(name) && r.IsDeleted==false).FirstOrDefaultAsync();
             if (newGroup != null)
             {
                 return "Đã có nhóm người dùng này !";

@@ -38,7 +38,7 @@ namespace UI.Controls
                 // Hiển thị dữ liệu trên DataGridView
                 if (bcpntable.Rows.Count > 0)
                 {
-                    dataGridView1.DataSource = bcpntable;
+                    dataGridView.DataSource = bcpntable;
                 }
                 else
                 {

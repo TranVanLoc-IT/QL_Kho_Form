@@ -34,7 +34,7 @@ namespace UI.Controls
                 // Hiển thị dữ liệu trên DataGridView
                 if (bcxuat.Rows.Count > 0)
                 {
-                    dataGridView1.DataSource = bcxuat;
+                    dataGridView.DataSource = bcxuat;
                 }
                 else
                 {

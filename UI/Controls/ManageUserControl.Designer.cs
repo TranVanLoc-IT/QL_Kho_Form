@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridView = new DataGridView();
             tendn = new TextBox();
             createButton = new UCButton.CreateButton();
@@ -46,11 +48,27 @@
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView.BackgroundColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Dock = DockStyle.Top;
             dataGridView.Location = new Point(0, 0);
             dataGridView.Margin = new Padding(5, 4, 5, 4);
             dataGridView.Name = "dataGridView";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.Size = new Size(1341, 350);
             dataGridView.TabIndex = 4;
@@ -61,12 +79,13 @@
             tendn.Margin = new Padding(5, 4, 5, 4);
             tendn.Name = "tendn";
             tendn.PlaceholderText = "Tên đăng nhập";
-            tendn.Size = new Size(271, 34);
+            tendn.Size = new Size(271, 39);
             tendn.TabIndex = 1;
             // 
             // createButton
             // 
             createButton.Location = new Point(783, 447);
+            createButton.Margin = new Padding(4, 4, 4, 4);
             createButton.Name = "createButton";
             createButton.Size = new Size(72, 70);
             createButton.TabIndex = 8;
@@ -76,7 +95,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(378, 389);
             label1.Name = "label1";
-            label1.Size = new Size(65, 26);
+            label1.Size = new Size(80, 33);
             label1.TabIndex = 10;
             label1.Text = "Email";
             // 
@@ -86,7 +105,7 @@
             email.Margin = new Padding(5, 4, 5, 4);
             email.Name = "email";
             email.PlaceholderText = "Nhập email";
-            email.Size = new Size(271, 34);
+            email.Size = new Size(271, 39);
             email.TabIndex = 11;
             // 
             // pass
@@ -94,7 +113,7 @@
             pass.Location = new Point(485, 481);
             pass.Margin = new Padding(5, 4, 5, 4);
             pass.Name = "pass";
-            pass.Size = new Size(271, 34);
+            pass.Size = new Size(271, 39);
             pass.TabIndex = 13;
             // 
             // label2
@@ -102,13 +121,14 @@
             label2.AutoSize = true;
             label2.Location = new Point(378, 493);
             label2.Name = "label2";
-            label2.Size = new Size(99, 26);
+            label2.Size = new Size(121, 33);
             label2.TabIndex = 12;
             label2.Text = "Mật khẩu";
             // 
             // updateButton
             // 
             updateButton.Location = new Point(906, 447);
+            updateButton.Margin = new Padding(4, 4, 4, 4);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(72, 70);
             updateButton.TabIndex = 14;
@@ -118,7 +138,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(786, 389);
             label3.Name = "label3";
-            label3.Size = new Size(106, 26);
+            label3.Size = new Size(127, 33);
             label3.TabIndex = 15;
             label3.Text = "Trạng thái";
             // 
@@ -127,12 +147,12 @@
             status.FormattingEnabled = true;
             status.Location = new Point(916, 377);
             status.Name = "status";
-            status.Size = new Size(226, 34);
+            status.Size = new Size(226, 41);
             status.TabIndex = 16;
             // 
             // ManageUserControl
             // 
-            AutoScaleDimensions = new SizeF(13F, 26F);
+            AutoScaleDimensions = new SizeF(15F, 33F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(status);
             Controls.Add(label3);

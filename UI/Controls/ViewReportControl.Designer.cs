@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             button1 = new Button();
             pictureBox1 = new PictureBox();
-            dataGridView1 = new DataGridView();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             dateTimePickerKetthuc = new DateTimePicker();
             dateTimePickerBatdau = new DateTimePicker();
+            dataGridView = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -64,16 +66,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(67, 452);
-            dataGridView1.Margin = new Padding(4, 5, 4, 5);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1093, 347);
-            dataGridView1.TabIndex = 14;
             // 
             // label3
             // 
@@ -128,13 +120,42 @@
             dateTimePickerBatdau.Size = new Size(333, 31);
             dateTimePickerBatdau.TabIndex = 9;
             // 
+            // dataGridView
+            // 
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView.BackgroundColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(67, 466);
+            dataGridView.Margin = new Padding(5, 4, 5, 4);
+            dataGridView.Name = "dataGridView";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 16F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.Size = new Size(1035, 350);
+            dataGridView.TabIndex = 19;
+            // 
             // ViewReportControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dataGridView);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
-            Controls.Add(dataGridView1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -145,7 +166,7 @@
             Size = new Size(1312, 816);
             Load += ViewReportControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -154,11 +175,11 @@
 
         private Button button1;
         private PictureBox pictureBox1;
-        private DataGridView dataGridView1;
         private Label label3;
         private Label label2;
         private Label label1;
         private DateTimePicker dateTimePickerKetthuc;
         private DateTimePicker dateTimePickerBatdau;
+        private DataGridView dataGridView;
     }
 }

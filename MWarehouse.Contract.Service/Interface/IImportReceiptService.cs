@@ -14,7 +14,8 @@ namespace MWarehouse.Contract.Service.Interface
         Task CreateAsync(CreateGoodsReceiptModel obj);
         Task UpdateAsync(UpdateGoodsReceiptModel obj);
         Task DeleteAsync(int id);
-        Task ConfirmAsync(int id);
+        Task ConfirmAsync(string id);
+        Task<int> GetAutoId(string id);
         Task<IEnumerable<ReceiptResultModel>> GetAllByBrandAsync(int code);
         Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync();
         Task<ResponseGoodsReceiptModel> GetByIdAsync(int id);

@@ -27,7 +27,7 @@ namespace UI.Controls
         private readonly IWarehouseService _warehouseService;
         private readonly ISupplierService _supplierService;
         private IEnumerable<ResponseGoodsReceiptModel> receipts;
-        private int code;
+        private string code;
         private class Option
         {
             public string Text { get; set; }
@@ -111,7 +111,7 @@ namespace UI.Controls
         {
             if (e.RowIndex >= 0 && dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn col)
             {
-                code = int.Parse(GetCellValue("AutoId", e.RowIndex).ToString()!);
+                code = GetCellValue("Id", e.RowIndex).ToString();
 
                 if (col.Index == 6 || col.Index == 0)
                 {
@@ -129,11 +129,11 @@ namespace UI.Controls
                     kho.Text = (await _warehouseService.GetByIDAsync(khoid)).TenKho;
                     ngaynhap.Text = GetCellValue("NgayNhapKho", e.RowIndex).ToString();
                     dssp.Controls.Clear();
-                    foreach(var product in (await _importDetailService.GetAllAsync(code)))
+                    foreach(var product in (await _importDetailService.GetAllAsync(await _importService.GetAutoId(code))))
                     {
                         ScreenCard card = new ScreenCard();
                         card.TenMH.Text = (await _productService.GetByIdAsync(product.SanPhamId)).TenSanPham + $" SL: {product.SlNhap}";
-                        card.price.Text = product.DonGiaNhap.ToString() + "VND";
+                        card.price.Text = product.DonGiaNhap.ToString() + " VND";
                         dssp.Controls.Add(card);
                     }
                 }
