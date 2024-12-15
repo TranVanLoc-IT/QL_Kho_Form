@@ -28,6 +28,11 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
             _mapper = mapper;
         }
+        /// <summary>
+        ///     Lấy toàn bộ chi tiết của phiếu xuất
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseExportReceiptDetailModel>> GetDetailAsync(int code)
         {
             var data = await _iuow.GetRepository<TblXnkXuatKhoRawDatum>().GetAllAsync();

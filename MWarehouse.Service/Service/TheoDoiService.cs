@@ -18,6 +18,11 @@ namespace MWarehouse.Service.Service
         {
             this._unitOfWork = unitOfWork;
         }
+
+        /// <summary>
+        ///     Lấy toàn bộ thông tin gian lận
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<TheoDoiModelView>> GetAllAsync()
         {
             return await _unitOfWork.GetRepository<TheoDoi>().Entities.Where(r => r.IsDeleted == false).Select(r => new TheoDoiModelView()
@@ -30,6 +35,10 @@ namespace MWarehouse.Service.Service
             }).ToListAsync();
         }
 
+        /// <summary>
+        ///     Xóa toàn bộ
+        /// </summary>
+        /// <returns></returns>
         public async Task ResetAsync()
         {
             var data = await _unitOfWork.GetRepository<TheoDoi>().Entities.Where(r => r.IsDeleted == false).ToListAsync();

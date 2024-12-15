@@ -2,18 +2,12 @@
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
-using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
 using MWarehouse.ModelViews.GoodsReceiptDetailModelViews;
 using MWarehouse.ModelViews.GoodsReceiptModelDetailViews;
 using MWarehouse.ModelViews.GoodsReceiptModelViews;
 using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
@@ -28,6 +22,12 @@ namespace MWarehouse.Service.Service
             _mapper = mapper;
         }
 
+        /// <summary>
+        ///     Tạo mới
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(IEnumerable<CreateGoodsReceiptDetailModel> obj)
         {
             foreach (var item in obj)
@@ -48,6 +48,11 @@ namespace MWarehouse.Service.Service
             }
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ chi tiết của phiếu nhập
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseGoodsReceiptDetailModel>> GetAllAsync(int code)
         {
             var data = await _iuow.GetRepository<TblXnkNhapKhoRawDatum>().GetAllAsync();

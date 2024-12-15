@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
-using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
-using MWarehouse.ModelViews.GoodsReceiptModelViews;
 using MWarehouse.ModelViews.ProductModelViews;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
@@ -25,6 +19,13 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
             _mapper = mapper;
         }
+
+        /// <summary>
+        ///     Tạo SP
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(CreateProductModel obj)
         {
             if (obj == null)
@@ -43,26 +44,49 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Xóa mềm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task DeleteAsync(int id)
         {
             TblDmSanPham delProduct = _iuow.GetRepository<TblDmSanPham>().Entities.Where(u => u.AutoId == id).FirstOrDefault()
                                     ?? throw new ErrorException((int)ErrorCode.Code.OBJECT_EXISTED, ErrorCode.Code.OBJECT_EXISTED.ToString(), "Dữ liệu đối tượng đã có !");
-            await _iuow.GetRepository<TblDmSanPham>().DeleteAsync(delProduct);
+            delProduct.IsDeleted = true;
+            await _iuow.GetRepository<TblDmSanPham>().UpdateAsync(delProduct);
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ chưa xóa
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseProductModel>> GetAllAsync()
         {
-            IEnumerable<ResponseProductModel> result = _mapper.Map<IEnumerable<ResponseProductModel>>(await _iuow.GetRepository<TblDmSanPham>().GetAllAsync());
+            IEnumerable<ResponseProductModel> result = _mapper.Map<IEnumerable<ResponseProductModel>>(await _iuow.GetRepository<TblDmSanPham>().Entities.Where(r => r.IsDeleted == false).ToListAsync());
             return result;
         }
 
+        /// <summary>
+        ///     Lấy theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ResponseProductModel> GetByIdAsync(int? id)
         {
             ResponseProductModel result = _mapper.Map<ResponseProductModel>(await _iuow.GetRepository<TblDmSanPham>().GetByIdAsync(id));
             return result;
         }
 
+        /// <summary>
+        ///     Cập nhật sp
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task UpdateAsync(string id, UpdateProductModel obj)
         {
             if (obj == null)
@@ -80,6 +104,12 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Cập nhật loại SP
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public async Task UpdateProductTypeAsync(int id, int type)
         {
             TblDmSanPham product = _iuow.GetRepository<TblDmSanPham>().Entities.Where(u => u.AutoId == id).FirstOrDefault()!;
@@ -90,16 +120,13 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
-        public Task UpdateQuantityExportAsync(int code, int sl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateQuantityImportAsync(int code, int sl)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        ///     Cập nhật đơn vị tính
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task UpdateUnitAsync(int id, int[] obj)
         {
             if (obj == null)

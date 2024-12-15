@@ -16,6 +16,11 @@ namespace MWarehouse.Service.Service
         {
             _iuow = iuow;
         }
+
+        /// <summary>
+        ///     Lấy toàn bộ màn hình
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<ManHinhView>> DsManHinh()
         {
             List<ManHinhView> manHinhs = await _iuow.GetRepository<DmManHinh>().Entities.Select(r => new ManHinhView()
@@ -26,6 +31,10 @@ namespace MWarehouse.Service.Service
             return manHinhs;
         }
 
+        /// <summary>
+        ///     Lấy danh sách nhóm người dùng
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<GroupRoleModelView>> DsRole()
         {
             var nhomNguoiDung = _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r => r.IsDeleted == false)
@@ -48,6 +57,11 @@ namespace MWarehouse.Service.Service
 
         }
 
+        /// <summary>
+        ///     Lấy màn hình đang cho phép truy cập theo nhóm
+        /// </summary>
+        /// <param name="maNhom"></param>
+        /// <returns></returns>
         public async Task<List<ManHinhView>> GetMhActivating(string maNhom)
         {
 
@@ -65,6 +79,10 @@ namespace MWarehouse.Service.Service
 
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ người dùng và nhóm quyền hoạt động
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<UserRoleModelView>> GetUsers()
         {
             List<UserRoleModelView> users = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(us => us.IsDeleted == false && us.TenDangNhap != "admin").
@@ -77,6 +95,11 @@ namespace MWarehouse.Service.Service
                                                    }).ToListAsync();
             return users;
         }
+
+        /// <summary>
+        ///     Lấy người dùng để quản lí 
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<UserModelView>> GetUserInfo()
         {
             List<UserModelView> users = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(r => r.TenDangNhap != "admin" && r.IsDeleted == false).Select(r => new UserModelView()
@@ -88,6 +111,12 @@ namespace MWarehouse.Service.Service
             return users;
         }
 
+        /// <summary>
+        ///     Thêm màn hình truy cập cho nhóm
+        /// </summary>
+        /// <param name="maNhom"></param>
+        /// <param name="maMh"></param>
+        /// <returns></returns>
         public async Task AddMhToGroupRole(string maNhom, string maMh)
         {
             QlPhanQuyen pq = await _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaManHinh == maMh && r.MaNhomNguoiDung == maNhom).FirstOrDefaultAsync();
@@ -106,6 +135,12 @@ namespace MWarehouse.Service.Service
             }
             await _iuow.GetRepository<QlPhanQuyen>().SaveAsync();
         }
+        /// <summary>
+        ///     Xóa màn hình truy cập của nhóm
+        /// </summary>
+        /// <param name="maNhom"></param>
+        /// <param name="maMh"></param>
+        /// <returns></returns>
         public async Task DeleteMHFromGroupRole(string maNhom, string maMh)
         {
             QlPhanQuyen pq = await _iuow.GetRepository<QlPhanQuyen>().Entities.Where(r => r.MaManHinh == maMh && r.MaNhomNguoiDung == maNhom).FirstOrDefaultAsync(); ;
@@ -113,6 +148,13 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<QlPhanQuyen>().UpdateAsync(pq);
             await _iuow.GetRepository<QlPhanQuyen>().SaveAsync();
         }
+
+        /// <summary>
+        ///     Xóa quyền người dùng
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public async Task DeleteUserRole(string user, string role)
         {
             QlNguoiDungNhomNguoiDung pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap == user && r.MaNhomNguoiDung == role).FirstAsync();
@@ -136,6 +178,13 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
         }
 
+        /// <summary>
+        ///     Cập nhật quyền người dùng
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="oldRole"></param>
+        /// <param name="newRole"></param>
+        /// <returns></returns>
         public async Task UpdateUserRole(string user, string oldRole, string newRole)
         {
             
@@ -170,6 +219,10 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy thông tin các quyền
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<RoleView>> Roles()
         {
             List<RoleView> manHinhs = await _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(r=>r.IsDeleted==false).Select(r => new RoleView()
@@ -180,6 +233,13 @@ namespace MWarehouse.Service.Service
             return manHinhs;
         }
 
+        /// <summary>
+        ///     Tạo mới nhóm người dùng
+        /// </summary>
+        /// <param name="manhom"></param>
+        /// <param name="name"></param>
+        /// <param name="ghichu"></param>
+        /// <returns></returns>
         public async Task<string> CreateNewGroupUser(string manhom, string name, string ghichu)
         {
 
@@ -214,6 +274,11 @@ namespace MWarehouse.Service.Service
 
         }
 
+        /// <summary>
+        ///     Xóa người dùng
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public async Task<string> DeleteUser(string name)
         {
             // check user existed
@@ -230,6 +295,11 @@ namespace MWarehouse.Service.Service
 
         }
 
+        /// <summary>
+        ///     Tạo mới người dùng
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public async Task<string> CreateNewUser(EditUserModel u)
         {
             // check user existed
@@ -250,6 +320,11 @@ namespace MWarehouse.Service.Service
             return "Tạo thành công !";
         }
 
+        /// <summary>
+        ///     Cập nhật: khóa, mở, password người dùng
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public async Task<string> UpdateUser(EditUserModel u)
         {
             // check user existed

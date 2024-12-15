@@ -17,11 +17,19 @@ namespace MWarehouse.Service.Service
         {
             _iuow = iuow;
         }
+
+        /// <summary>
+        ///     Lấy báo cáo phiếu xuất theo khoảng tgian
+        /// </summary>
+        /// <param name="ngayNhap"></param>
+        /// <param name="ngayXuat"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public DataTable GetBCphieuXuat(DateTime ngayNhap, DateTime ngayXuat)
         {
             DataTable baoCaoTable = new DataTable();
 
-            using (SqlConnection connection = new SqlConnection("Server=KIETBANHTRAI\\SQLEXPRESS;Database=QL_Kho;User Id=sa;Password=123;Trust Server Certificate=True;"))
+            using (SqlConnection connection = new SqlConnection("Server=MSI;Database=QL_Kho;User Id=sa;Password=123456;Trust Server Certificate=True;"))
             {
                 try
                 {

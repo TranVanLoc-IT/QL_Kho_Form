@@ -20,6 +20,12 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
             _mapper = mapper;
         }
+        /// <summary>
+        ///     Tạo mới DVT
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(CreateUnitModel obj)
         {
             if(obj == null)
@@ -37,20 +43,36 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Xóa DVT
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task DeleteAsync(int id)
         {
             TblDmDonViTinh delUnit = _iuow.GetRepository<TblDmDonViTinh>().Entities.Where(u => u.AutoId == id).FirstOrDefault()
                                     ?? throw new ErrorException((int)ErrorCode.Code.OBJECT_EXISTED, ErrorCode.Code.OBJECT_EXISTED.ToString(), "Dữ liệu đối tượng đã có !");
-            await _iuow.GetRepository<TblDmDonViTinh>().DeleteAsync(delUnit);
+            delUnit.IsDeleted = true;
+            await _iuow.GetRepository<TblDmDonViTinh>().UpdateAsync(delUnit);
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ DVT
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseUnitModel>> GetAllAsync()
         {
             IEnumerable<ResponseUnitModel> result = _mapper.Map<IEnumerable<ResponseUnitModel>>(await _iuow.GetRepository<TblDmDonViTinh>().GetAllAsync());
             return result;
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ sp áp dụng
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseProductModel>> GetAllProductAsync(int code)
         {
             IEnumerable<ResponseProductModel> result = _mapper.Map<IEnumerable<ResponseProductModel>>((await _iuow.GetRepository<TblDmSanPham>().GetAllAsync()).Where(r => r.DonViTinhId == code));

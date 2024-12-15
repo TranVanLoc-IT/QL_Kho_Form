@@ -85,7 +85,7 @@ namespace UI.Layouts
             this.Page.Location = new Point((this.header.Width / 2) - this.Page.Width, this.Page.Height);
         }
 
-
+            
         private void Login()
         {
             LoginForm login = new LoginForm(_loginService);

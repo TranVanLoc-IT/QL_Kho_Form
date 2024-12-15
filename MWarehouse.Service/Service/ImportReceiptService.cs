@@ -3,17 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
-using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
-using MWarehouse.ModelViews.ExportReceiptModelView;
 using MWarehouse.ModelViews.GoodsReceiptModelViews;
 using MWarehouse.ModelViews.UnitModelViews;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;   
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
@@ -27,6 +20,13 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
             _mapper = mapper;
         }
+
+        /// <summary>
+        ///  Tạo mới
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(CreateGoodsReceiptModel obj)
         {
             if (obj == null)
@@ -44,6 +44,12 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Xóa mềm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task DeleteAsync(int id)
         {
             TblXnkNhapKho delReceipt = _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(u => u.AutoId == id).FirstOrDefault()
@@ -58,6 +64,12 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Cập nhật phiếu
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task UpdateAsync(UpdateGoodsReceiptModel obj)
         {
             if (obj == null)
@@ -77,6 +89,11 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ chi tiết
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<ReceiptResultModel>> GetAllByBrandAsync(int code)
         {
             IEnumerable<ReceiptResultModel> result = from i in _iuow.GetRepository<TblXnkNhapKho>().Entities
@@ -97,6 +114,10 @@ namespace MWarehouse.Service.Service
 
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ phiếu
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseGoodsReceiptModel>> GetAllAsync()
         {
             IEnumerable<ResponseGoodsReceiptModel> result = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.IsDeleted == false).Select(r => new ResponseGoodsReceiptModel()
@@ -111,6 +132,12 @@ namespace MWarehouse.Service.Service
             return result;
 
         }
+        /// <summary>
+        ///     Duyệt phiếu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task ConfirmAsync(string id)
         {
             TblXnkNhapKho found = await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.SoPhieuNhap == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
@@ -119,11 +146,22 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<TblXnkNhapKho>().SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy phiếu theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ResponseGoodsReceiptModel> GetByIdAsync(int id)
         {
             ResponseGoodsReceiptModel result = _mapper.Map<ResponseGoodsReceiptModel>(await _iuow.GetRepository<TblXnkNhapKho>().GetByIdAsync(id));
             return result;
         }
+
+        /// <summary>
+        ///     Lấy autoid dùng lấy chi tiết
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<int> GetAutoId(string id)
         {
             return await _iuow.GetRepository<TblXnkNhapKho>().Entities.Where(r => r.SoPhieuNhap == id).Select(r => r.AutoId).FirstAsync();

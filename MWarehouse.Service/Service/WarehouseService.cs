@@ -18,6 +18,12 @@ namespace MWarehouse.Service.Service
             this._iuow = unitOfWork;
             this._mapper = mapper;
         }
+        /// <summary>
+        ///     Tạo kho
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(CreateWarehouseModel obj)
         {
             if (obj == null)
@@ -34,26 +40,49 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Xóa kho
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task DeleteAsync(int id)
         {
             TblDmKho delWarehouse = _iuow.GetRepository<TblDmKho>().Entities.Where(u => u.AutoId == id).FirstOrDefault()
                                     ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, ErrorCode.Code.OBJECT_EXISTED.ToString(), "Dữ liệu đối tượng không có!");
-            await _iuow.GetRepository<TblDmKho>().DeleteAsync(delWarehouse);
+            delWarehouse.IsDeleted = true;
+            await _iuow.GetRepository<TblDmKho>().UpdateAsync(delWarehouse);
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ kho
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseWarehouseModel>> GetAllAsync()
         {
-            IEnumerable<ResponseWarehouseModel> result = _mapper.Map<IEnumerable<ResponseWarehouseModel>>(await _iuow.GetRepository<TblDmKho>().GetAllAsync());
+            IEnumerable<ResponseWarehouseModel> result = _mapper.Map<IEnumerable<ResponseWarehouseModel>>(await _iuow.GetRepository<TblDmKho>().Entities.Where(r=> r.IsDeleted==false).ToListAsync());
             return result;
         }
 
+        /// <summary>
+        ///     Lấy kho theo id
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<ResponseWarehouseModel> GetByIDAsync(int code)
         {
             ResponseWarehouseModel result = _mapper.Map<ResponseWarehouseModel>(await _iuow.GetRepository<TblDmKho>().Entities.Where(r => r.AutoId == code).FirstAsync());
             return result;
         }
 
+        /// <summary>
+        ///     Cập nhật kho
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task UpdateAsync(int id, ResponseWarehouseModel obj)
         {
             TblDmKho warehouse = _iuow.GetRepository<TblDmKho>().Entities.Where(u => u.AutoId == id).FirstOrDefault()

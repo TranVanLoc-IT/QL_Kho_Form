@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MWarehouse.Contract.Repository.Interface;
 using MWarehouse.Contract.Service.Interface;
 using MWarehouse.Core;
-using MWarehouse.Core.Base;
 using MWarehouse.Core.Constant;
 using MWarehouse.ModelViews.ProductTypeModelViews;
 using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MWarehouse.Service.Service
 {
@@ -24,6 +19,12 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
             _mapper = mapper;
         }
+        /// <summary>
+        ///     Tạo mới LSP
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task CreateAsync(CreateProductTypeModel obj)
         {
             if (obj == null)
@@ -43,17 +44,27 @@ namespace MWarehouse.Service.Service
             await _iuow.SaveAsync();
         }
 
+        /// <summary>
+        ///     Xóa LSP đã có
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task DeleteAsync(int id)
         {
             TblDmLoaiSanPham delProductType = _iuow.GetRepository<TblDmLoaiSanPham>().Entities.Where(u => u.AutoId == id).FirstOrDefault()
                                     ?? throw new ErrorException((int)ErrorCode.Code.OBJECT_EXISTED, ErrorCode.Code.OBJECT_EXISTED.ToString(), "Dữ liệu đối tượng đã có !");
-            await _iuow.GetRepository<TblDmLoaiSanPham>().DeleteAsync(delProductType);
+            delProductType.IsDeleted = true;
+            await _iuow.GetRepository<TblDmLoaiSanPham>().UpdateAsync(delProductType);
             await _iuow.SaveAsync();
         }
-
+        /// <summary>
+        ///     Lấy toàn bộ LSP chưa xóa
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseProductTypeModel>> GetAllAsync()
         {
-            IEnumerable<ResponseProductTypeModel> result = _mapper.Map<IEnumerable<ResponseProductTypeModel>>(await _iuow.GetRepository<TblDmLoaiSanPham>().GetAllAsync());
+            IEnumerable<ResponseProductTypeModel> result = _mapper.Map<IEnumerable<ResponseProductTypeModel>>(await _iuow.GetRepository<TblDmLoaiSanPham>().Entities.Where(r => r.IsDeleted == false).ToListAsync());
             return result;
         }
 

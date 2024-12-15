@@ -21,6 +21,13 @@ namespace MWarehouse.Service.Service
             _iuow = iuow;
         }
 
+        /// <summary>
+        ///     Lấy thông tin tồn kho
+        /// </summary>
+        /// <param name="ngayNhap"></param>
+        /// <param name="ngayXuat"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public DataTable GetBaoCaoTonKho(DateTime ngayNhap, DateTime ngayXuat)
         {
             DataTable baoCaoTable = new DataTable();

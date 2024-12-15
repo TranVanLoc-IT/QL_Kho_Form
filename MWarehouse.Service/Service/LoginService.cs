@@ -30,7 +30,7 @@ namespace MWarehouse.Service.Service
         }
 
         /// <summary>
-        ///     Handle login , success => form array <> throw exception
+        ///     Xử lý login
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
@@ -41,11 +41,11 @@ namespace MWarehouse.Service.Service
                 .Where(u => u.MatKhau == login.MatKhau && 
                             u.TenDangNhap == login.TenDangNhap).FirstOrDefault() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, ErrorCode.Code.NOT_FOUND.ToString(), "Không có người dùng nào");
             _user = user.TenDangNhap;
-            string forms = (from b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
+            string curUser = (from b in _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                              where b.TenDangNhap == user.TenDangNhap
                              select b.MaNhomNguoiDung).FirstOrDefault() ?? "";
 
-            return forms;
+            return curUser;
         }
     }
 }

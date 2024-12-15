@@ -178,7 +178,6 @@ namespace UI.Controls
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0 &&
                     dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
-                    // Hủy ve mac dinh
                     e.Handled = true;
 
                     // Vẽ nền
@@ -244,7 +243,6 @@ namespace UI.Controls
 
                     e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds.X, e.CellBounds.Y, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
 
-                    // Giải phóng brush
                     brush.Dispose();
                 }
             };

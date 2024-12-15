@@ -281,7 +281,6 @@ namespace UI.Controls
                         clickedRowIndex = -1;
                         dataGridView.Invoke(new Action(() =>
                         {
-                            // Kiểm tra lại chỉ số trước khi vẽ lại
                             if (e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count &&
                                 e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView.Columns.Count)
                             {

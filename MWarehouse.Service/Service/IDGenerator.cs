@@ -1,9 +1,4 @@
-﻿using MWarehouse.ModelViews.GoodsReceiptModelViews;
-using MWarehouse.ModelViews.ProductModelViews;
-using MWarehouse.ModelViews.ProductTypeModelViews;
-using MWarehouse.ModelViews.SupplierModelViews;
-using MWarehouse.ModelViews.UnitModelViews;
-using MWarehouse.ModelViews.WarehouseModelViews;
+﻿
 
 namespace MWarehouse.Service.Service
 {
@@ -11,12 +6,26 @@ namespace MWarehouse.Service.Service
     {
         private static Random random = new Random();
 
+        /// <summary>
+        ///     Phát sinh id ngẫu nhiên
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public static string Generate(string prefix, int length)
         {
             string auto = Guid.NewGuid().ToString("N").Substring(0, length);
             return prefix + auto;
         }
 
+        /// <summary>
+        ///     Phát sinh ID kiểm tra tồn tại kiểu Generic
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="length"></param>
+        /// <param name="items"></param>
+        /// <param name="idSelector"></param>
+        /// <returns></returns>
         public static int GenerateID<T>(int length, IEnumerable<T> items, Func<T, int> idSelector)
         {
             int min = (int)Math.Pow(10, length - 1);

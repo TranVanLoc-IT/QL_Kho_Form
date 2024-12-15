@@ -20,6 +20,12 @@ namespace MWarehouse.Service.Service
             _mapper = mapper;
         }
 
+        /// <summary>
+        ///     Thực hiện xác nhận phiếu nhập
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorException"></exception>
         public async Task ConfirmAsync(int id)
         {   TblXnkXuatKho found = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.AutoId == id).FirstOrDefaultAsync() ?? throw new ErrorException((int)ErrorCode.Code.NOT_FOUND, "Not found", "Không thấy");
             found.TrangThai = 1;
@@ -27,6 +33,10 @@ namespace MWarehouse.Service.Service
             await _iuow.GetRepository<TblXnkXuatKho>().SaveAsync();
         }
 
+        /// <summary>
+        ///     Lấy toàn bộ phiếu - chưa bị xóa
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ResponseExportReceiptModel>> GetAllAsync()
         {
             IEnumerable<TblXnkXuatKho> data = await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.IsDeleted == false).ToListAsync();
@@ -34,6 +44,11 @@ namespace MWarehouse.Service.Service
             return result;
         }
 
+        /// <summary>
+        ///     Lấy autoid của phiếu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<int> GetAutoId(string id)
         {
             return await _iuow.GetRepository<TblXnkXuatKho>().Entities.Where(r => r.SoPhieuXuat == id).Select(r => r.AutoId).FirstAsync();

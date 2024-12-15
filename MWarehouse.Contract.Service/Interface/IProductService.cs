@@ -13,8 +13,6 @@ namespace MWarehouse.Contract.Service.Interface
     {
         // async
         Task CreateAsync(CreateProductModel obj);
-        Task UpdateQuantityImportAsync(int code, int sl);
-        Task UpdateQuantityExportAsync(int code, int sl);
         Task UpdateAsync(string id, UpdateProductModel obj);
         Task UpdateUnitAsync(int id, int[] obj);
         Task UpdateProductTypeAsync(int id, int type);
