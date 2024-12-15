@@ -61,21 +61,20 @@ namespace MWarehouse.Service.Service
                                       TenMH = mh.TenManHinh
                                   }).AsNoTracking().ToListAsync();
 
-
             return manHinhs;
 
         }
 
         public async Task<List<UserRoleModelView>> GetUsers()
         {
-            List<UserRoleModelView> users = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(r => r.TenDangNhap != "admin" && r.IsDeleted == false).Select(r => new UserRoleModelView()
-            {
-                User = r.TenDangNhap,
-                GroupUser =  _iuow.GetRepository<QlNhomNguoiDung>().Entities.Where(e => e.MaNhom == r.MaNhomNguoiDung).Select(r => r.TenNhom).First(),
-                Decsription = r.GhiChu,
-                Email = _iuow.GetRepository<QlNguoiDung>().Entities.Where(e => e.TenDangNhap == r.TenDangNhap).Select(r => r.Email).First(),
-
-            }).ToListAsync();
+            List<UserRoleModelView> users = await _iuow.GetRepository<QlNguoiDung>().Entities.Where(us => us.IsDeleted == false && us.TenDangNhap != "admin").
+                                                   Select(us => new UserRoleModelView
+                                                   {
+                                                       User = us.TenDangNhap,
+                                                       GroupUser = _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities.Where(e => e.TenDangNhap == us.TenDangNhap && e.IsDeleted == false).Select(r => r.MaNhomNguoiDung).FirstOrDefault() ?? "Không có quyền",
+                                                       Decsription = "",
+                                                       Email = us.Email ?? ""
+                                                   }).ToListAsync();
             return users;
         }
         public async Task<List<UserModelView>> GetUserInfo()
@@ -139,15 +138,21 @@ namespace MWarehouse.Service.Service
 
         public async Task UpdateUserRole(string user, string oldRole, string newRole)
         {
-            QlNguoiDungNhomNguoiDung pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
+            
+            QlNguoiDungNhomNguoiDung? pq = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                                           .Where(r => r.TenDangNhap == user &&
                                           r.MaNhomNguoiDung == oldRole
-                                          ).FirstAsync();
+                                          ).FirstOrDefaultAsync();
 
             QlNguoiDungNhomNguoiDung? hasNewRole = await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().Entities
                                           .Where(r => r.TenDangNhap == user &&
                                           r.MaNhomNguoiDung == newRole
                                           ).FirstOrDefaultAsync();
+            if(pq != null)
+            {
+                pq.IsDeleted = true;
+                await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(pq);
+            }
             if(hasNewRole != null)
             {
                 hasNewRole.IsDeleted = false;
@@ -162,8 +167,6 @@ namespace MWarehouse.Service.Service
                 };
                 await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().InsertAsync(hasNewRole);
             }
-            pq.IsDeleted = true;
-            await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().UpdateAsync(pq);
             await _iuow.GetRepository<QlNguoiDungNhomNguoiDung>().SaveAsync();
         }
 
@@ -256,9 +259,13 @@ namespace MWarehouse.Service.Service
                 return "Không có người dùng này !";
             }
             // check user existed
-            user.MatKhau = u.Pass;
+
             user.Email = u.Mail;
             user.TrangThai = u.Status;
+            if (!string.IsNullOrEmpty(u.Pass))
+            {
+                user.MatKhau = u.Pass;
+            }
 
             await _iuow.GetRepository<QlNguoiDung>().UpdateAsync(user);
             await _iuow.GetRepository<QlNguoiDung>().SaveAsync();

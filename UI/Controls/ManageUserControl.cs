@@ -1,18 +1,7 @@
 ﻿using MWarehouse.Contract.Service.Interface;
 using MWarehouse.ModelViews.LoginModelView;
 using MWarehouse.ModelViews.RoleModelView;
-using MWarehouse.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UI.Controls
 {
@@ -47,6 +36,7 @@ namespace UI.Controls
             dataGridView.RowHeaderMouseClick += DataGridView_RowHeaderMouseClick;
 
         }
+
 
         private void DataGridView_RowHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
@@ -90,7 +80,7 @@ namespace UI.Controls
 
             string pattern = @"^(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;'""\\|,.<>/?-]).+$";
 
-            if (!Regex.IsMatch(mk, pattern))
+            if (!Regex.IsMatch(mk, pattern) && !string.IsNullOrEmpty(mk))
             {
                 err.SetError(this.pass, "Mật khẩu phải chứa ít nhất một chữ số và một ký tự đặc biệt");
                 return false;

@@ -18,7 +18,12 @@ namespace UI.Controls
             this.Load += async (s, e) => await Config(s, e);
 
             dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
-            
+            this.buttonRefresh.Click += async (s, e) => await refreshClick(s, e);
+        }
+
+        private async Task refreshClick(object sender, EventArgs e)
+        {
+            await RefreshDatagridview(sender, e);
         }
 
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)

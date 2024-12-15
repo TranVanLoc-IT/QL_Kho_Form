@@ -24,9 +24,14 @@ namespace UI.Controls
             this.roleService = role;
             this.Load += async (s, e) => await Config(s, e);
             dataGridView.CellContentClick += async (s, e) => await cellContentClick(s, e);
-
+            this.buttonRefresh.Click += async (s, e) => await refreshClick(s, e);
         }
 
+        private async Task refreshClick(object sender, EventArgs e)
+        {
+            await RefreshDatagridview(sender, e);
+
+        }
         private async Task cellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -34,16 +39,14 @@ namespace UI.Controls
             {
                 var user = dataGridView.Rows[e.RowIndex].Cells[0].Value?.ToString();
                 var oldRole = dataGridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
-                // lay ma cua role
-                oldRole = roles.Where(r => r.TenQuyen.Equals(oldRole)).Select(r => r.MaQuyen).FirstOrDefault();
-                var comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
+
+                var comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[4] as DataGridViewComboBoxCell;
                 var role = comboBoxCell?.Value?.ToString();
                 // index 1: update
-                if(6 - col.Index == 5 || 6 - col.Index == 4)
+                if (6 - col.Index == 5 || 6 - col.Index == 4)
                 {
-                     user = dataGridView.Rows[e.RowIndex].Cells[3].Value?.ToString();
-                     oldRole = dataGridView.Rows[e.RowIndex].Cells[4].Value?.ToString();
-                    oldRole = roles.Where(r => r.TenQuyen.Equals(oldRole)).Select(r => r.MaQuyen).First();
+                    user = dataGridView.Rows[e.RowIndex].Cells[3].Value?.ToString();
+                    oldRole = dataGridView.Rows[e.RowIndex].Cells[4].Value?.ToString();
                     comboBoxCell = dataGridView.Rows[e.RowIndex].Cells[0] as DataGridViewComboBoxCell;
                     role = comboBoxCell?.Value?.ToString();
                 }
@@ -54,7 +57,7 @@ namespace UI.Controls
                         MessageBox.Show("Chọn quyền mới !");
                         return;
                     }
-                    if (oldRole.Equals(role))
+                    if (oldRole != null && oldRole.Equals(role))
                     {
                         MessageBox.Show("Chọn quyền khác với quyền hiện tại !");
                         return;
@@ -100,7 +103,7 @@ namespace UI.Controls
             {
                 HeaderText = "",
                 Text = "Sửa",
-                UseColumnTextForButtonValue = true 
+                UseColumnTextForButtonValue = true
             };
             dataGridView.Columns.Add(editColumn);
 
@@ -108,7 +111,7 @@ namespace UI.Controls
             {
                 HeaderText = "",
                 Text = "Xóa",
-                UseColumnTextForButtonValue = true 
+                UseColumnTextForButtonValue = true
             };
             dataGridView.Columns.Add(deleteColumn);
 
@@ -205,5 +208,6 @@ namespace UI.Controls
             dataGridView.Refresh();
             await Config(sender, e);
         }
+
     }
 }
