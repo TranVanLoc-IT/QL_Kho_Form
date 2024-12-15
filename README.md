@@ -264,6 +264,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
   </tr>
 </table>
 <h2 id="ai">Ứng dụng AI - Chatbot AI</h2>
-<p><b>Chat bot cung cấp thông tin liên hệ, thông tin về phần mềm kho, cách sử công cụ.</b></p>
+<p><b>Chat bot phát hiện gian lận, sử dụng tập dữ liệu số lượng, giá và thời gian tạo phát hiện chỉnh sửa cập nhật gian lận trong xuất nhập kho hàng !</b></p>
 
 
